@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@rneui/themed'
 
 import White from '../screens/White';
+import SearchAlim from '../screens/SearchAlim';
 
 
 
@@ -33,13 +34,13 @@ const TabNavigator = () => {
       tabBarIcon: ({focused , color , size }) => {
 
         if (route.name === 'Macros') {
-          return <Icon name="check-circle" type="feather" color={focused ? "red":"gray"} />
+          return <Icon name="food" type="material-community" color={focused ? "#36BFF9":"gray"} />
         } 
         else if (route.name === 'White1') {
-          return <Icon name="check-circle" type="feather" color={focused ? "red":"gray"} />
+          return <Icon name="stats-chart" type="ionicon" color={focused ? "#36BFF9":"gray"} />
         }
         else if (route.name === 'White2') {
-          return <Icon name="check-circle" type="feather" color={focused ? "red":"gray"} />
+          return <Icon name="dumbbell" type="font-awesome-5" color={focused ? "#36BFF9":"gray"} />
         }
       }
 
@@ -47,7 +48,7 @@ const TabNavigator = () => {
 
       <Tab.Screen name="Macros" component={MacrosMain} options={{headerShown:false}}/>
       <Tab.Screen name="White1" component={White} options={{headerShown:true}} />
-      <Tab.Screen name="White2" component={White} options={{headerShown:false}}/>
+      <Tab.Screen name="White2" component={SearchAlim} options={{headerShown:false}}/>
 
 
     </Tab.Navigator>
