@@ -1,4 +1,4 @@
-import { View, Text , TouchableOpacity } from 'react-native'
+import { View, Text , TouchableOpacity, TouchableHighlight } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ChartTest from '../components/PerChart'
@@ -6,13 +6,21 @@ import BrChart from '../components/BrChart'
 import { MaterialIcons , FontAwesome } from '@expo/vector-icons';
 import BotoneraAlim from '../views/BotoneraAlim'
 import Consums from '../views/Consums'
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function HomeScreen() {
+  
+  const navigation = useNavigation();
+
+
+
   return (
     <SafeAreaView>
-
-      <FontAwesome name="history" size={24} color="black" />
-
+      
+      <TouchableOpacity className="px-5">
+        <FontAwesome className="" name="history" size={24} color="black" />
+      </TouchableOpacity>
 
       {/* Stats */}
       <View className="items-center">
@@ -38,8 +46,8 @@ export default function HomeScreen() {
 
       {/* Search btn*/}
 
-      <TouchableOpacity className="items-center w-full px-5 mt-3 items-center justify-center">
-
+      <TouchableOpacity onPress={() => navigation.navigate("SearchAlim")}>
+      <View  className="items-center w-full px-5 mt-3 items-center justify-center">
 
         <View className="w-full text-center justify-center bg-[#EAEAEA] h-12 rounded-lg shadow-md shadow-gray-800 ">
           
@@ -51,6 +59,7 @@ export default function HomeScreen() {
         </View>
 
 
+      </View>
       </TouchableOpacity>
 
 

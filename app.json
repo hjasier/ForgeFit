@@ -12,16 +12,37 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.hjasier.ForgeFit"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera.",
+          "enableCodeScanner": true
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "06f32d72-676c-4abd-8e97-d871d53f31c4"
+      }
     }
   }
 }

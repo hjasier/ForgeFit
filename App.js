@@ -4,14 +4,18 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/MacrosMain';
 import ChartTest from './components/PerChart';
 import StackNavigator from './navigation/StackNavigator';
+import { DatabaseProvider } from './hooks/DatabaseContext';
+
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <StackNavigator />
-    </NavigationContainer>
+    <DatabaseProvider>
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </DatabaseProvider>
   );
 }
 
