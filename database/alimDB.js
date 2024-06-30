@@ -5,6 +5,10 @@ async function setupAlimDB() {
 
   const db = await SQLite.openDatabaseAsync('alimDB.db');
   
+
+  // NO ES ESTEEEEEEEEEE
+  // BORRRAR
+
   await db.execAsync(`
     PRAGMA journal_mode = WAL;
     CREATE TABLE IF NOT EXISTS alims (
@@ -18,10 +22,11 @@ async function setupAlimDB() {
       saturated INTEGER,
       fiber INTEGER,
       sugar INTEGER,
+      salt INTEGER,
+      sodium INTEGER,
       potassium INTEGER,
       cholesterol INTEGER,
       weight INTEGER,
-      alimGroup INTEGER,
       brand TEXT,
       imgSRC TEXT,
       unit TEXT,

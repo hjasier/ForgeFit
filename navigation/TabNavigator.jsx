@@ -55,7 +55,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Macros" component={MacrosMain} options={{headerShown:false}}/>
       
       <Tab.Screen name="White1" component={OFFTest} options={{headerShown:false}} />
-      <Tab.Screen name="MacrosStack" component={MacrosInfo} options={{headerShown:false}}/>
+      <Tab.Screen name="MacrosStack" component={OFFTest} options={{headerShown:false}}/>
       
 
 

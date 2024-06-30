@@ -61,7 +61,7 @@ const AlimAdd = () => {
           (name, protein, kcals, carbs, fat, weight, imgSRC, uploadSRC , unit) 
           VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)
         `;
-        const values = [alimName, protein, kcals, carbs, fat, weight, imgSRC, "user", "g"];
+        const values = [alimName, protein, kcals, carbs, fat, weight, imgSRC, "user", unit];
         await db.runAsync(query, values);
 
         const updatedAlims = await db.getAllAsync('SELECT * FROM alims');

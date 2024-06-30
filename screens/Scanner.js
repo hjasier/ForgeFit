@@ -32,13 +32,22 @@ export default function Scanner() {
     if (scanned) {
       return;
     }
-    console.log(data);
+    
     Vibration.vibrate();
     setScanned(true);
-    navigation.goBack();
 
+    getAlimData(data);
+
+    //navigation.goBack();
 
   };
+
+
+  const getAlimData = async (barcode) => {
+    const response = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`);
+    const data = await response.json();
+    navigation.navigate('MacrosInfo', {data: data});
+  }
 
   return (
     <View style={styles.container}>
