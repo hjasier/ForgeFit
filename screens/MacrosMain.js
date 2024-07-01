@@ -18,7 +18,7 @@ export default function HomeScreen() {
 
   const goals = {
     protein: 88,
-    carbs: 88,
+    carbs: 400,
     kcals: 2814
   }
 
@@ -64,13 +64,17 @@ export default function HomeScreen() {
 
 
   useEffect(() => {
-    updateMacros();
-  }, []);
+    if (db){
+      updateMacros();
+    }
+  }, [db]);
 
   useFocusEffect(
     useCallback(() => {
-      updateMacros();
-    }, [])
+      if (db){
+        updateMacros();
+      }
+    }, [db])
   );
 
 

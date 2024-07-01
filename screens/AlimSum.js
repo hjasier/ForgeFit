@@ -56,7 +56,6 @@ const AlimSum = ({ route }) => {
         await db.runAsync(query, values);
 
         const updatedAlims = await db.getAllAsync('SELECT * FROM consums');
-        console.log(updatedAlims);
       }
     } catch (error) {
       console.error("Error al insertar el consumo:", error);
@@ -67,7 +66,59 @@ const AlimSum = ({ route }) => {
   
   }
 
-  const handleStoreConsum = () => {
+
+  const checkAlimExists = async () => {
+    try {
+      if (db) {
+        const query = `SELECT * FROM alims WHERE id = ?;`;
+        const values = [alim.id];
+        const result = await db.getAllAsync(query, values);
+        if (result.length === 0) {
+          const query = `
+            INSERT INTO alims 
+            (id, name, barCode, kcals, protein, carbs, fat, saturated, fiber, sugars, salt, sodium, potassium, cholesterol, weight, unit, alimGroup, brand, imgSRC, uploadSRC)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+          `;
+          const values = [
+            alim.id,
+            alim.name,
+            alim.barCode,
+            alim.kcals,
+            alim.protein,
+            alim.carbs,
+            alim.fat,
+            alim.saturated,
+            alim.fiber,
+            alim.sugars,
+            alim.salt,
+            alim.sodium,
+            alim.potassium,
+            alim.cholesterol,
+            alim.weight,
+            alim.unit,
+            alim.alimGroup,
+            alim.brand,
+            alim.imgSRC,
+            alim.uploadSRC
+          ];
+          await db.runAsync(query, values);
+        }
+      }
+    } catch (error) {
+      console.error("Error al insertar el alimento:", error);
+      return;
+    }
+  }
+        
+
+
+  const handleStoreConsum = () => { 
+
+    console.log("API RESULT: "+alim.isAPIResult);
+
+    if(alim.isAPIResult){
+      checkAlimExists();
+    }
     insertConsum();
     navigation.navigate("Macros");
   }
@@ -86,15 +137,15 @@ const AlimSum = ({ route }) => {
       {/* Stats */}
       <View className="flex flex-row">
             <View className="bg-[#36BFF9] w-20 h-10 rounded-l-xl items-center justify-center flex-row">
-                <Text className="text-white font-bold ">{alim.kcals}</Text>
+                <Text className="text-white font-bold ">{parseFloat((alim.kcals * consumUnits).toFixed(2))}</Text>
                 <Text className="text-white px-1">kcal</Text>
             </View>
             <View className="bg-[#FF4E4E] w-20 h-10 items-center justify-center flex-row">
-                <Text className="text-white font-bold">{alim.protein}</Text>
+                <Text className="text-white font-bold">{parseFloat((alim.protein * consumUnits).toFixed(2))}</Text>
                 <Text className="text-white px-1">g</Text>
             </View>
             <View className="bg-[#FFC34E] w-20 h-10 rounded-r-xl items-center justify-center flex-row">
-                <Text className="text-white font-bold ">{alim.carbs}</Text>
+                <Text className="text-white font-bold ">{parseFloat((alim.carbs * consumUnits).toFixed(2))}</Text>
                 <Text className="text-white px-1">g</Text>
             </View>
       </View>

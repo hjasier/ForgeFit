@@ -6,8 +6,9 @@ import AlimSum from '../screens/AlimSum';
 import AlimAdd from '../screens/AlimAdd';
 import Scanner from '../screens/Scanner';
 import TakeImg from '../screens/TakeImg';
-import SerApiTest from '../screens/SerApiTest';
+
 import MacrosInfo from '../screens/MacrosInfo';
+import ConfigMenu from '../screens/ConfigMenu';
 
 
 
@@ -27,8 +28,9 @@ const StackNavigator = () => {
         <Stack.Screen name="AlimAdd" component={AlimAdd} options={{headerShown:false}} />
         <Stack.Screen name="Scanner" component={Scanner} options={{headerShown:false}} />
         <Stack.Screen name="TakeImg" component={TakeImg} options={{headerShown:false}} />
-        <Stack.Screen name="SerApiTest" component={SerApiTest} options={{headerShown:false}} />
         <Stack.Screen name="MacrosInfo" component={MacrosInfo} options={{headerShown:false}} />
+        <Stack.Screen name="ConfigMenu" component={ConfigMenu} options={{headerShown:false}} />
+
 
 
 

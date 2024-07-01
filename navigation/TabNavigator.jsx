@@ -13,8 +13,9 @@ import SearchStackNavigator from './MacrosStack';
 import MacrosStack from './MacrosStack';
 import SQTest from '../screens/SQTest';
 import OFFTest from '../screens/OFFTest';
-import SerApiTest from '../screens/SerApiTest';
+
 import MacrosInfo from '../screens/MacrosInfo';
+import UserStatsMenu from '../screens/UserStatsMenu';
 
 
 
@@ -54,7 +55,7 @@ const TabNavigator = () => {
 
       <Tab.Screen name="Macros" component={MacrosMain} options={{headerShown:false}}/>
       
-      <Tab.Screen name="White1" component={OFFTest} options={{headerShown:false}} />
+      <Tab.Screen name="White1" component={UserStatsMenu} options={{headerShown:false}} />
       <Tab.Screen name="MacrosStack" component={OFFTest} options={{headerShown:false}}/>
       
 

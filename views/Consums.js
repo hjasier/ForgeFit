@@ -26,13 +26,17 @@ const Consums = () => {
   }
 
   useEffect(() => {
-    updateTodaysConsums();
-  }, []);
+    if (db){
+      updateTodaysConsums();
+    }
+  }, [db]);
 
   useFocusEffect(
     useCallback(() => {
-      updateTodaysConsums();
-    }, [])
+      if (db){
+        updateTodaysConsums();
+      }
+    }, [db])
   );
 
   

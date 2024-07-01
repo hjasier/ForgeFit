@@ -9,8 +9,7 @@ import { useDatabase } from '../hooks/DatabaseContext';
 import axios from 'axios';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as FileSystem from 'expo-file-system';
-
-
+import { SERAPIKEY } from '../keys';
 const AlimAdd = () => {
 
   const db = useDatabase();
@@ -84,9 +83,8 @@ const AlimAdd = () => {
 
     try {
       const bilbaoCoordinates = '43.2630126,-2.9349852'; 
-      
-      const apiKey = '59eca2e25fdc7f5d6b71f94d235f77ccf048e2d3e7fdb05f545e4721bfcdc76e';//TODO: mv a secrets
-      const apiUrl = `https://serpapi.com/search?engine=google_images&q=${encodeURIComponent(alimName)}&ijn=0&hl=es&gl=es&geo=${bilbaoCoordinates}&api_key=${apiKey}`;
+
+      const apiUrl = `https://serpapi.com/search?engine=google_images&q=${encodeURIComponent(alimName)}&ijn=0&hl=es&gl=es&geo=${bilbaoCoordinates}&api_key=${SERAPIKEY}`;
   
       const response = await axios.get(apiUrl);
   

@@ -9,6 +9,8 @@ import { DatabaseProvider } from './hooks/DatabaseContext';
 
 const Stack = createNativeStackNavigator();
 
+
+
 function App() {
   return (
     <DatabaseProvider>

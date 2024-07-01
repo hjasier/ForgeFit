@@ -4,6 +4,7 @@ let dbInstance = null;
 
 export const setupDatabase = async () => {
   if (!dbInstance) {
+    console.log('Creating database instance');
     dbInstance = await SQLite.openDatabaseAsync('database.db');
 
     await dbInstance.execAsync(`
@@ -11,7 +12,7 @@ export const setupDatabase = async () => {
         CREATE TABLE IF NOT EXISTS alims (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL,
-          barCode INTEGER,
+          barCode INTEGER unique,
           kcals INTEGER,
           protein INTEGER,
           carbs INTEGER,

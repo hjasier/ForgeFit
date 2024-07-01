@@ -23,16 +23,16 @@ const Consum = ({consum}) => {
                     <View className="flex flex-row space-x-2">
                         <View className="flex flex-row">
                             <Text className="text-[#179BE6]">{parseFloat((consum.kcals * consum.cunit).toFixed(2))}</Text>
-                            <Text className="pt-0.5 pl-0.5 text-gray-400 text-xs">kcal</Text>
+                            <Text className="pt-0.5 pl-0.5 text-gray-400 text-xs"> kcal</Text>
                         </View>
                         <View className="flex flex-row">
                             <Text className="text-[#FF4E4E]">{parseFloat((consum.protein * consum.cunit).toFixed(2))}</Text>
-                            <Text className="pt-0.5 pl-0.5 text-gray-400 text-xs">g</Text>
+                            <Text className="pt-0.5 pl-0.5 text-gray-400 text-xs"> g</Text>
                         </View>
 
                         <View className="flex flex-row">
                             <Text className="text-[#FFC34E]">{parseFloat((consum.carbs * consum.cunit).toFixed(2))}</Text>
-                            <Text className="pt-0.5 pl-0.5 text-gray-400 text-xs">kcal</Text>
+                            <Text className="pt-0.5 pl-0.5 text-gray-400 text-xs"> g</Text>
                         </View>
                     </View>
 
