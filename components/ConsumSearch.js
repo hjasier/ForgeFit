@@ -14,7 +14,7 @@ const ConsumSearch = ({alim}) => {
   
   return (
 
-    <TouchableOpacity onPress={() => navigation.navigate("AlimSum",{"alimID":0})}>
+    <TouchableOpacity onPress={() => navigation.navigate("AlimSum",{alim:alim})}>
 
         <View className="bg-[#EAEAEA] h-14 w-full my-1 px-2 py-2 rounded-lg flex flex-row justify-between items-center">
             

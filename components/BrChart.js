@@ -9,6 +9,8 @@ const barData = [
 
 
 const BrChart = ({header,colorT,total ,curToday}) => {
+
+
   return (
     <View className="p-2">
     

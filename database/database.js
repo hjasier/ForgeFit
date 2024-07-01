@@ -34,9 +34,16 @@ export const setupDatabase = async () => {
 
     await dbInstance.execAsync(`
         PRAGMA journal_mode = WAL;
-        CREATE TABLE IF NOT EXISTS alimGroups (
+        CREATE TABLE IF NOT EXISTS consums (
           id INTEGER PRIMARY KEY NOT NULL,
-          name TEXT NOT NULL
+          hour TEXT NOT NULL,
+          day TEXT NOT NULL,
+          month TEXT NOT NULL,
+          year TEXT NOT NULL,
+          alimId INTEGER NOT NULL,
+          weight INTEGER,
+          unit TEXT,
+          FOREIGN KEY (alimId) REFERENCES alims (id)
         );
       `);
   }

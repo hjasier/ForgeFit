@@ -14,7 +14,7 @@ const BotoneraAlim = () => {
     try {
       if (db) {
         const query = `
-          DROP TABLE alims;
+          DROP TABLE consums;
         `;
         await db.runAsync(query);
         console.log("Tabla eliminada");

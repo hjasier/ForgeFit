@@ -2,12 +2,14 @@ import { PieChart } from "react-native-gifted-charts";
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const pieData = [
-    {value: 30, color: 'lightgray'},
-    {value: 70, color: '#34C4F1'}
-];
 
 const ChartTest = ({kcalToday,kcalTotal}) => {
+  
+  const pieData = [
+    {value: kcalTotal-kcalToday, color: 'lightgray'},
+    {value: kcalToday, color: '#34C4F1'},
+  ];
+  
   return (
     <View>
             <PieChart

@@ -1,7 +1,8 @@
 import { View, Text, TouchableNativeFeedback , Image , TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Consum = () => {
+const Consum = ({consum}) => {
+
   return (
 
     <TouchableOpacity>
@@ -11,26 +12,26 @@ const Consum = () => {
             
             <View className="flex flex-row">
 
-                <Image source={require('../assets/testImg.png')} className="h-10 w-10 rounded-md"/>
+                <Image source={{uri:consum.imgSRC}} className="h-10 w-10 rounded-md"/>
                 
             
                 <View className="flex flex-col pl-3">
                     
-                    <Text>Colacao</Text>
+                    <Text>{consum.name}</Text>
                     
 
-                    <View className="flex flex-row justify-between space-x-2">
+                    <View className="flex flex-row space-x-2">
                         <View className="flex flex-row">
-                            <Text className="text-[#179BE6]">200</Text>
+                            <Text className="text-[#179BE6]">{parseFloat((consum.kcals * consum.cunit).toFixed(2))}</Text>
                             <Text className="pt-0.5 pl-0.5 text-gray-400 text-xs">kcal</Text>
                         </View>
                         <View className="flex flex-row">
-                            <Text className="text-[#FF4E4E]">6.8</Text>
+                            <Text className="text-[#FF4E4E]">{parseFloat((consum.protein * consum.cunit).toFixed(2))}</Text>
                             <Text className="pt-0.5 pl-0.5 text-gray-400 text-xs">g</Text>
                         </View>
 
                         <View className="flex flex-row">
-                            <Text className="text-[#FFC34E]">7.2</Text>
+                            <Text className="text-[#FFC34E]">{parseFloat((consum.carbs * consum.cunit).toFixed(2))}</Text>
                             <Text className="pt-0.5 pl-0.5 text-gray-400 text-xs">kcal</Text>
                         </View>
                     </View>
@@ -43,7 +44,7 @@ const Consum = () => {
 
 
             
-            <Text className="px-1 text-gray-500">200 ml</Text>
+            <Text className="px-1 text-gray-500">{consum.weight} {consum.unit}</Text>
 
 
         </View>
