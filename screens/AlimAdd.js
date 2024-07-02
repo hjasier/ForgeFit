@@ -114,7 +114,7 @@ const AlimAdd = () => {
   }
 
   const takeImg = () => {
-    navigation.navigate("TakeImg");
+    navigation.navigate("TakeImg" ,{returnPath: "AlimAdd"});
   }
 
 

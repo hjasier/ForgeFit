@@ -5,15 +5,24 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import MacroInfo from '../components/MacroInfo';
 import NutrientLevel from '../components/NutrientLevel';
 import { useDatabase } from '../hooks/DatabaseContext';
+import { FontAwesome } from '@expo/vector-icons';
 
 const MacrosInfo = ({ route }) => {
-  const data = route.params.data;
+  let data = route.params.data;
+
+  if (route.params.backData){
+    data = route.params.backData;
+  }
+
   const product = data.product;
+
+
   const navigation = useNavigation();
 
   const [serving, setServing] = useState(100);
   const [servingUnit, setServingUnit] = useState("g");
   const [recalculatedNutrients, setRecalculatedNutrients] = useState({});
+  const [image, setImage] = useState(product.image_front_url);
   
   const db = useDatabase();
 
@@ -68,7 +77,7 @@ const MacrosInfo = ({ route }) => {
           recalculatedNutrients.sugars_100g,
           product.brands,
           product.code,
-          product.image_front_url,
+          image,
           "OFF",
           servingUnit
         ];
@@ -111,10 +120,46 @@ const MacrosInfo = ({ route }) => {
     }, [navigation])
   );
 
+  const handleImagePress = () => {
+    navigation.navigate("TakeImg" , {returnPath: "MacrosInfo" , backData: data});
+  };
+
+  useEffect(() => {
+    if (route.params?.imgSRC) {
+      console.log("Imagen recibida: ", route.params.imgSRC);
+      setImage(route.params.imgSRC);
+
+    }
+  }, [route.params]);
+
+
+  
   return (
     <SafeAreaView>
       <View className="items-center py-10 flex-row items-center justify-center space-x-5">
-        <Image source={{ uri: product.image_front_url }} className="w-20 h-20 rounded-lg" />
+
+        {/* Imagen */}
+        
+        <TouchableOpacity onPress={handleImagePress}>
+        {
+        
+        
+        image ? (
+
+          <Image source={{ uri: image }} className="w-20 h-20 rounded-lg" />
+
+        ): (
+          <View className="w-20 h-20 rounded-lg border-2 border-black items-center justify-center " >
+            <FontAwesome name="image" size={18} color="black" />
+          </View>
+        )
+
+        }
+
+        
+          
+        </TouchableOpacity>
+        
         <View className="items-center justify-center space-y-2">
           <TextInput
             onChangeText={setName}

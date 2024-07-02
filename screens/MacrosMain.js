@@ -9,9 +9,11 @@ import Consums from '../views/Consums'
 import { useNavigation , useFocusEffect } from '@react-navigation/native';
 import { useDatabase } from '../hooks/DatabaseContext'
 import { useState , useCallback } from 'react';
+import { StatusBar } from 'react-native';
+import * as NavigationBar from 'expo-navigation-bar';
 
 
-export default function HomeScreen() {
+export default function MacrosMain() {
   
   const navigation = useNavigation();
   const db = useDatabase();
@@ -44,7 +46,8 @@ export default function HomeScreen() {
         // Uso de db.get para obtener un solo resultado
         const result = await db.getAllAsync(query, values);
 
-        if (result && result[0]) {
+        if (result && result[0] && result[0].kcals !== null && result[0].protein !== null && result[0].carbs !== null) {
+          
           // Formatear cada valor de result[0] a 2 decimales
           const formattedResult = {
             kcals: parseFloat(result[0].kcals.toFixed(2)),
@@ -76,6 +79,14 @@ export default function HomeScreen() {
       }
     }, [db])
   );
+
+  useEffect(() => {
+    const setUpBarColors = async () => {
+        StatusBar.setBackgroundColor('#F5F5F5');
+        NavigationBar.setBackgroundColorAsync("white");
+        }
+    setUpBarColors();
+  }, []);
 
 
 

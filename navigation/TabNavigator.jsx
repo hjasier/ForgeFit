@@ -16,6 +16,7 @@ import OFFTest from '../screens/OFFTest';
 
 import MacrosInfo from '../screens/MacrosInfo';
 import UserStatsMenu from '../screens/UserStatsMenu';
+import ExMain from '../screens/ExMain';
 
 
 
@@ -43,10 +44,10 @@ const TabNavigator = () => {
         if (route.name === 'Macros') {
           return <Icon name="food" type="material-community" color={focused ? "#36BFF9":"gray"} />
         } 
-        else if (route.name === 'White1') {
+        else if (route.name === 'UserStats') {
           return <Icon name="stats-chart" type="ionicon" color={focused ? "#36BFF9":"gray"} />
         }
-        else if (route.name === 'MacrosStack') {
+        else if (route.name === 'ExMain') {
           return <Icon name="dumbbell" type="font-awesome-5" color={focused ? "#36BFF9":"gray"} />
         }
       }
@@ -54,9 +55,8 @@ const TabNavigator = () => {
     })}>
 
       <Tab.Screen name="Macros" component={MacrosMain} options={{headerShown:false}}/>
-      
-      <Tab.Screen name="White1" component={UserStatsMenu} options={{headerShown:false}} />
-      <Tab.Screen name="MacrosStack" component={OFFTest} options={{headerShown:false}}/>
+      <Tab.Screen name="UserStats" component={UserStatsMenu} options={{headerShown:false}} />
+      <Tab.Screen name="ExMain" component={ExMain} options={{headerShown:false}}/>
       
 
 

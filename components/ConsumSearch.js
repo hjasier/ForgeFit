@@ -15,9 +15,13 @@ const ConsumSearch = ({alim}) => {
 
   const bgColor = alim.uploadSRC === "user" ? "#F9E3C0" : "#EAEAEA";
 
+  const [fetchingDetails, setFetchingDetails] = useState(false);
+
 
   const fetchNutrionixDetails = async (alim) => {
+    setFetchingDetails(true);
     try {
+
       const apiUrl = `https://trackapi.nutritionix.com/v2/natural/nutrients`;
       const headers = {
         'Content-Type': 'application/json',
@@ -32,40 +36,37 @@ const ConsumSearch = ({alim}) => {
       const response = await axios.post(apiUrl, { query: alim.name, locale: loc }, { headers });
 
       if (response.data.foods && response.data.foods.length > 0) {
-        const details = response.data.foods[0]; // Se asume que la primera coincidencia es la correcta
+        const details = response.data.foods[0];
 
-        // 4. Actualizar el alimento con los detalles completos
-        setAlimListNutrionix((prevAlimList) => prevAlimList.map((item) =>
-          item.id === alim.id ? {
-            ...item,
-            kcals: details.nf_calories,
-            protein: details.nf_protein,
-            carbs: details.nf_total_carbohydrate,
-            fat: details.nf_total_fat,
-            saturated: details.nf_saturated_fat,
-            fiber: details.nf_dietary_fiber,
-            sugars: details.nf_sugars,
-            salt: details.nf_sodium,
-            sodium: details.nf_sodium,
-            potassium: details.nf_potassium,
-            cholesterol: details.nf_cholesterol,
-            detailsLoaded: true,
-          } : item
-        ));
+        alim.kcals=details.nf_calories
+        alim.protein=details.nf_protein
+        alim.carbs=details.nf_total_carbohydrate
+        alim.fat=details.nf_total_fat
+        alim.saturated=details.nf_saturated_fat
+        alim.fiber=details.nf_dietary_fiber
+        alim.sugars=details.nf_sugars
+        alim.salt=details.nf_sodium
+        alim.sodium=details.nf_sodium
+        alim.potassium= details.nf_potassium
+        alim.cholesterol=details.nf_cholesterol
+        alim.detailsLoaded=true
       }
 
     } catch (error) {
       console.error(`Error en detalles de ${alim.name}:`, error);
-
+    }finally{
+      setFetchingDetails(false); // Indicar que la carga ha terminado
+      navigation.navigate("AlimSum", { alim: alim });
     }
   };
 
 
   const handlePress = () => {
     if (alim.uploadSRC === "Nutrionix" && alim.isAPIResult) {
-        fetchNutrionixDetails(alim);
+      fetchNutrionixDetails(alim);
+    } else {
+      navigation.navigate("AlimSum", { alim: alim });
     }
-    navigation.navigate("AlimSum",{alim:alim});
   }
 
   return (

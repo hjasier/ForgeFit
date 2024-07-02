@@ -6,17 +6,28 @@ import BotonCuadrado from '../components/BotonCuadrado';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import BotoneraStats from '../views/BotoneraStats';
 import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
+import { StatusBar } from 'react-native';
+import * as NavigationBar from 'expo-navigation-bar';
 
 const UserStatsMenu = () => {
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const setUpBarColors = async () => {
+        StatusBar.setBackgroundColor('#36BFF9');
+        NavigationBar.setBackgroundColorAsync("white");
+        }
+    setUpBarColors();
+  }, []);
 
   return (
     <View>
      
      {/* NavBar */}
 
-     <MenuNavBar name="Crear proyecto">
+     <MenuNavBar>
         <View className="flex-row justify-between w-full px-4">
             <View className="w-5"/>
             <View className="text-center justify-center">

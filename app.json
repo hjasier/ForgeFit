@@ -23,23 +23,15 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "android.permission.CAMERA"
+        "android.permission.CAMERA",
+        "WRITE_EXTERNAL_STORAGE"
       ],
       "package": "com.hjasier.ForgeFit"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      [
-        "react-native-vision-camera",
-        {
-          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera.",
-          "enableCodeScanner": true
-        }
-      ],
-      "expo-secure-store"
-    ],
+    "plugins": [],
     "extra": {
       "eas": {
         "projectId": "06f32d72-676c-4abd-8e97-d871d53f31c4"

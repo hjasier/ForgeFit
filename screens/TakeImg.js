@@ -4,8 +4,12 @@ import { Button, StyleSheet, Text, TouchableOpacity, View , Vibration } from 're
 import { useNavigation } from '@react-navigation/native';
 import { useRef } from 'react';
 import * as FileSystem from 'expo-file-system';
+import * as ImageManipulator from 'expo-image-manipulator';
 
-export default function TakeImg() {
+export default function TakeImg({ route }) {
+
+  const returnPath = route.params.returnPath;
+
   const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
@@ -31,17 +35,6 @@ export default function TakeImg() {
     setFacing(current => (current === 'back' ? 'front' : 'back'));
   }
 
-  const handleBarcodeScanned = ({ data }) => {
-    if (scanned) {
-      return;
-    }
-    console.log(data);
-    Vibration.vibrate();
-    setScanned(true);
-    navigation.goBack();
-
-
-  };
 
   const handleTakePicture = async () => {
     if (cameraRef.current) {
@@ -49,6 +42,23 @@ export default function TakeImg() {
         // Toma la foto y obtén la URI temporal
         const photo = await cameraRef.current.takePictureAsync();
         console.log('Foto temporalmente guardada en: ', photo.uri);
+
+        // Recorta la imagen para que sea cuadrada
+        const size = 1900; //300x300
+        
+        //Centro de la img + y
+        const originX = (photo.width - size) / 2;
+        const originY = ((photo.height - size) / 2) - 300 ;
+        
+        // Recorta img
+        const croppedPhoto = await ImageManipulator.manipulateAsync(
+          photo.uri,
+          [{ crop: { originX: originX, originY: originY, width: size, height: size } }],
+          { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
+        );
+
+        console.log('Foto recortada guardada en: ', croppedPhoto.uri);
+        
 
         // Definir la ruta donde se guardará la imagen dentro de la aplicación
         const appImagePath = `${FileSystem.documentDirectory}photos/`;
@@ -63,12 +73,13 @@ export default function TakeImg() {
 
         // Mover la imagen desde la ubicación temporal a la carpeta definida
         await FileSystem.moveAsync({
-          from: photo.uri,
+          from: croppedPhoto.uri,
           to: newFilePath,
         });
 
         console.log('Foto guardada en la aplicación en: ', newFilePath);
-        navigation.navigate('AlimAdd', { imgSRC: newFilePath });
+        backdata = route.params.backData;
+        navigation.navigate(returnPath, { imgSRC: newFilePath , backData: backdata});
       } catch (error) {
         console.log('Error al tomar la foto: ', error);
       }
