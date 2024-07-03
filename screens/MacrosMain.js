@@ -1,7 +1,7 @@
 import { View, Text , TouchableOpacity, TouchableHighlight } from 'react-native'
 import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import ChartTest from '../components/PerChart'
+import PerChart from '../components/PerChart'
 import BrChart from '../components/BrChart'
 import { MaterialIcons , FontAwesome } from '@expo/vector-icons';
 import BotoneraAlim from '../views/BotoneraAlim'
@@ -101,7 +101,7 @@ export default function MacrosMain() {
       {/* Stats */}
       <View className="items-center">
 
-        <ChartTest kcalToday={todayMacros.kcals} kcalTotal={goals.kcals}/>
+        <PerChart kcalToday={todayMacros.kcals} kcalTotal={goals.kcals}/>
 
         <BrChart header="Proteína" colorT="#FF4E4E" curToday={todayMacros.protein} total={goals.protein}/>
         <BrChart header="Carbohidratos" colorT="#FFC34E" curToday={todayMacros.carbs} total={goals.carbs}/>

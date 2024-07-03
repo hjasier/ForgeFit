@@ -20,14 +20,14 @@ const SelectorRutina = ({rutina , setRutina}) => {
 
   return (
 
-    <ScrollView horizontal className="flex-row space-x-2">
+    <ScrollView horizontal className="flex-row space-x-3">
       {Object.keys(listaRutinasDEMO).map((rut, index) => (
         <TouchableOpacity onPress={() => setRutina(index)} key={index} 
         
         style={rutina == index ? { backgroundColor: "#FFD700" } : { backgroundColor: "#d9d9d93e" }}
 
 
-        className="w-20 h-20 rounded-xl items-center justify-center drop-shadow-md shadow-gray-700 ">
+        className="w-16 h-20 rounded-xl items-center justify-center drop-shadow-md shadow-gray-700 ">
           <Image className="w-10 h-10" source={require('../assets/testEx.png')} />
           <Text>{listaRutinasDEMO[rut]}</Text>
         </TouchableOpacity>

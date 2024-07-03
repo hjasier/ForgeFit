@@ -33,10 +33,14 @@ const ExMain = () => {
 
         <MenuNavBar>
             <View className="justify-between flex-row w-full px-6 items-center">
+              <TouchableOpacity>
                 <Icon className="w-15" name="history" type="font-awesome-5" color="white" />
+              </TouchableOpacity>
                 <TextInput className="bg-[#d9d9d92c] text-center text-white text-base h-12 w-44 rounded-lg" placeholder='Buscar Ejercicio' />
                 
-                <Text className="w-15 font-extrabold text-xl text-white">1:33</Text>
+                <TouchableOpacity>
+                  <Text className="w-15 font-extrabold text-xl text-white">1:33</Text>
+                </TouchableOpacity>
             </View>
         </MenuNavBar> 
 

@@ -50,11 +50,103 @@ export const setupDatabase = async () => {
           FOREIGN KEY (alimId) REFERENCES alims (id)
         );
       `);
+
+    await dbInstance.execAsync(`
+        PRAGMA journal_mode = WAL;
+        CREATE TABLE IF NOT EXISTS ejers (
+          id INTEGER PRIMARY KEY NOT NULL,
+          name TEXT NOT NULL,
+          musculature INTEGER NOT NULL,
+          imgSRC TEXT,
+          uploadSRC TEXT,
+          FOREIGN KEY (musculature) REFERENCES musculatures (id)
+        );
+    `);
+
+    await dbInstance.execAsync(`
+        PRAGMA journal_mode = WAL;
+        CREATE TABLE IF NOT EXISTS musculature (
+          id INTEGER PRIMARY KEY NOT NULL,
+          name TEXT NOT NULL
+        );
+    `);
+
+    await dbInstance.execAsync(`
+        PRAGMA journal_mode = WAL;
+        CREATE TABLE IF NOT EXISTS routine (
+          id INTEGER PRIMARY KEY NOT NULL,
+          name TEXT NOT NULL,
+          imgSRC TEXT,
+        );
+    `);
+
+    await dbInstance.execAsync(`
+      PRAGMA journal_mode = WAL;
+      CREATE TABLE IF NOT EXISTS routine_exercise (
+      routine_id INTEGER NOT NULL,
+      exercise_id INTEGER NOT NULL,
+      order INTEGER,
+      FOREIGN KEY (routine_id) REFERENCES rutines(id),
+      FOREIGN KEY (exercise_id) REFERENCES exercises(id),
+      PRIMARY KEY (routine_id, exercise_id)
+       );
+  `);
+
+    await dbInstance.execAsync(`
+      PRAGMA journal_mode = WAL;
+      CREATE TABLE IF NOT EXISTS dropSets (
+        id INTEGER PRIMARY KEY NOT NULL,
+        ejerId INTEGER NOT NULL,
+        reps INTEGER,
+        weight INTEGER,
+        FOREIGN KEY (ejerId) REFERENCES ejers (id)
+      );
+    `);
+
+    await dbInstance.execAsync(`
+        PRAGMA journal_mode = WAL;
+        CREATE TABLE IF NOT EXISTS sets (
+          id INTEGER PRIMARY KEY NOT NULL,
+          ejerId INTEGER NOT NULL,
+          reps INTEGER,
+          weight INTEGER,
+          dropSet_id INTEGER,
+          FOREIGN KEY (ejerId) REFERENCES ejers (id)
+          FOREIGN KEY (dropSet_id) REFERENCES dropSets (id)
+        );
+    `);
+
+
+    await dbInstance.execAsync(`
+        PRAGMA journal_mode = WAL;
+        CREATE TABLE IF NOT EXISTS user (
+          id INTEGER PRIMARY KEY NOT NULL,
+          name TEXT NOT NULL,
+          age INTEGER,
+          weight INTEGER,
+          height INTEGER,
+        );
+    `);
+
+
+
+
+    
   }
   return dbInstance;
 };
 
 export const getDatabase = () => dbInstance;
+
+
+
+
+
+
+
+
+
+
 
 
 export const backupDatabase = async () => {
@@ -92,23 +184,20 @@ export const backupDatabase = async () => {
 export const restoreDatabase = async (tarUri) => {
   console.log('Restoring database');
   try {
-    const dbPath = FileSystem.documentDirectory + 'TEST/';
-    
+    const dbPath = FileSystem.documentDirectory + 'SQLite/';
+    const zip = new JSZip();
     const tarBase64 = await FileSystem.readAsStringAsync(tarUri, { encoding: FileSystem.EncodingType.Base64 });
 
-        // Convertir la cadena Base64 en datos binarios (Buffer)
-        const tarBuffer = Buffer.from(tarBase64, 'base64');
+    // Cargar el archivo tar
+    await zip.loadAsync(tarBase64, { base64: true });
 
-        // Crear un stream de lectura desde el buffer
-        const tarStream = new Readable();
-        tarStream.push(tarBuffer);
-        tarStream.push(null); // Fin del stream
-
-        // Extraer el contenido del archivo tar en la ruta especificada
-        await extract({
-            file: tarStream,
-            cwd: dbPath
-        });
+    // Extraer los archivos del tar
+    await Promise.all(Object.keys(zip.files).map(async (fileName) => {
+      const file = zip.files[fileName];
+      const filePath = dbPath + fileName;
+      await FileSystem.writeAsStringAsync(filePath, file._data, { encoding: FileSystem.EncodingType.Base64 });
+    }
+    ));
 
 
     console.log('Database restored successfully');
