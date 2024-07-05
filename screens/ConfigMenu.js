@@ -5,10 +5,13 @@ import * as SQLite from 'expo-sqlite';
 import { backupDatabase , restoreDatabase } from '../database/database';
 import * as Sharing from 'expo-sharing';
 import * as DocumentPicker from 'expo-document-picker';
+import { initialData } from '../database/initialData';
+import { useDatabase } from '../hooks/DatabaseContext';
 
 
 const ConfigMenu = () => {
 
+  const db = useDatabase();
   
   const handleExportData = async () => {
     backupDatabase();
@@ -74,6 +77,8 @@ const ConfigMenu = () => {
 
 
 
+
+
     
   return (
     <View className="items-center justify-center h-full">
@@ -86,7 +91,6 @@ const ConfigMenu = () => {
       <TouchableOpacity onPress={handleImportData} className="h-10 w-30 bg-gray-500 text-white rounded-lg">
         <Text className="text-white">Importar datos</Text>
       </TouchableOpacity>
-
 
 
     </View>

@@ -10,22 +10,6 @@ const BotoneraAlim = () => {
   const navigation = useNavigation();
   const db = useDatabase();
 
-  const dropALLTEST = async () => {
-    try {
-      if (db) {
-        const query = `
-        DROP TABLE consums;
-        DROP TABLE alims;
-        `;
-        await db.runAsync(query);
-        console.log("Tabla eliminada");
-      }
-    } catch (error) {
-      console.error("Error eliminar tabla", error);
-    } finally {
-    }
-  };
-
   return (
     <View className="flex-row justify-between space-x-2 px-2">
       
@@ -43,7 +27,7 @@ const BotoneraAlim = () => {
 
 
       {/* Crear Receta */}
-      <TouchableOpacity onPress={dropALLTEST} className="bg-[#EAEAEA] rounded-xl h-24 items-center w-24 align-middle justify-center">
+      <TouchableOpacity className="bg-[#EAEAEA] rounded-xl h-24 items-center w-24 align-middle justify-center">
         <FontAwesome name="book" size={24} color="black" />
         <Text className="px-3 text-center">Crear Receta</Text>
       </TouchableOpacity>

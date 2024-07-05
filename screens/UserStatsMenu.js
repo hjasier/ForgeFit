@@ -56,8 +56,8 @@ const UserStatsMenu = () => {
                 <BotonCuadrado name="Crear Ejercicio"/>
             </TouchableOpacity>
 
-            <TouchableOpacity>
-                <BotonCuadrado name="Configurar Semana"/>
+            <TouchableOpacity onPress={() => navigation.navigate({name:"ConfigRoutines"})}>
+                <BotonCuadrado name="Configurar Rutinas"/>
             </TouchableOpacity>
             
         </View>

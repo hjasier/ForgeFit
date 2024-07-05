@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
-import setupDatabaseTest from '../database/databaseTest';
+
 
 
 export default function SQTest() {

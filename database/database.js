@@ -2,6 +2,7 @@ import * as SQLite from 'expo-sqlite';
 import * as FileSystem from 'expo-file-system';
 import * as DocumentPicker from 'expo-document-picker';
 import JSZip from 'jszip';
+import { initialData } from './initialData';
 
 let dbInstance = null;
 
@@ -9,7 +10,7 @@ export const setupDatabase = async () => {
   if (!dbInstance) {
     console.log('Creating database instance');
     dbInstance = await SQLite.openDatabaseAsync('database.db');
-    
+
     await dbInstance.execAsync(`
         PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS alims (
@@ -53,40 +54,64 @@ export const setupDatabase = async () => {
 
     await dbInstance.execAsync(`
         PRAGMA journal_mode = WAL;
-        CREATE TABLE IF NOT EXISTS ejers (
+        CREATE TABLE IF NOT EXISTS exercises (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL,
-          musculature INTEGER NOT NULL,
+          muscleGroup INTEGER NOT NULL,
           imgSRC TEXT,
           uploadSRC TEXT,
-          FOREIGN KEY (musculature) REFERENCES musculatures (id)
+          FOREIGN KEY (muscleGroup) REFERENCES muscleGroup (id)
+        );
+    `);
+    
+
+    await dbInstance.execAsync(`
+        PRAGMA journal_mode = WAL;
+        CREATE TABLE IF NOT EXISTS musculatures (
+          id INTEGER PRIMARY KEY NOT NULL,
+          name TEXT NOT NULL,
+          muscleGroup INTEGER,
+          FOREIGN KEY (muscleGroup) REFERENCES muscleGroup (id)
         );
     `);
 
     await dbInstance.execAsync(`
         PRAGMA journal_mode = WAL;
-        CREATE TABLE IF NOT EXISTS musculature (
+        CREATE TABLE IF NOT EXISTS musculature_exercise (
+          musculature_id INTEGER NOT NULL,
+          exercise_id INTEGER NOT NULL,
+          FOREIGN KEY (musculature_id) REFERENCES musculatures (id),
+          FOREIGN KEY (exercise_id) REFERENCES exercises (id),
+          PRIMARY KEY (musculature_id, exercise_id)
+        );
+    `);
+
+    await dbInstance.execAsync(`
+        PRAGMA journal_mode = WAL;
+        CREATE TABLE IF NOT EXISTS muscleGroup (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL
         );
     `);
+  
+    
 
     await dbInstance.execAsync(`
         PRAGMA journal_mode = WAL;
-        CREATE TABLE IF NOT EXISTS routine (
+        CREATE TABLE IF NOT EXISTS routines (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL,
-          imgSRC TEXT,
+          imgSRC TEXT
         );
     `);
 
     await dbInstance.execAsync(`
       PRAGMA journal_mode = WAL;
-      CREATE TABLE IF NOT EXISTS routine_exercise (
+      CREATE TABLE IF NOT EXISTS routine_exercises (
       routine_id INTEGER NOT NULL,
       exercise_id INTEGER NOT NULL,
-      order INTEGER,
-      FOREIGN KEY (routine_id) REFERENCES rutines(id),
+      exOrder INTEGER,
+      FOREIGN KEY (routine_id) REFERENCES routines(id),
       FOREIGN KEY (exercise_id) REFERENCES exercises(id),
       PRIMARY KEY (routine_id, exercise_id)
        );
@@ -99,7 +124,7 @@ export const setupDatabase = async () => {
         ejerId INTEGER NOT NULL,
         reps INTEGER,
         weight INTEGER,
-        FOREIGN KEY (ejerId) REFERENCES ejers (id)
+        FOREIGN KEY (ejerId) REFERENCES exercises (id)
       );
     `);
 
@@ -110,9 +135,9 @@ export const setupDatabase = async () => {
           ejerId INTEGER NOT NULL,
           reps INTEGER,
           weight INTEGER,
-          dropSet_id INTEGER,
-          FOREIGN KEY (ejerId) REFERENCES ejers (id)
-          FOREIGN KEY (dropSet_id) REFERENCES dropSets (id)
+          dropset_id INTEGER,
+          FOREIGN KEY (ejerId) REFERENCES exercises (id)
+          FOREIGN KEY (dropset_id) REFERENCES dropSets (id)
         );
     `);
 
@@ -124,15 +149,89 @@ export const setupDatabase = async () => {
           name TEXT NOT NULL,
           age INTEGER,
           weight INTEGER,
-          height INTEGER,
+          height INTEGER
         );
     `);
 
 
+    //-------------------------------------------------------------------------------------
+    //DEBUG
+    //-------------------------------------------------------------------------------------
 
+    const DEBUG_DELETE_ALL_TABLES = false;
+    if (DEBUG_DELETE_ALL_TABLES) {
+      console.log('Deleting all tables');
+      try {
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS alims;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS consums;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS exercises;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS musculatures;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS muscleGroup;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS routines;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS routine_exercises;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS dropSets;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS sets;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS user;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS musculature_exercise;`);
+
+      } catch (error) {
+        console.error('Error deleting tables:', error);
+      }
+      finally {
+        console.log('Tables deleted');
+      }
+    }
+
+    //-------------------------------------------------------------------------------------
+    //INITIAL DATA
+    //-------------------------------------------------------------------------------------
 
     
+    const mresult = await dbInstance.getAllAsync('SELECT * FROM muscleGroup');
+    if (mresult === 0 || mresult.length === 0) {
+        let query = `INSERT INTO muscleGroup (name) VALUES`;
+        initialData.muscleGroups.forEach((group) => {
+            query += `('${group.name}'),`;
+        });
+        query = query.slice(0, -1); // Elimina la última coma
+        query += ';';
+        try {
+            console.log("Insertando datos iniciales muscleGroup")
+            await dbInstance.execAsync(query);
+        } catch (error) {
+            console.error("Error al insertar datos iniciales gruposM", error);
+        }
+    }else{
+      console.log("Skipping muscleGroup insertions")
+    }
+
+    const eresult = await dbInstance.getAllAsync('SELECT * FROM exercises');
+    if (eresult === 0 || eresult.length === 0) {
+        let query = `INSERT INTO exercises
+                     (name, muscleGroup, uploadSRC) 
+                     VALUES
+        `;
+        initialData.ejers.forEach((ejer) => {
+            query += `('${ejer.name}', ${ejer.muscleGroups[0]}, 'default'),`;
+        });
+        query = query.slice(0, -1); // Elimina la última coma
+        query += ';';
+        try {
+            console.log("Insertando datos iniciales ejercicios");
+            await dbInstance.execAsync(query);
+        } catch (error) {
+            console.error("Error al insertar datos iniciales ejercicios", error);
+        }
+    }else{
+      console.log("Skipping exercises insertions")
+    }
+    
+    
+
+
   }
+
+
   return dbInstance;
 };
 

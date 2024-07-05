@@ -10,6 +10,11 @@ import TakeImg from '../screens/TakeImg';
 import MacrosInfo from '../screens/MacrosInfo';
 import ConfigMenu from '../screens/ConfigMenu';
 import SaveEjDone from '../screens/SaveEjDone';
+import ExList from '../screens/ExList';
+import EditEx from '../screens/EditEx';
+import ConfigRoutines from '../screens/ConfigRoutines';
+import SelectRoutineEjs from '../screens/SelectRoutineEjs';
+import CreateRoutine from '../screens/CreateRoutine';
 
 
 
@@ -33,6 +38,21 @@ const StackNavigator = () => {
         <Stack.Screen name="MacrosInfo" component={MacrosInfo} options={{headerShown:false}} />
         <Stack.Screen name="ConfigMenu" component={ConfigMenu} options={{headerShown:false}} />
         <Stack.Screen name="SaveEjDone" component={SaveEjDone} options={{headerShown:false}} />
+        <Stack.Screen name="ExList" component={ExList} options={{headerShown:false}} />
+        <Stack.Screen name="EditEx" component={EditEx} options={{headerShown:false}} />
+        <Stack.Screen name="ConfigRoutines" component={ConfigRoutines} options={{headerShown:false}} />
+        <Stack.Screen name="SelectRoutineEjs" component={SelectRoutineEjs} options={{headerShown:false}} />
+        <Stack.Screen name="CreateRoutine" component={CreateRoutine} options={{headerShown:false}} />
+
+
+
+        
+
+
+
+
+
+
 
 
 
