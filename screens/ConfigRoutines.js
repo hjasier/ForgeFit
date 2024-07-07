@@ -9,13 +9,10 @@ import ListaEjersConfig from '../components/ListaEjersConfig'
 import { useNavigation } from '@react-navigation/native'
 import { Icon } from '@rneui/base'
 
-
 const ConfigRoutines = () => {
 
   const navigation = useNavigation();
   const [rutina, setRutina] = useState(null);
-
-
 
 
   return (
@@ -37,7 +34,7 @@ const ConfigRoutines = () => {
       <>
       <View className="items-center py-5">
         <TouchableOpacity onPress={()=> navigation.navigate("SelectRoutineEjs",{routine:rutina})} className="items-center text-center justify-center bg-[#EAEAEA] w-32 h-9 rounded-lg shadow-md shadow-gray-800">
-          <Text>Añadir Ejercicios</Text>
+          <Text>Editar Ejercicios</Text>
         </TouchableOpacity>
       </View>
 
@@ -46,9 +43,6 @@ const ConfigRoutines = () => {
       </View>
       </>
       )}
-
-
-
 
     </SafeAreaView>
   )

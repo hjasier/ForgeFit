@@ -15,6 +15,7 @@ import EditEx from '../screens/EditEx';
 import ConfigRoutines from '../screens/ConfigRoutines';
 import SelectRoutineEjs from '../screens/SelectRoutineEjs';
 import CreateRoutine from '../screens/CreateRoutine';
+import ExHistoryList from '../screens/ExHistoryList';
 
 
 
@@ -43,6 +44,8 @@ const StackNavigator = () => {
         <Stack.Screen name="ConfigRoutines" component={ConfigRoutines} options={{headerShown:false}} />
         <Stack.Screen name="SelectRoutineEjs" component={SelectRoutineEjs} options={{headerShown:false}} />
         <Stack.Screen name="CreateRoutine" component={CreateRoutine} options={{headerShown:false}} />
+        <Stack.Screen name="ExHistoryList" component={ExHistoryList} options={{headerShown:false}} />
+
 
 
 

@@ -5,7 +5,7 @@ import { Icon } from '@rneui/themed';
 import BotonCuadrado from '../components/BotonCuadrado';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import BotoneraStats from '../views/BotoneraStats';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation , useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
@@ -13,6 +13,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 const UserStatsMenu = () => {
 
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     const setUpBarColors = async () => {
@@ -20,7 +21,7 @@ const UserStatsMenu = () => {
         NavigationBar.setBackgroundColorAsync("white");
         }
     setUpBarColors();
-  }, []);
+  }, [isFocused]);
 
   return (
     <View>

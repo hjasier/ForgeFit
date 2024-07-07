@@ -5,18 +5,37 @@ import SelectorGrupo from '../components/SelectorGrupo';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { useRef } from 'react';
+import { initialData } from '../database/initialData';
+import SelectExImage from '../components/SelectExImage';
+import { useDatabase } from '../hooks/DatabaseContext';
 
 const EditEx = ({route}) => {
 
   const navigation = useNavigation();
+  const db = useDatabase();
 
   const exercise = route.params.exercise;
   const [group, setGroup] = useState(exercise.muscleGroup);
   const [newName, setNewName] = useState(exercise.name);
+  const [newImage, setNewImage] = useState(exercise.imgSRC);
   
   const handleEditEx = () => {
     console.log("Editando ejercicio");
+    updateExData();
     navigation.goBack();
+  }
+
+  const updateExData = async () => {
+    const query = `
+      UPDATE exercises
+      SET name = ?,
+          imgSRC = ?,
+          muscleGroup = ?
+      WHERE id = ?;
+    `;
+    const values = [newName, newImage, group, exercise.id];
+    await db.runAsync(query, values);
   }
 
   return (
@@ -33,10 +52,9 @@ const EditEx = ({route}) => {
       onChangeText={setNewName}
       placeholder="Nombre del ejercicio" 
       className="w-52 justify-center text-center  rounded-md h-11 bg-[#EAEAEA] shadow-md shadow-gray-700 py-0.5 px-3"/>
-
-    <TouchableOpacity className="bg-[#EAEAEA] shadow-md shadow-gray-700 py-0.5 rounded-md p-3 mt-10">
-      <Image className="w-20 h-20" source={require('../assets/testEx.png')}/>
-    </TouchableOpacity>
+    
+    <SelectExImage group={group} selectedImage={newImage}  setNewImage={setNewImage} />
+    
 
     <TouchableOpacity onPress={handleEditEx} className="px-3 bg-[#171717] h-12 rounded-lg shadow-md shadow-gray-800 items-center justify-center mt-16">
       <Text className="text-white">Guardar cambios</Text>

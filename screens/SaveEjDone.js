@@ -6,14 +6,30 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useRef } from 'react';
+import { useEffect } from 'react';
+import { useDatabase } from '../hooks/DatabaseContext';
 
 
-const SaveEjDone = () => {
+const SaveEjDone = ({route}) => {
 
   const navigation = useNavigation();
+  const exercise = route.params.exercise;
+  const db = useDatabase();
 
   const [numSets, setNumSets] = useState(1);
   const scrollViewRef = useRef(null);
+
+  const [setsData, setSetsData] = useState(
+    Array.from({ length: 20 }, () => ({ peso: '', reps: '' })) // 20 sets max
+  );
+
+
+  const handleInputChange = (index, field, value) => {
+    const updatedSets = setsData.map((set, i) => (
+      i === index ? { ...set, [field]: value } : set
+    ));
+    setSetsData(updatedSets);
+  };
 
   const addNewSet = () => {
     setNumSets(numSets + 1);
@@ -29,6 +45,57 @@ const SaveEjDone = () => {
         setNumSets(numSets - 1);
     }
   };
+
+    const handleSaveSet = async () => {
+        if (setsData[0].peso === '' || setsData[0].reps === '') {
+          return;
+        }
+        
+        const main_set_id = Math.floor(Math.random() * 100000000);
+
+        try {
+            if (db) {
+              const query = `
+                INSERT INTO sets
+                (id, exercise_id, weight, reps, isMainSet)
+                VALUES (?, ?, ?, ? , 1);
+              `;
+            const values = [main_set_id, exercise.id ,setsData[0].peso, setsData[0].reps];
+
+            await db.runAsync(query, values); 
+
+            //Insert dropsets
+            for (let i = 1; i < numSets; i++) {
+              const drop_set_id = Math.floor(Math.random() * 100000000);
+              const setsinsertQuery = `
+                INSERT INTO sets
+                (id, exercise_id, weight, reps, isMainSet)
+                VALUES (?, ?, ?, ? , 0);
+              `;
+              const dropSetValues = [drop_set_id, exercise.id, setsData[i].peso, setsData[i].reps];
+              await db.runAsync(setsinsertQuery, dropSetValues);
+
+              const query = `
+                INSERT INTO dropsets
+                (main_set_id, drop_set_i, set_order)
+                VALUES (?, ?, ?);
+              `;
+              const values = [main_set_id, drop_set_id, i];
+              await db.runAsync(query, values);
+            }
+
+            }
+
+
+
+
+          } catch (error) {
+            console.error("Error al insertar el set:", error);
+            return;
+          } finally {
+            navigation.goBack();
+          }
+    }
 
   return (
     <View>
@@ -47,13 +114,14 @@ const SaveEjDone = () => {
             </View>
         </MenuNavBar> 
 
+
         <ScrollView ref={scrollViewRef} className="h-screen">
 
         <View className="px-12 py-10 pb-32">
 
             <View className="flex-row items-center space-x-4 justify-center mb-16">
                 <Image className="w-12 h-12" source={require('../assets/testEx.png')} />
-                <Text className="text-base">Press banca</Text>
+                <Text className="text-base">{exercise.name}</Text>
             </View>
             
 
@@ -78,12 +146,16 @@ const SaveEjDone = () => {
                 <View className="items-center space-y-3">
                     <View className="flex-row items-center space-x-4">
                         <Text>Peso</Text>
-                        <TextInput keyboardType="numeric" className="bg-[#EAEAEA] h-12 w-24 rounded-lg text-center" placeholder="0"/>
+                        <TextInput 
+                        onChangeText={(value) => handleInputChange(i, 'peso', value)}
+                        keyboardType="numeric" className="bg-[#EAEAEA] h-12 w-24 rounded-lg text-center" placeholder="0"/>
                     </View>
 
                     <View className="flex-row items-center space-x-4">
                         <Text>Reps</Text>
-                        <TextInput keyboardType="numeric" className="bg-[#EAEAEA] h-12 w-24 rounded-lg text-center" placeholder="0"/>
+                        <TextInput 
+                        onChangeText={(value) => handleInputChange(i, 'reps', value)}
+                        keyboardType="numeric" className="bg-[#EAEAEA] h-12 w-24 rounded-lg text-center" placeholder="0"/>
                     </View>
                 </View>
 
@@ -102,7 +174,7 @@ const SaveEjDone = () => {
                     <Text>DropSet</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity className="w-20 h-8 bg-[#171717] items-center justify-center rounded-lg">
+                <TouchableOpacity onPress={handleSaveSet} className="w-20 h-8 bg-[#171717] items-center justify-center rounded-lg">
                     <Text className="text-white">Guardar</Text>
                 </TouchableOpacity>
             </View>

@@ -7,6 +7,7 @@ import { useDatabase } from '../hooks/DatabaseContext'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Icon } from '@rneui/themed'
 import { useNavigation } from '@react-navigation/native'
+import { initialData } from '../database/initialData'
 
 const ExList = () => {
 
@@ -45,12 +46,13 @@ const ExList = () => {
         <SelectorGrupo group={group} setGroup={setGroup} />
     </View>
 
-    <View className="w-full px-7 h-48 items-center space-y-3">
+    <ScrollView className="w-full px-7">
 
+        <View className="space-y-3 pb-48">        
         {exercises.map((exercise) => (
 
             <TouchableOpacity onPress={() => navigation.navigate("EditEx",{exercise:exercise})} key={exercise.id} className="flex-row justify-between bg-[#EAEAEA] h-14 w-full items-center px-4 rounded-lg">
-                <Image className="w-8 h-8" source={require('../assets/testEx.png')}/>
+                <Image resizeMode="contain" className="w-8 h-8" source={initialData.images[exercise.imgSRC].imgSRC}/>
 
                 <Text>{exercise.name}</Text>
 
@@ -61,9 +63,10 @@ const ExList = () => {
             </TouchableOpacity>
             
         ))}
+        </View>
         
 
-    </View>
+    </ScrollView>
 
 
 

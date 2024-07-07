@@ -3,7 +3,7 @@ import React from 'react'
 import { Icon } from '@rneui/themed'
 import MenuNavBar from '../components/MenuNavBar';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation , useIsFocused} from '@react-navigation/native';
 import SelectorRutina from '../components/SelectorRutina';
 import ListaEjers from '../components/ListaEjers';
 import { useState } from 'react';
@@ -14,6 +14,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 const ExMain = () => {
 
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   const [rutina, setRutina] = useState(0);
 
@@ -23,7 +24,7 @@ const ExMain = () => {
         NavigationBar.setBackgroundColorAsync("white");
         }
     setUpBarColors();
-  }, []);
+  }, [isFocused]);
 
   return (
     <View>
@@ -33,7 +34,7 @@ const ExMain = () => {
 
         <MenuNavBar>
             <View className="justify-between flex-row w-full px-6 items-center">
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("ExHistoryList")}>
                 <Icon className="w-15" name="history" type="font-awesome-5" color="white" />
               </TouchableOpacity>
                 <TextInput className="bg-[#d9d9d92c] text-center text-white text-base h-12 w-44 rounded-lg" placeholder='Buscar Ejercicio' />
@@ -45,7 +46,7 @@ const ExMain = () => {
         </MenuNavBar> 
 
 
-
+        
         <View className="items-center mt-5 w-full px-8">
             <SelectorRutina rutina={rutina} setRutina={setRutina} />
         </View>

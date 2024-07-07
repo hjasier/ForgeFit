@@ -6,7 +6,7 @@ import { FontAwesome ,AntDesign , Octicons ,Entypo } from '@expo/vector-icons'
 import { useNavigation  } from '@react-navigation/native';
 import { useState } from 'react';
 import { useDatabase } from '../hooks/DatabaseContext'
-
+import CryptoJS from 'crypto-js';
 
 const AlimSum = ({ route }) => {
 
@@ -33,6 +33,19 @@ const AlimSum = ({ route }) => {
     }
     setConsumUnits(text);
     setConsumWeight(parseFloat(text)*alim.weight);
+  }
+
+  const generateHash = (inputString) => {
+    let hash = 0;
+    for (let i = 0; i < inputString.length; i++) {
+      const char = inputString.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash |= 0; // Convertimos a 32-bit integer
+    }
+    // Aseguramos que el resultado sea positivo y obtenemos los últimos 5 dígitos
+    const positiveHash = Math.abs(hash);
+    const shortId = ('00000' + positiveHash % 100000).slice(-5);
+    return shortId;
   }
 
 
@@ -79,6 +92,9 @@ const AlimSum = ({ route }) => {
             (id, name, barCode, kcals, protein, carbs, fat, saturated, fiber, sugars, salt, sodium, potassium, cholesterol, weight, unit, alimGroup, brand, imgSRC, uploadSRC)
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
           `;
+          if (alim.uploadSRC === "Nutrionix") {
+            alim.id = generateHash(alim.name);
+          }
           const values = [
             alim.id,
             alim.name,
@@ -101,6 +117,7 @@ const AlimSum = ({ route }) => {
             alim.imgSRC,
             alim.uploadSRC
           ];
+
           await db.runAsync(query, values);
         }
       }

@@ -6,7 +6,7 @@ import BrChart from '../components/BrChart'
 import { MaterialIcons , FontAwesome } from '@expo/vector-icons';
 import BotoneraAlim from '../views/BotoneraAlim'
 import Consums from '../views/Consums'
-import { useNavigation , useFocusEffect } from '@react-navigation/native';
+import { useNavigation , useIsFocused ,useFocusEffect } from '@react-navigation/native';
 import { useDatabase } from '../hooks/DatabaseContext'
 import { useState , useCallback } from 'react';
 import { StatusBar } from 'react-native';
@@ -16,6 +16,8 @@ import * as NavigationBar from 'expo-navigation-bar';
 export default function MacrosMain() {
   
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
   const db = useDatabase();
 
   const goals = {
@@ -70,7 +72,7 @@ export default function MacrosMain() {
     if (db){
       updateMacros();
     }
-  }, [db]);
+  }, [isFocused]);
 
   useFocusEffect(
     useCallback(() => {
@@ -80,13 +82,14 @@ export default function MacrosMain() {
     }, [db])
   );
 
+
   useEffect(() => {
     const setUpBarColors = async () => {
         StatusBar.setBackgroundColor('#F5F5F5');
         NavigationBar.setBackgroundColorAsync("white");
         }
     setUpBarColors();
-  }, []);
+  }, [isFocused]);
 
 
 

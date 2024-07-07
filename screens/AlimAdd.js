@@ -62,9 +62,6 @@ const AlimAdd = () => {
         `;
         const values = [alimName, protein, kcals, carbs, fat, weight, imgSRC, "user", unit];
         await db.runAsync(query, values);
-
-        const updatedAlims = await db.getAllAsync('SELECT * FROM alims');
-        console.log(updatedAlims);
       }
     } catch (error) {
       console.error("Error al insertar el alimento:", error);

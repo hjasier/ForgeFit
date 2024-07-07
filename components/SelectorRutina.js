@@ -4,11 +4,13 @@ import { Image , TouchableOpacity } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useDatabase } from '../hooks/DatabaseContext'
 import { useState } from 'react'
+import { useIsFocused } from '@react-navigation/native'
 
 
 const SelectorRutina = ({rutina , setRutina}) => {
 
   const db = useDatabase();
+  const isFocused = useIsFocused();
 
   const [rutinas, setRutinas] = useState([]);
 
@@ -18,11 +20,12 @@ const SelectorRutina = ({rutina , setRutina}) => {
         const query = `SELECT * FROM routines ORDER BY name;`;
         const result = await db.getAllAsync(query);
         setRutinas(result);
+        setRutina(result[0]);
       }
       getRutinas();
 
     }
-  }, [db]);
+  }, [isFocused]);
   
 
   

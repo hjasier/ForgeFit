@@ -17,6 +17,7 @@ const SelectRoutineEjs = ({route}) => {
     const [exercises, setExercises] = useState([]);
     const [selectedExercises, setSelectedExercises] = useState([]);
 
+    // Get exercises according to muscle group
     useEffect(() => {
       if (db) {
         const getExercises = async () => {
@@ -27,8 +28,9 @@ const SelectRoutineEjs = ({route}) => {
         }
         getExercises();
       }
-    }, [db, group]);
+    }, [group]);
 
+    // Get selected exercises for the routine
     useEffect(() => {
       if (db) {
         const getSelectedExercises = async () => {
@@ -41,10 +43,16 @@ const SelectRoutineEjs = ({route}) => {
         getSelectedExercises();
       }
     }
-    , [db, routine]);
+    , [routine]);
 
     const handleSelectExercise = async (exercise) => {
       if (selectedExercises.find((e) => e.exercise_id === exercise.id)) {
+        if (exercise.exOrder < selectedExercises.length) {
+          //Update following exercises exOrder
+          const query = `UPDATE routine_exercises SET exOrder = exOrder - 1 WHERE routine_id = ? AND exOrder >= ?;`;
+          const values = [routine.id, exercise.exOrder];
+          await db.runAsync(query, values);
+        }
         const query = `DELETE FROM routine_exercises WHERE routine_id = ? AND exercise_id = ?;`;
         const values = [routine.id, exercise.id];
         await db.runAsync(query, values);
@@ -76,26 +84,37 @@ const SelectRoutineEjs = ({route}) => {
       <ScrollView className="h-[550] mt-5" >
       <View className="items-center pb-24 px-5 space-y-3">
 
-        {exercises.map((exercise) => (
-            <TouchableOpacity
-                onPress={() => handleSelectExercise(exercise)}
-                style={{backgroundColor: selectedExercises.find((e) => e.exercise_id === exercise.id) ? "#171717" : "#EAEAEA"}}
-                key={exercise.id} className="flex-row justify-between bg-[#EAEAEA] h-14 w-full items-center px-4 rounded-lg">
-                <View>
-                <Image className="w-8 h-8" source={require('../assets/testEx.png')}/>
-                </View>
+      {exercises.map((exercise) => {
+        // Encontrar el ejercicio seleccionado en la lista de selectedExercises
+        const selectedExercise = selectedExercises.find((e) => e.exercise_id === exercise.id);
+        
+        return (
+          <TouchableOpacity
+            onPress={() => handleSelectExercise(exercise)}
+            style={{
+              backgroundColor: selectedExercise ? "#FFD700" : "#EAEAEA"
+            }}
+            key={exercise.id}
+            className="flex-row justify-between bg-[#EAEAEA] h-14 w-full items-center px-4 rounded-lg"
+          >
+            <View>
+              <Image className="w-8 h-8" source={require('../assets/testEx.png')} />
+            </View>
 
-                <Text>{exercise.name}</Text>
+            <Text>{exercise.name}</Text>
 
-                {selectedExercises.find((e) => e.exercise_id === exercise.id) && (
-                <View className="">
-                  <Text className="px-3 py-2 bg-[#EAEAEA] rounded-md font-bold shadow-md shadow-gray-700">0</Text>
-                </View>
-                )}
-                
+            {/* Mostrar exOrder si el ejercicio está seleccionado */}
+            {selectedExercise && (
+              <View>
+                <Text className="px-3 py-2 bg-[#EAEAEA] rounded-md font-bold shadow-md shadow-gray-700">
+                  {selectedExercise.exOrder} {/* Aquí se muestra exOrder */}
+                </Text>
+              </View>
+            )}
+          </TouchableOpacity>
+        );
+      })}
 
-            </TouchableOpacity>
-        ))}
       </View>
       </ScrollView>
       

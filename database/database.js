@@ -3,6 +3,7 @@ import * as FileSystem from 'expo-file-system';
 import * as DocumentPicker from 'expo-document-picker';
 import JSZip from 'jszip';
 import { initialData } from './initialData';
+import { Asset } from 'expo-asset';
 
 let dbInstance = null;
 
@@ -118,27 +119,28 @@ export const setupDatabase = async () => {
   `);
 
     await dbInstance.execAsync(`
-      PRAGMA journal_mode = WAL;
-      CREATE TABLE IF NOT EXISTS dropSets (
-        id INTEGER PRIMARY KEY NOT NULL,
-        ejerId INTEGER NOT NULL,
-        reps INTEGER,
-        weight INTEGER,
-        FOREIGN KEY (ejerId) REFERENCES exercises (id)
-      );
-    `);
-
-    await dbInstance.execAsync(`
         PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS sets (
           id INTEGER PRIMARY KEY NOT NULL,
-          ejerId INTEGER NOT NULL,
-          reps INTEGER,
+          exercise_id INTEGER NOT NULL,
+          reps INTEGER NOT NULL,
           weight INTEGER,
-          dropset_id INTEGER,
-          FOREIGN KEY (ejerId) REFERENCES exercises (id)
-          FOREIGN KEY (dropset_id) REFERENCES dropSets (id)
+          isMainSet BOOLEAN NOT NULL,
+          date DATETIME DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (exercise_id) REFERENCES exercises (id)
         );
+    `);
+
+    await dbInstance.execAsync(`
+      PRAGMA journal_mode = WAL;
+      CREATE TABLE IF NOT EXISTS dropsets (
+          id INTEGER PRIMARY KEY NOT NULL,
+          main_set_id INTEGER NOT NULL, 
+          drop_set_id INTEGER NOT NULL,
+          set_order INTEGER NOT NULL, 
+          FOREIGN KEY (main_set_id) REFERENCES sets (id),
+          FOREIGN KEY (drop_set_id) REFERENCES sets (id)
+      );
     `);
 
 
@@ -152,6 +154,18 @@ export const setupDatabase = async () => {
           height INTEGER
         );
     `);
+
+    await dbInstance.execAsync(`
+        PRAGMA journal_mode = WAL;
+        CREATE TABLE IF NOT EXISTS exercise_images (
+          id INTEGER PRIMARY KEY NOT NULL,
+          name TEXT NOT NULL,
+          imgIndex INTEGER NOT NULL,
+          muscleGroup INTEGER NOT NULL,
+          FOREIGN KEY (muscleGroup) REFERENCES muscleGroup (id)
+        );
+    `);
+
 
 
     //-------------------------------------------------------------------------------------
@@ -169,10 +183,11 @@ export const setupDatabase = async () => {
       await dbInstance.execAsync(`DROP TABLE IF EXISTS muscleGroup;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS routines;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS routine_exercises;`);
-      await dbInstance.execAsync(`DROP TABLE IF EXISTS dropSets;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS dropsets;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS sets;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS user;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS musculature_exercise;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS exercise_images;`);
 
       } catch (error) {
         console.error('Error deleting tables:', error);
@@ -185,10 +200,9 @@ export const setupDatabase = async () => {
     //-------------------------------------------------------------------------------------
     //INITIAL DATA
     //-------------------------------------------------------------------------------------
-
     
-    const mresult = await dbInstance.getAllAsync('SELECT * FROM muscleGroup');
-    if (mresult === 0 || mresult.length === 0) {
+    const mresult = await dbInstance.getAllAsync('SELECT COUNT(*) FROM muscleGroup');
+    if (mresult[0]["COUNT(*)"]==0) {
         let query = `INSERT INTO muscleGroup (name) VALUES`;
         initialData.muscleGroups.forEach((group) => {
             query += `('${group.name}'),`;
@@ -205,14 +219,67 @@ export const setupDatabase = async () => {
       console.log("Skipping muscleGroup insertions")
     }
 
-    const eresult = await dbInstance.getAllAsync('SELECT * FROM exercises');
-    if (eresult === 0 || eresult.length === 0) {
+
+    const saveImage = async (imageSRC) => {
+      const asset = Asset.fromModule(imageSRC);
+      const assetUri = asset.uri;
+      try{
+        const fileName = `ex_${Date.now()}.jpg`; // Nombre único basado en la fecha actual
+        const appImagePath = FileSystem.documentDirectory+`exImages/`;
+        const newFilePath = appImagePath+`${fileName}`;
+        const dirInfo = await FileSystem.getInfoAsync(appImagePath);
+        if (!dirInfo.exists) {
+          await FileSystem.makeDirectoryAsync(appImagePath, { intermediates: true });
+        }
+        await FileSystem.downloadAsync(
+          assetUri, // La URI del recurso en la carpeta de activos
+          newFilePath // La ruta de destino en el sistema de archivos del usuario
+        );
+        console.log(newFilePath);
+        return newFilePath;
+      }
+      catch (error) {
+        console.error('Error downloading asset:', error);
+      }
+    }
+
+
+     const eimgresult = await dbInstance.getAllAsync('SELECT COUNT(*) FROM exercise_images');
+     if (eimgresult[0]["COUNT(*)"]==0){
+         let query = `INSERT INTO exercise_images (name, imgIndex, muscleGroup) VALUES`;
+  
+         initialData.images.forEach((img,index) => {
+             query += `('${img.name}', '${index}', ${img.muscleGroup}),`;
+         });
+         query = query.slice(0, -1); // Elimina la última coma
+         query += ';';
+         try {
+             console.log("Insertando datos iniciales imagenes ejercicios")
+             await dbInstance.execAsync(query);
+         } catch (error) {
+             console.error("Error al insertar datos iniciales imagenes ejercicios", error);
+         }
+     }
+      else{
+        console.log("Skipping exercise_images insertions")
+      }
+    
+
+
+    const eresult = await dbInstance.getAllAsync('SELECT COUNT(*) FROM exercises');
+    if (eresult[0]["COUNT(*)"]==0) {
         let query = `INSERT INTO exercises
-                     (name, muscleGroup, uploadSRC) 
+                     (name, muscleGroup, imgSRC , uploadSRC) 
                      VALUES
         `;
         initialData.ejers.forEach((ejer) => {
-            query += `('${ejer.name}', ${ejer.muscleGroups[0]}, 'default'),`;
+            const image = initialData.images.find(img => img.name === ejer.image);
+            const imageID = initialData.images.indexOf(image);
+            if (!image) {
+                console.error(`No se encontró la imagen ${ejer.image} para el ejercicio ${ejer.name}`);
+                return;
+            }
+            query += `('${ejer.name}', ${ejer.muscleGroups[0]},${imageID},  'default'),`;
         });
         query = query.slice(0, -1); // Elimina la última coma
         query += ';';
@@ -230,7 +297,6 @@ export const setupDatabase = async () => {
 
 
   }
-
 
   return dbInstance;
 };

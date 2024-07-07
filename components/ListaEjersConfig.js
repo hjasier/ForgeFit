@@ -1,7 +1,7 @@
 import { View, Text , Image , TouchableOpacity } from 'react-native'
 import React from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation , useIsFocused } from '@react-navigation/native';
 import { Icon } from '@rneui/themed'
 import { useDatabase } from '../hooks/DatabaseContext';
 import { useEffect } from 'react';
@@ -10,6 +10,7 @@ import DraggableFlatList from 'react-native-draggable-flatlist';
 
 const ListaEjersConfig = ({rutina}) => {
 
+    const isFocused = useIsFocused();  
     const navigation = useNavigation();
     const db = useDatabase();
 
@@ -32,7 +33,7 @@ const ListaEjersConfig = ({rutina}) => {
             }
             getExercises();
         }
-        }, [rutina]);
+        }, [rutina,isFocused]);
 
     const handleUpdateOrder = async (data) => {
         const query = `UPDATE routine_exercises SET exOrder = ? WHERE routine_id = ? AND exercise_id = ?;`;
