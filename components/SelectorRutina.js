@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { useDatabase } from '../hooks/DatabaseContext'
 import { useState } from 'react'
 import { useIsFocused } from '@react-navigation/native'
+import { initialData } from '../database/initialData'
 
 
 const SelectorRutina = ({rutina , setRutina}) => {
@@ -17,7 +18,7 @@ const SelectorRutina = ({rutina , setRutina}) => {
   useEffect(() => {
     if (db) {
       const getRutinas = async () => {
-        const query = `SELECT * FROM routines ORDER BY name;`;
+        const query = `SELECT * FROM routines;`;
         const result = await db.getAllAsync(query);
         setRutinas(result);
         setRutina(result[0]);
@@ -49,7 +50,7 @@ const SelectorRutina = ({rutina , setRutina}) => {
           }
           className="w-16 h-20 rounded-xl items-center justify-center drop-shadow-md shadow-gray-700"
         >
-          <Image className="w-10 h-10" source={require('../assets/testEx.png')} />
+          <Image resizeMode="contain" className="w-10 h-10" source={initialData.muscleGroups[rut.imgSRC].imgSRC} />
           <Text>{rut.name}</Text>
         </TouchableOpacity>
       ))

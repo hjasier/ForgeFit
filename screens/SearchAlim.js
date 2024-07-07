@@ -19,6 +19,7 @@ const SearchAlim = () => {
   const [selectedOption, setSelectedOption] = useState(0);
 
   const options = ['Todos', 'Mios', 'OpenFoodFacts', 'Nutrionix'];
+  const debounceTimeout = useRef(null);
 
   // Enfoca el TextInput cuando el componente se monta
   useEffect(() => {
@@ -36,17 +37,29 @@ const SearchAlim = () => {
         switch (selectedOption) {
           case 0:
             await sqlSearch();
-            await offSearch();
-            await nutrionixSearch();
+            clearTimeout(debounceTimeout.current);
+            debounceTimeout.current = setTimeout(async () => {
+              await offSearch();
+            }, 400);
+            debounceTimeout.current = setTimeout(async () => {
+              await nutrionixSearch();
+            }, 400);
+            
             break;
           case 1:
             await sqlSearch();
             break;
           case 2:
-            await offSearch();
+            clearTimeout(debounceTimeout.current);
+            debounceTimeout.current = setTimeout(async () => {
+              await offSearch();
+            }, 400);
             break;
           case 3:
-            await nutrionixSearch();
+            clearTimeout(debounceTimeout.current);
+            debounceTimeout.current = setTimeout(async () => {
+              await nutrionixSearch();
+            }, 400);
             break;
           default:
             break;
@@ -60,6 +73,9 @@ const SearchAlim = () => {
     }
 
     fetchResults();
+    return () => {
+      clearTimeout(debounceTimeout.current);
+    };
   }, [search, selectedOption]);
 
   // Combina los resultados basados en la opción seleccionada
@@ -101,7 +117,7 @@ const SearchAlim = () => {
         json: 1,
         page_size: 20,
       };
-
+      
       const response = await axios.get('https://world.openfoodfacts.org/cgi/search.pl', { params });
       const alims = response.data.products.map(product => ({
         id: product.id,

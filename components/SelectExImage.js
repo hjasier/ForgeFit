@@ -32,9 +32,7 @@ const SelectExImage = ({group, selectedImage, setNewImage}) => {
   };
 
   useEffect(() => {
-    console.log(selectedImage);
-    if (selectedImage) {
-      
+    if (selectedImage) { 
       scrollToElement(selectedImage);
     }
   }, []);

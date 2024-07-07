@@ -16,6 +16,9 @@ import ConfigRoutines from '../screens/ConfigRoutines';
 import SelectRoutineEjs from '../screens/SelectRoutineEjs';
 import CreateRoutine from '../screens/CreateRoutine';
 import ExHistoryList from '../screens/ExHistoryList';
+import ExAdd from '../screens/ExAdd';
+import ExHistory from '../screens/ExHistory';
+import SetWeight from '../screens/SetWeight';
 
 
 
@@ -45,6 +48,13 @@ const StackNavigator = () => {
         <Stack.Screen name="SelectRoutineEjs" component={SelectRoutineEjs} options={{headerShown:false}} />
         <Stack.Screen name="CreateRoutine" component={CreateRoutine} options={{headerShown:false}} />
         <Stack.Screen name="ExHistoryList" component={ExHistoryList} options={{headerShown:false}} />
+        <Stack.Screen name="ExAdd" component={ExAdd} options={{headerShown:false}} />
+        <Stack.Screen name="ExHistory" component={ExHistory} options={{headerShown:false}} />
+        <Stack.Screen name="SetWeight" component={SetWeight} options={{headerShown:false}} />
+
+
+
+
 
 
 

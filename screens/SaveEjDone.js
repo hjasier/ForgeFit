@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useDatabase } from '../hooks/DatabaseContext';
+import { initialData } from '../database/initialData';
+import moment from 'moment';
 
 
 const SaveEjDone = ({route}) => {
@@ -57,10 +59,10 @@ const SaveEjDone = ({route}) => {
             if (db) {
               const query = `
                 INSERT INTO sets
-                (id, exercise_id, weight, reps, isMainSet)
-                VALUES (?, ?, ?, ? , 1);
+                (id, exercise_id, weight, reps, date, isMainSet)
+                VALUES (?, ?, ?, ?, ?, 1);
               `;
-            const values = [main_set_id, exercise.id ,setsData[0].peso, setsData[0].reps];
+            const values = [main_set_id, exercise.id ,setsData[0].peso, setsData[0].reps, moment().format('YYYY-MM-DD HH:mm:ss')];
 
             await db.runAsync(query, values); 
 
@@ -77,7 +79,7 @@ const SaveEjDone = ({route}) => {
 
               const query = `
                 INSERT INTO dropsets
-                (main_set_id, drop_set_i, set_order)
+                (main_set_id, drop_set_id, set_order)
                 VALUES (?, ?, ?);
               `;
               const values = [main_set_id, drop_set_id, i];
@@ -104,7 +106,7 @@ const SaveEjDone = ({route}) => {
         {/* NavBar */}
         <MenuNavBar>
             <View className="justify-between flex-row w-full px-6 items-center">
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("ExHistory",{exercise:exercise})}>
                     <Icon className="w-15" name="history" type="font-awesome-5" color="white" />
                 </TouchableOpacity>
                 <Text></Text>
@@ -120,7 +122,7 @@ const SaveEjDone = ({route}) => {
         <View className="px-12 py-10 pb-32">
 
             <View className="flex-row items-center space-x-4 justify-center mb-16">
-                <Image className="w-12 h-12" source={require('../assets/testEx.png')} />
+                <Image resizeMode='contain' className="w-12 h-12" source={initialData.images[exercise.imgSRC].imgSRC} />
                 <Text className="text-base">{exercise.name}</Text>
             </View>
             

@@ -7,6 +7,7 @@ import { useNavigation  } from '@react-navigation/native';
 import { useState } from 'react';
 import { useDatabase } from '../hooks/DatabaseContext'
 import CryptoJS from 'crypto-js';
+import moment from 'moment'
 
 const AlimSum = ({ route }) => {
 
@@ -54,14 +55,11 @@ const AlimSum = ({ route }) => {
       if (db) {
         const query = `
           INSERT INTO consums 
-          (hour , day , month, year , alimId, weight, unit)
-          VALUES (?, ?, ?, ?, ?, ?, ?)
+          (date , alimId, weight, unit)
+          VALUES (?, ?, ?, ?)
         `;
         const values = [
-          new Date().getHours(),
-          new Date().getDate(),
-          new Date().getMonth(),
-          new Date().getFullYear(),
+          moment().format('YYYY-MM-DD HH:mm:ss'),
           alim.id,
           consumWeight,
           consumUnits
@@ -86,13 +84,13 @@ const AlimSum = ({ route }) => {
         const query = `SELECT * FROM alims WHERE id = ?;`;
         const values = [alim.id];
         const result = await db.getAllAsync(query, values);
-        if (result.length === 0) {
+        if (result.length == 0) {
           const query = `
             INSERT INTO alims 
             (id, name, barCode, kcals, protein, carbs, fat, saturated, fiber, sugars, salt, sodium, potassium, cholesterol, weight, unit, alimGroup, brand, imgSRC, uploadSRC)
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
           `;
-          if (alim.uploadSRC === "Nutrionix") {
+          if (alim.uploadSRC == "Nutrionix") {
             alim.id = generateHash(alim.name);
           }
           const values = [
@@ -119,6 +117,9 @@ const AlimSum = ({ route }) => {
           ];
 
           await db.runAsync(query, values);
+        }
+        else {
+          console.log("El alimento ya existe en la base de datos UPDATE LLL");
         }
       }
     } catch (error) {

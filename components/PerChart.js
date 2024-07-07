@@ -21,7 +21,7 @@ const PerChart = ({kcalToday,kcalTotal}) => {
             centerLabelComponent={() => 
               {
             return <View className="flex items-center">
-            <Text className="font-bold text-xl"> {parseInt(kcalToday)}</Text>
+            <Text className="font-bold text-xl"> {parseInt(kcalTotal) - parseInt(kcalToday)}</Text>
             <Text className="font-medium text-xl"> {kcalTotal}</Text>
             <Text className="text-gray-400 text-xl"> kcal</Text>
             

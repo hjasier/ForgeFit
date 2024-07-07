@@ -9,11 +9,15 @@ import { useNavigation , useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
+import { useState } from 'react';
+import { useDatabase } from '../hooks/DatabaseContext';
 
 const UserStatsMenu = () => {
 
   const navigation = useNavigation();
   const isFocused = useIsFocused();
+  const db = useDatabase();
+  const [weight, setWeight] = useState(0);
 
   useEffect(() => {
     const setUpBarColors = async () => {
@@ -22,6 +26,15 @@ const UserStatsMenu = () => {
         }
     setUpBarColors();
   }, [isFocused]);
+
+  useEffect(() => {
+    const getWeight = async () => {
+        const query = `SELECT * FROM weight ORDER BY date DESC LIMIT 1;`;
+        const result = await db.getAllAsync(query);
+        result && setWeight(result[0].weight);
+    }
+    getWeight();
+    }, [isFocused]);
 
   return (
     <View>
@@ -49,11 +62,11 @@ const UserStatsMenu = () => {
         <View className="w-80 h-40 bg-white "></View>
 
         <View className="flex-row space-x-2 mt-3">
-            <TouchableOpacity>
-                <BotonCuadrado name="Peso"/>
+            <TouchableOpacity onPress={() => navigation.navigate("SetWeight")}>
+                <BotonCuadrado name={`Peso ${weight} kg`}/>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("ExAdd")}>
                 <BotonCuadrado name="Crear Ejercicio"/>
             </TouchableOpacity>
 

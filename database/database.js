@@ -39,13 +39,9 @@ export const setupDatabase = async () => {
       `);
 
     await dbInstance.execAsync(`
-        PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS consums (
           id INTEGER PRIMARY KEY NOT NULL,
-          hour TEXT NOT NULL,
-          day TEXT NOT NULL,
-          month TEXT NOT NULL,
-          year TEXT NOT NULL,
+          date DATETIME DEFAULT CURRENT_TIMESTAMP,
           alimId INTEGER NOT NULL,
           weight INTEGER,
           unit TEXT,
@@ -54,7 +50,6 @@ export const setupDatabase = async () => {
       `);
 
     await dbInstance.execAsync(`
-        PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS exercises (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL,
@@ -67,7 +62,6 @@ export const setupDatabase = async () => {
     
 
     await dbInstance.execAsync(`
-        PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS musculatures (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL,
@@ -77,7 +71,6 @@ export const setupDatabase = async () => {
     `);
 
     await dbInstance.execAsync(`
-        PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS musculature_exercise (
           musculature_id INTEGER NOT NULL,
           exercise_id INTEGER NOT NULL,
@@ -88,7 +81,6 @@ export const setupDatabase = async () => {
     `);
 
     await dbInstance.execAsync(`
-        PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS muscleGroup (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL
@@ -98,20 +90,19 @@ export const setupDatabase = async () => {
     
 
     await dbInstance.execAsync(`
-        PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS routines (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL,
-          imgSRC TEXT
+          imgSRC TEXT DEFAULT '0'
         );
     `);
 
     await dbInstance.execAsync(`
-      PRAGMA journal_mode = WAL;
       CREATE TABLE IF NOT EXISTS routine_exercises (
       routine_id INTEGER NOT NULL,
       exercise_id INTEGER NOT NULL,
       exOrder INTEGER,
+      sets INTEGER DEFAULT 3,
       FOREIGN KEY (routine_id) REFERENCES routines(id),
       FOREIGN KEY (exercise_id) REFERENCES exercises(id),
       PRIMARY KEY (routine_id, exercise_id)
@@ -119,7 +110,6 @@ export const setupDatabase = async () => {
   `);
 
     await dbInstance.execAsync(`
-        PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS sets (
           id INTEGER PRIMARY KEY NOT NULL,
           exercise_id INTEGER NOT NULL,
@@ -132,7 +122,6 @@ export const setupDatabase = async () => {
     `);
 
     await dbInstance.execAsync(`
-      PRAGMA journal_mode = WAL;
       CREATE TABLE IF NOT EXISTS dropsets (
           id INTEGER PRIMARY KEY NOT NULL,
           main_set_id INTEGER NOT NULL, 
@@ -145,7 +134,6 @@ export const setupDatabase = async () => {
 
 
     await dbInstance.execAsync(`
-        PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS user (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL,
@@ -156,7 +144,6 @@ export const setupDatabase = async () => {
     `);
 
     await dbInstance.execAsync(`
-        PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS exercise_images (
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL,
@@ -165,6 +152,14 @@ export const setupDatabase = async () => {
           FOREIGN KEY (muscleGroup) REFERENCES muscleGroup (id)
         );
     `);
+
+    await dbInstance.execAsync(`
+      CREATE TABLE IF NOT EXISTS weight (
+        id INTEGER PRIMARY KEY NOT NULL,
+        date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        weight INTEGER NOT NULL
+      );
+  `);
 
 
 
@@ -188,6 +183,7 @@ export const setupDatabase = async () => {
       await dbInstance.execAsync(`DROP TABLE IF EXISTS user;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS musculature_exercise;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS exercise_images;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS weight;`);
 
       } catch (error) {
         console.error('Error deleting tables:', error);
@@ -203,9 +199,9 @@ export const setupDatabase = async () => {
     
     const mresult = await dbInstance.getAllAsync('SELECT COUNT(*) FROM muscleGroup');
     if (mresult[0]["COUNT(*)"]==0) {
-        let query = `INSERT INTO muscleGroup (name) VALUES`;
+        let query = `INSERT INTO muscleGroup (id,name) VALUES`;
         initialData.muscleGroups.forEach((group) => {
-            query += `('${group.name}'),`;
+            query += `(${group.id},'${group.name}'),`;
         });
         query = query.slice(0, -1); // Elimina la última coma
         query += ';';

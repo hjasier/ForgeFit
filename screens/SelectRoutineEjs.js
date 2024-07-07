@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import SelectorGrupo from '../components/SelectorGrupo'
 import { useDatabase } from '../hooks/DatabaseContext'
 import { ScrollView } from 'react-native-gesture-handler'
+import { initialData } from '../database/initialData'
 
 
 const SelectRoutineEjs = ({route}) => {
@@ -74,7 +75,6 @@ const SelectRoutineEjs = ({route}) => {
 
       <View className="items-center space-y-3 pt-5">
         <Text className="font-bold">Seleccionando ejercicios para {routine.name}</Text>
-        <Text>Mis Rutinas</Text>
       </View>
 
       <View className="items-center mt-5 w-full px-8">
@@ -98,7 +98,7 @@ const SelectRoutineEjs = ({route}) => {
             className="flex-row justify-between bg-[#EAEAEA] h-14 w-full items-center px-4 rounded-lg"
           >
             <View>
-              <Image className="w-8 h-8" source={require('../assets/testEx.png')} />
+              <Image resizeMode='contain' className="w-8 h-8" source={initialData.images[exercise.imgSRC].imgSRC} />
             </View>
 
             <Text>{exercise.name}</Text>

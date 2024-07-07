@@ -5,6 +5,7 @@ import { useDatabase } from '../hooks/DatabaseContext'
 import { useState } from 'react'
 import { useEffect, useCallback } from 'react'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
+import moment from 'moment'
 
 
 const Consums = () => {
@@ -17,10 +18,8 @@ const Consums = () => {
     const query = `
           SELECT * , c.unit as cunit FROM consums c
           JOIN alims a ON c.alimId = a.id
-            WHERE c.day = ?
-            AND c.month = ?
-            AND c.year = ?;');`
-    const values = [new Date().getDate(), new Date().getMonth(), new Date().getFullYear()];
+          WHERE DATE(c.date) = DATE(?);`
+    const values = [moment().format('YYYY-MM-DD HH:mm:ss')];
     const updatedConsums = await db.getAllAsync(query, values);
     setTodaysConsums(updatedConsums);
   }

@@ -11,13 +11,15 @@ export const initialData = {
     //6 Glutes
 
     muscleGroups: [
-        { id: 0, name: 'Pecho', imgSRC: 'default' },
-        { id: 1, name: 'Espalda', imgSRC: 'default' },
-        { id: 2, name: 'Piernas', imgSRC: 'default' },
-        { id: 3, name: 'Hombros', imgSRC: 'default' },
-        { id: 4, name: 'Brazos', imgSRC: 'default' },
-        { id: 5, name: 'Abdominales', imgSRC: 'default' },
-        { id: 6, name: 'Glúteos', imgSRC: 'default' }
+        { id: 0, name: 'Pecho', imgSRC: require('../assets/muscleGroups/chest.png') },
+        { id: 1, name: 'Espalda', imgSRC: require('../assets/muscleGroups/back.png') },
+        { id: 2, name: 'Piernas', imgSRC: require('../assets/muscleGroups/legs.png') },
+        { id: 3, name: 'Hombros', imgSRC: require('../assets/muscleGroups/shoulders.png') },
+        { id: 4, name: 'Brazos', imgSRC: require('../assets/muscleGroups/arms.png') },
+        { id: 5, name: 'Abs', imgSRC: require('../assets/muscleGroups/abs.png') },
+        { id: 6, name: 'Cuello', imgSRC: require('../assets/muscleGroups/neck.png') },
+        
+        //{ id: 6, name: 'Glúteos', imgSRC: 'default' }
     ],
 
 
@@ -80,9 +82,9 @@ export const initialData = {
     ],
 
     images: [
-        { id:0, name: 'chest-building-exercises-and-muscle-vector-34238801.png', imgSRC: require('../assets/exDefaultImages/chest-building-exercises-and-muscle-vector-34238801.png'), muscleGroup: 0 },
+        { id:0, name: 'chest-building-exercises-and-muscle-vector-34238801.png', imgSRC: require('../assets/exDefaultImages/chest-building-exercises-and-muscle-vector-34238801.png'), muscleGroup: 4 },
         { id:1, name: 'dumbbell-overhead-press-top-body-workout-vector-34405161.png', imgSRC: require('../assets/exDefaultImages/dumbbell-overhead-press-top-body-workout-vector-34405161.png'), muscleGroup: 3 },
-        { id:2, name: 'hammer-strength-machine-seated-chest-press-vector-34861746.png', imgSRC: require('../assets/exDefaultImages/hammer-strength-machine-seated-chest-press-vector-34861746.png'), muscleGroup: 0 },
+        { id:2, name: 'hammer-strength-machine-seated-chest-press-vector-34861746.png', imgSRC: require('../assets/exDefaultImages/hammer-strength-machine-seated-chest-press-vector-34861746.png'), muscleGroup: 1 },
         { id:3, name: 'incline-barbell-bench-press-exercise-vector-34861748.png', imgSRC: require('../assets/exDefaultImages/incline-barbell-bench-press-exercise-vector-34861748.png'), muscleGroup: 0 },
         { id:4, name: 'lifting-barbell-in-a-gym-on-ez-bar-preacher-curl-vector-34705869.png', imgSRC: require('../assets/exDefaultImages/lifting-barbell-in-a-gym-on-ez-bar-preacher-curl-vector-34705869.png'), muscleGroup: 4 },
         { id:5, name: 'man-butterfliespec-deckseated-machine-flyes-flat-vector-34502820.png', imgSRC: require('../assets/exDefaultImages/man-butterfliespec-deckseated-machine-flyes-flat-vector-34502820.png'), muscleGroup: 0 },
@@ -133,7 +135,7 @@ export const initialData = {
         { id:50, name: 'man-doing-rear-leg-raise-workout-with-machine-vector-48993650.png', imgSRC: require('../assets/exDefaultImages/man-doing-rear-leg-raise-workout-with-machine-vector-48993650.png'), muscleGroup: 2 },
         { id:51, name: 'man-doing-reverse-grip-incline-dumbbell-bench-vector-48837153.png', imgSRC: require('../assets/exDefaultImages/man-doing-reverse-grip-incline-dumbbell-bench-vector-48837153.png'), muscleGroup: 0 },
         { id:52, name: 'man-doing-reverse-incline-bench-barbell-curl-vector-49241935.png', imgSRC: require('../assets/exDefaultImages/man-doing-reverse-incline-bench-barbell-curl-vector-49241935.png'), muscleGroup: 4 },
-        { id:53, name: 'man-doing-rope-pulldown-exercise-flat-vector-42772981.png', imgSRC: require('../assets/exDefaultImages/man-doing-rope-pulldown-exercise-flat-vector-42772981.png'), muscleGroup: 1 },
+        { id:53, name: 'man-doing-rope-pulldown-exercise-flat-vector-42772981.png', imgSRC: require('../assets/exDefaultImages/man-doing-rope-pulldown-exercise-flat-vector-42772981.png'), muscleGroup: 4 },
         { id:54, name: 'man-doing-seated-back-row-machine-exercise-vector-47499220.png', imgSRC: require('../assets/exDefaultImages/man-doing-seated-back-row-machine-exercise-vector-47499220.png'), muscleGroup: 1 },
         { id:55, name: 'man-doing-seated-dumbbell-bicep-hammer-curls-vector-48801275.png', imgSRC: require('../assets/exDefaultImages/man-doing-seated-dumbbell-bicep-hammer-curls-vector-48801275.png'), muscleGroup: 4 },
         { id:56, name: 'man-doing-seated-dumbbell-preacher-bicep-hammer-vector-48888213.png', imgSRC: require('../assets/exDefaultImages/man-doing-seated-dumbbell-preacher-bicep-hammer-vector-48888213.png'), muscleGroup: 4 },
@@ -161,7 +163,7 @@ export const initialData = {
         { id:78, name: 'man-doing-straight-arm-lat-pulldown-exercise-vector-42870559.png', imgSRC: require('../assets/exDefaultImages/man-doing-straight-arm-lat-pulldown-exercise-vector-42870559.png'), muscleGroup: 1 },
         { id:79, name: 'man-doing-straight-arm-pulldown-pullovers-vector-38446346.png', imgSRC: require('../assets/exDefaultImages/man-doing-straight-arm-pulldown-pullovers-vector-38446346.png'), muscleGroup: 1 },
         { id:80, name: 'man-doing-sumo-barbell-deadlifts-exercise-vector-39115277.png', imgSRC: require('../assets/exDefaultImages/man-doing-sumo-barbell-deadlifts-exercise-vector-39115277.png'), muscleGroup: 2 },
-        { id:81, name: 'man-doing-tricep-dip-exercise-vector-49364088.png', imgSRC: require('../assets/exDefaultImages/man-doing-tricep-dip-exercise-vector-49364088.png'), muscleGroup: 4 },
+        { id:81, name: 'man-doing-tricep-dip-exercise-vector-49364088.png', imgSRC: require('../assets/exDefaultImages/man-doing-tricep-dip-exercise-vector-49364088.png'), muscleGroup: 0 },
         { id:82, name: 'man-doing-triceps-presdown-exercise-vector-42922181.png', imgSRC: require('../assets/exDefaultImages/man-doing-triceps-presdown-exercise-vector-42922181.png'), muscleGroup: 4 },
         { id:83, name: 'man-doing-wrist-roller-forearm-blaster-vector-48792276.png', imgSRC: require('../assets/exDefaultImages/man-doing-wrist-roller-forearm-blaster-vector-48792276.png'), muscleGroup: 4 },
         { id:84, name: 'seated-calf-machine-raises-vector-44360420.png', imgSRC: require('../assets/exDefaultImages/seated-calf-machine-raises-vector-44360420.png'), muscleGroup: 2 },
@@ -169,6 +171,8 @@ export const initialData = {
         { id:86, name: 'woman-doing-lying-leg-curls-exercise-vector-47304177.png', imgSRC: require('../assets/exDefaultImages/woman-doing-lying-leg-curls-exercise-vector-47304177.png'), muscleGroup: 2 },
         { id:87, name: 'woman-doing-seated-face-pull-rear-delt-vector-49568420.png', imgSRC: require('../assets/exDefaultImages/woman-doing-seated-face-pull-rear-delt-vector-49568420.png'), muscleGroup: 3 },
         { id:88, name: 'man-doing-stiff-legged-barbell-deadlift-vector-38515390.png', imgSRC: require('../assets/exDefaultImages/man-doing-stiff-legged-barbell-deadlift-vector-38515390.png'), muscleGroup: 1 },
+        { id:89, name: 'man-doing-tricep-dip-exercise-vector-49364088.png', imgSRC: require('../assets/exDefaultImages/man-doing-tricep-dip-exercise-vector-49364088.png'), muscleGroup: 4 },
+
       ],
     
     //Exercises
@@ -186,15 +190,19 @@ export const initialData = {
         { name: "Remo en máquina horizontal", muscles: [5, 7, 9], muscleGroups: [1], image: "man-doing-seated-back-row-machine-exercise-vector-47499220.png" }, // Dorsal Ancho, Trapecio Medio, Romboides
         { name: "Remo en máquina vertical", muscles: [5, 7, 9], muscleGroups: [1], image: "man-doing-seated-lever-machine-one-arm-row-vector-49373361.png" }, // Dorsal Ancho, Trapecio Medio, Romboides
         { name: "Low row en máquina", muscles: [5, 7, 9], muscleGroups: [1], image: "man-doing-seated-low-cable-back-rows-exercise-vector-42772985.png" }, // Dorsal Ancho, Trapecio Medio, Romboides
-        { name: "Remo inclinado", muscles: [5, 7, 9], muscleGroups: [1], image: "man-doing-bent-over-row-with-smith-machine-vector-49027816.png" }, // Dorsal Ancho, Trapecio Medio, Romboides
+        { name: "Remo inclinado", muscles: [5, 7, 9], muscleGroups: [1], image: "man-character-doing-dumbbell-incline-bench-row-vector-48801264.png" }, // Dorsal Ancho, Trapecio Medio, Romboides
         { name: "Remo en barra T", muscles: [5, 7, 9], muscleGroups: [1], image: "man-doing-bent-over-t-bar-row-with-chest-supported-vector-45433041.png" }, // Dorsal Ancho, Trapecio Medio, Romboides
 
-        { name: "Curl Martillo", muscles: [30, 33], muscleGroups: [4], image: "man-doing-cable-hammer-bicep-curls-exercise-vector-34698172.png" }, // Bíceps Braquial, Braquiorradial
-        { name: "Curl Barra", muscles: [30], muscleGroups: [4], image: "man-doing-reverse-incline-bench-barbell-curl-vector-49241935.png" }, // Bíceps Braquial
+        { name: "Curl Martillo", muscles: [30, 33], muscleGroups: [4], image: "man-doing-standing-dumbbell-bicep-hammer-curls-vector-34705866.png" }, // Bíceps Braquial, Braquiorradial
+        { name: "Curl Martillo Sentado", muscles: [30, 33], muscleGroups: [4], image: "man-doing-seated-dumbbell-bicep-hammer-curls-vector-48801275.png" }, // Bíceps Braquial, Braquiorradial
+        { name: "Curl Barra", muscles: [30], muscleGroups: [4], image: "man-doing-barbell-drag-bicep-curls-exercise-vector-45443642.png" }, // Bíceps Braquial
         { name: "Curl Mancuernas", muscles: [30], muscleGroups: [4], image: "man-doing-standing-dumbbell-bicep-hammer-curls-vector-34705866.png" }, // Bíceps Braquial
-        { name: "Bíceps en máquina", muscles: [30], muscleGroups: [4], image: "man-doing-lying-chest-press-machine-exercise-vector-48837157.png" }, // Bíceps Braquial
+        { name: "Bíceps en máquina", muscles: [30], muscleGroups: [4], image: "lifting-barbell-in-a-gym-on-ez-bar-preacher-curl-vector-34705869.png" }, // Bíceps Braquial
         { name: "Bíceps en Scott", muscles: [30], muscleGroups: [4], image: "man-doing-one-arm-dumbbell-preacher-curl-vector-34705876.png" }, // Bíceps Braquial
-        { name: "Bíceps Spider", muscles: [30], muscleGroups: [4], image: "man-doing-single-dumbbell-spider-hammer-curl-vector-48837169.png" }, // Bíceps Braquial
+        { name: "Bíceps Spider", muscles: [30], muscleGroups: [4], image: "man-doing-reverse-incline-bench-barbell-curl-vector-49241935.png" }, // Bíceps Braquial
+        { name: "Bíceps Polea", muscles: [30], muscleGroups: [4], image: "man-doing-cable-hammer-bicep-curls-exercise-vector-34698172.png" }, // Bíceps Braquial
+        { name: "Bíceps Polea Unilateral", muscles: [30], muscleGroups: [4], image: "man-doing-single-arm-reverse-grip-cable-bicep-vector-48837160.png" }, // Bíceps Braquial
+        
 
         { name: "Tríceps polea", muscles: [31], muscleGroups: [4], image: "man-doing-triceps-presdown-exercise-vector-42922181.png" }, // Tríceps Braquial
         { name: "Tríceps polea Katana", muscles: [31], muscleGroups: [4], image: "man-doing-cable-rope-overhead-triceps-extensions-vector-37299924.png" }, // Tríceps Braquial
@@ -218,7 +226,7 @@ export const initialData = {
         { name: "Press militar con mancuernas", muscles: [26, 27], muscleGroups: [3], image: "dumbbell-overhead-press-top-body-workout-vector-34405161.png" }, // Deltoide Anterior, Deltoide Medio
         { name: "Face pull", muscles: [28, 29], muscleGroups: [3, 1], image: "woman-doing-seated-face-pull-rear-delt-vector-49568420.png" }, // Deltoide Posterior, Manguito Rotador
         { name: "Press militar máquina", muscles: [26, 27], muscleGroups: [3], image: "man-doing-smith-machine-shoulder-press-exercise-vector-42797997.png" }, // Deltoide Anterior, Deltoide Medio
-        { name: "Elevaciones frontales", muscles: [26], muscleGroups: [3], image: "man-doing-front-incline-dumbbell-raise-exercise-vector-49296048.png" }, // Deltoide Anterior
+        { name: "Elevaciones frontales", muscles: [26], muscleGroups: [3], image: "man-doing-dumbbell-front-raise-exercise-vector-42782860.png" }, // Deltoide Anterior
         { name: "Elevaciones posteriores", muscles: [28], muscleGroups: [3], image: "man-doing-rear-delt-machine-flyes-exercise-vector-46760816.png" }, // Deltoide Posterior
 
         { name: "Sentadilla Libre", muscles: [13, 24, 38], muscleGroups: [2, 6], image: "man-doing-barbell-squat-exercise-vector-39117268.png" }, // Cuádriceps, Gemelos, Glúteo Mayor

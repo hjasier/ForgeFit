@@ -19,6 +19,9 @@ const BotoneraStats = () => {
       
       <BtnStats text="Lista de ejercicios" icon={"star"} iconType={"fontawesome-5"} path={"ExList"} />
 
+      <BtnStats text="Configurar Semana" icon={"star"} iconType={"fontawesome-5"} path={"ExList"} />
+
+
 
     </View>
 

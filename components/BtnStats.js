@@ -10,7 +10,7 @@ const BtnStats = ({path,iconType, icon , text}) => {
 
   return (
     <TouchableOpacity onPress={() => navigation.navigate({name:path})} 
-        className="flex-row justify-center bg-[#EAEAEA] h-14 w-full items-center px-4 rounded-lg">
+        className="flex-row justify-center bg-[#EAEAEA] h-14 w-full items-center px-4 rounded-lg mb-3">
         
         <View className="flex-row space-x-3 items-center">
           <Icon type={iconType} name={icon} size={24} color="black" />

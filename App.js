@@ -5,7 +5,7 @@ import HomeScreen from './screens/MacrosMain';
 import ChartTest from './components/PerChart';
 import StackNavigator from './navigation/StackNavigator';
 import { DatabaseProvider } from './hooks/DatabaseContext';
-
+import { MenuProvider } from 'react-native-popup-menu';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,9 +14,11 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <DatabaseProvider>
-      <NavigationContainer>
-        <StackNavigator />
-      </NavigationContainer>
+      <MenuProvider>
+        <NavigationContainer>
+          <StackNavigator />
+        </NavigationContainer>
+      </MenuProvider>
     </DatabaseProvider>
   );
 }

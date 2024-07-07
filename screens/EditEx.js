@@ -2,7 +2,7 @@ import { View, Text , TextInput , Image} from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SelectorGrupo from '../components/SelectorGrupo';
-import { useState } from 'react';
+import { useState  } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useRef } from 'react';

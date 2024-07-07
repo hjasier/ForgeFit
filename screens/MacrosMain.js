@@ -11,6 +11,7 @@ import { useDatabase } from '../hooks/DatabaseContext'
 import { useState , useCallback } from 'react';
 import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
+import moment from 'moment'
 
 
 export default function MacrosMain() {
@@ -39,11 +40,9 @@ export default function MacrosMain() {
           SUM(c.weight * a.carbs / a.weight) AS carbs
           FROM consums c
           JOIN alims a ON c.alimId = a.id
-          WHERE c.day = ?
-            AND c.month = ?
-            AND c.year = ?;
+          WHERE DATE(c.date) = DATE(?);
         `;
-        const values = [new Date().getDate(), new Date().getMonth(), new Date().getFullYear()];
+        const values = [moment().format('YYYY-MM-DD HH:mm:ss')];
   
         // Uso de db.get para obtener un solo resultado
         const result = await db.getAllAsync(query, values);

@@ -6,6 +6,7 @@ import { Icon } from '@rneui/themed'
 import { useDatabase } from '../hooks/DatabaseContext';
 import { useEffect , useState } from 'react';
 import { initialData } from '../database/initialData';
+import moment from 'moment';
 
 const ListaEjers = ({rutina}) => {
 
@@ -17,7 +18,7 @@ const ListaEjers = ({rutina}) => {
 
 
   useEffect(() => {
-    if (db) {
+    if (db && rutina) {
         const getExercises = async () => {
         const query = `
             SELECT * 
@@ -35,6 +36,22 @@ const ListaEjers = ({rutina}) => {
     }, [rutina,isFocused]);
 
 
+  useEffect(() => {
+    if (db) {
+      const getCompletedExercises = async () => {
+        const query = `
+          SELECT * 
+          FROM sets
+          WHERE DATE(date) = DATE(?)
+        `;
+        const result = await db.getAllAsync(query, [moment().format('YYYY-MM-DD')]);
+        console.log(result);
+      }
+      getCompletedExercises();
+    }
+  } , [isFocused]);
+
+
   return (
     <ScrollView className="w-full h-[505]">
       <View className="w-full pb-24 px-6 space-y-3">
@@ -49,7 +66,7 @@ const ListaEjers = ({rutina}) => {
             </View>
             
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("ExHistory",{exercise:exercise})}>
             <Icon size={20} name="history" type="font-awesome-5"/>
           </TouchableOpacity>
 

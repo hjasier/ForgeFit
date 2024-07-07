@@ -10,11 +10,15 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
+import moment from 'moment';
+import useTimer from '../hooks/TimerHook';
+
 
 const ExMain = () => {
 
   const navigation = useNavigation();
   const isFocused = useIsFocused();
+  const timer = useTimer();
 
   const [rutina, setRutina] = useState(0);
 
@@ -34,13 +38,13 @@ const ExMain = () => {
 
         <MenuNavBar>
             <View className="justify-between flex-row w-full px-6 items-center">
-              <TouchableOpacity onPress={() => navigation.navigate("ExHistoryList")}>
+              <TouchableOpacity onPress={() => navigation.navigate("ExHistoryList",{date:moment().format('YYYY-MM-DD')})}>
                 <Icon className="w-15" name="history" type="font-awesome-5" color="white" />
               </TouchableOpacity>
                 <TextInput className="bg-[#d9d9d92c] text-center text-white text-base h-12 w-44 rounded-lg" placeholder='Buscar Ejercicio' />
                 
-                <TouchableOpacity>
-                  <Text className="w-15 font-extrabold text-xl text-white">1:33</Text>
+                <TouchableOpacity onPress={timer.reset}>
+                  <Text className="w-15 font-extrabold text-xl text-white">{timer.format}</Text>
                 </TouchableOpacity>
             </View>
         </MenuNavBar> 
