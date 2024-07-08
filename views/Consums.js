@@ -6,17 +6,18 @@ import { useState } from 'react'
 import { useEffect, useCallback } from 'react'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import moment from 'moment'
-
+import { useMacros } from '../hooks/MacrosHook';
 
 const Consums = () => {
 
   const db = useDatabase();
+  const macros = useMacros();
 
   const [todaysConsums, setTodaysConsums] = useState([]);
 
   const updateTodaysConsums = async () => {
     const query = `
-          SELECT * , c.unit as cunit FROM consums c
+          SELECT * ,c.id as id, c.weight as weight, c.unit as cunit FROM consums c
           JOIN alims a ON c.alimId = a.id
           WHERE DATE(c.date) = DATE(?);`
     const values = [moment().format('YYYY-MM-DD HH:mm:ss')];
@@ -25,20 +26,11 @@ const Consums = () => {
   }
 
   useEffect(() => {
-    if (db){
+    if (db) {
       updateTodaysConsums();
     }
-  }, [db]);
+  }, [macros.todayMacros]);
 
-  useFocusEffect(
-    useCallback(() => {
-      if (db){
-        updateTodaysConsums();
-      }
-    }, [db])
-  );
-
-  
 
   return (
     <View className="w-full px-7 mt-1">

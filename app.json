@@ -11,6 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "platforms": ["ios", "android"],  // Asegúrate de incluir 'android' aquí
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -22,20 +23,25 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "android.permission.CAMERA",
-        "WRITE_EXTERNAL_STORAGE"
-      ],
-      "package": "com.hjasier.ForgeFit"
+      "package": "com.hjasier.ForgeFit",
+      "permissions": ["CAMERA", "WRITE_EXTERNAL_STORAGE"]  // Cambiado a strings simples para Android
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [],
+    "hooks": {
+      // Aquí se pueden agregar scripts o hooks personalizados si es necesario
+    },
     "extra": {
       "eas": {
+        "build": {
+          "releaseChannel": "default",  // Canal de release (puede ajustarse según tu configuración)
+          // Otras configuraciones de EAS según sea necesario
+        },
         "projectId": "06f32d72-676c-4abd-8e97-d871d53f31c4"
       }
-    }
+    },
+    "owner": "hjasier"
   }
 }

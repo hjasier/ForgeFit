@@ -6,6 +6,8 @@ import ChartTest from './components/PerChart';
 import StackNavigator from './navigation/StackNavigator';
 import { DatabaseProvider } from './hooks/DatabaseContext';
 import { MenuProvider } from 'react-native-popup-menu';
+import { TimerProvider } from './hooks/TimerHook';
+import { MacrosProvider } from './hooks/MacrosHook';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,11 +16,15 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <DatabaseProvider>
-      <MenuProvider>
-        <NavigationContainer>
-          <StackNavigator />
-        </NavigationContainer>
-      </MenuProvider>
+      <TimerProvider>
+          <MenuProvider>
+            <NavigationContainer>
+              <MacrosProvider>
+                <StackNavigator />
+              </MacrosProvider>
+            </NavigationContainer>
+          </MenuProvider>
+      </TimerProvider>
     </DatabaseProvider>
   );
 }

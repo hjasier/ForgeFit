@@ -4,6 +4,9 @@ import * as DocumentPicker from 'expo-document-picker';
 import JSZip from 'jszip';
 import { initialData } from './initialData';
 import { Asset } from 'expo-asset';
+import axios from 'axios';
+import { Buffer } from 'buffer';
+
 
 let dbInstance = null;
 
@@ -138,7 +141,9 @@ export const setupDatabase = async () => {
           id INTEGER PRIMARY KEY NOT NULL,
           name TEXT NOT NULL,
           age INTEGER,
-          weight INTEGER,
+          activity INTEGER,
+          goal INTEGER,
+          gender TEXT,
           height INTEGER
         );
     `);
@@ -169,7 +174,7 @@ export const setupDatabase = async () => {
 
     const DEBUG_DELETE_ALL_TABLES = false;
     if (DEBUG_DELETE_ALL_TABLES) {
-      console.log('Deleting all tables');
+      console.log('Droping all tables');
       try {
       await dbInstance.execAsync(`DROP TABLE IF EXISTS alims;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS consums;`);
@@ -189,7 +194,7 @@ export const setupDatabase = async () => {
         console.error('Error deleting tables:', error);
       }
       finally {
-        console.log('Tables deleted');
+        console.log('Tables dropped');
       }
     }
 
@@ -365,4 +370,60 @@ export const restoreDatabase = async (tarUri) => {
   } catch (error) {
     console.error('Error restoring database:', error);
   }
+};
+
+
+export const backupDatabaseToServer = async () => {
+  const dbPath = FileSystem.documentDirectory + 'SQLite/';
+  const filesToSend = [
+      { name: 'database.db', path: dbPath + 'database.db' },
+      { name: 'database.db-wal', path: dbPath + 'database.db-wal' },
+      { name: 'database.db-shm', path: dbPath + 'database.db-shm' }
+  ];
+  const formData = new FormData();
+  filesToSend.forEach(file => {
+      formData.append('file', {
+          uri: 'file://' + file.path,
+          type: 'application/octet-stream',
+          name: file.name
+      });
+  });
+  try {
+      const response = await axios.post('http://192.168.28.151:5000/upload', formData, {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+      });
+
+      return response.data;
+  } catch (error) {
+      console.error('Upload error:', error);
+  }
+};
+
+
+export const importBackUpFromServer = async (backup) => {
+  const filesToDownload = [backup.f0, backup.f1, backup.f2];
+
+  const dbPath = FileSystem.documentDirectory + 'SQLite/';
+
+  // Asegúrate de que el directorio SQLite exista
+  const dirInfo = await FileSystem.getInfoAsync(dbPath);
+  if (!dirInfo.exists) {
+    await FileSystem.makeDirectoryAsync(dbPath, { intermediates: true });
+  }
+
+  await Promise.all(filesToDownload.map(async (file) => {
+    try {
+      const response = await axios.get(`http://192.168.28.151:5000/download/${file}`, { responseType: 'arraybuffer' });
+      const filePath = dbPath + file.split('_')[1];
+      console.log("Guardando archivo en:", filePath);
+      const base64Data = Buffer.from(response.data, 'binary').toString('base64');
+      await FileSystem.writeAsStringAsync(filePath, base64Data, { encoding: FileSystem.EncodingType.Base64 });
+    } catch (error) {
+      console.error(`Error al descargar o guardar el archivo ${file}:`, error);
+    }
+  }));
+
+  await setupDatabase();
 };

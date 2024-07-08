@@ -7,10 +7,8 @@ import MacrosMain from '../screens/MacrosMain'
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@rneui/themed'
 
-import White from '../screens/White';
+
 import SearchAlim from '../screens/SearchAlim';
-import SearchStackNavigator from './MacrosStack';
-import MacrosStack from './MacrosStack';
 import SQTest from '../screens/SQTest';
 import OFFTest from '../screens/OFFTest';
 

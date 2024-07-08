@@ -1,17 +1,20 @@
-import { View, Text, TouchableOpacity , Alert  } from 'react-native'
-import React from 'react'
+import { View, Text, TouchableOpacity , Alert } from 'react-native'
+import React, { useEffect } from 'react'
 import * as FileSystem from 'expo-file-system';
 import * as SQLite from 'expo-sqlite';
-import { backupDatabase , restoreDatabase } from '../database/database';
+import { backupDatabase , restoreDatabase , backupDatabaseToServer , importBackUpFromServer } from '../database/database';
 import * as Sharing from 'expo-sharing';
 import * as DocumentPicker from 'expo-document-picker';
 import { initialData } from '../database/initialData';
 import { useDatabase } from '../hooks/DatabaseContext';
+import axios from 'axios';
+import { useState } from 'react';
 
 
 const ConfigMenu = () => {
 
   const db = useDatabase();
+  const [availableBackups, setAvailableBackups] = useState([]);
   
   const handleExportData = async () => {
     backupDatabase();
@@ -74,7 +77,36 @@ const ConfigMenu = () => {
     }
   };
 
+  const handleBackUpToServer = async () => {
+    const response = backupDatabaseToServer();
+    if (response){
+      Alert.alert('Backup realizado con éxito');
+      getAvailableBackups();
+    } else {
+      Alert.alert('Error al realizar el backup');
+    }
+  };
 
+  
+  const getAvailableBackups = async () => {
+    const response = await axios.get('http://192.168.28.151:5000/list');
+    if(response.status === 200){
+     setAvailableBackups(response.data);
+    }
+  }
+
+  useEffect(() => {
+    getAvailableBackups();
+  }, []);
+
+  const handleImportDataFromServer = async (backup) => {
+    const response = importBackUpFromServer(backup);
+    if (response){
+      Alert.alert('Backup restaurado con éxito');
+    } else {
+      Alert.alert('Error al restaurar el backup');
+    }
+  }
 
 
 
@@ -91,6 +123,17 @@ const ConfigMenu = () => {
       <TouchableOpacity onPress={handleImportData} className="h-10 w-30 bg-gray-500 text-white rounded-lg">
         <Text className="text-white">Importar datos</Text>
       </TouchableOpacity>
+
+
+      <TouchableOpacity onPress={handleBackUpToServer} className="h-10 w-30 bg-gray-500 text-white rounded-lg">
+        <Text className="text-white">Backup a Server</Text>
+      </TouchableOpacity>
+
+      {availableBackups.map((backup, index) => (
+        <TouchableOpacity key={index} onPress={() => handleImportDataFromServer(backup)} className="h-10 w-30 bg-gray-500 text-white rounded-lg">
+          <Text className="text-white">Restaurar Copia de seguridad {backup.name}</Text>
+        </TouchableOpacity>
+      ))}
 
 
     </View>

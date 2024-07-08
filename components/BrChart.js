@@ -10,6 +10,7 @@ const barData = [
 
 const BrChart = ({header,colorT,total ,curToday}) => {
 
+  const width = total !== 0 ? (200 * (curToday / total)) : 0;
 
   return (
     <View className="p-2">
@@ -23,7 +24,7 @@ const BrChart = ({header,colorT,total ,curToday}) => {
 
     {/* Barra */}
     <View style={{width:200}} className="bg-gray-200 h-4 relative rounded-full">
-    <View style={{width:200*(curToday/total),backgroundColor:colorT}} className=" h-4 rounded-full absolute"/>
+    <View style={{width:width,backgroundColor:colorT}} className=" h-4 rounded-full absolute"/>
     
     </View>
   </View>

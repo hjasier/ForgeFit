@@ -1,4 +1,4 @@
-import { View, Text , TouchableOpacity, TouchableHighlight } from 'react-native'
+import { View, Text , TouchableHighlight } from 'react-native'
 import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import PerChart from '../components/PerChart'
@@ -12,83 +12,52 @@ import { useState , useCallback } from 'react';
 import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
 import moment from 'moment'
+import { useMacros } from '../hooks/MacrosHook';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
+const MacrosMain = () => {
 
-export default function MacrosMain() {
-  
   const navigation = useNavigation();
   const isFocused = useIsFocused();
+  const macros = useMacros();
 
   const db = useDatabase();
 
-  const goals = {
-    protein: 88,
-    carbs: 400,
-    kcals: 2814
-  }
-
-  const [todayMacros, setTodayMacros] = useState({kcals: 0, protein: 0, carbs: 0});
-
-
-  const updateMacros = async () => {
-    try {
-      if (db) {
-        const query = `
-          SELECT 
-          SUM(c.weight * a.kcals / a.weight) AS kcals,
-          SUM(c.weight * a.protein / a.weight) AS protein,
-          SUM(c.weight * a.carbs / a.weight) AS carbs
-          FROM consums c
-          JOIN alims a ON c.alimId = a.id
-          WHERE DATE(c.date) = DATE(?);
-        `;
-        const values = [moment().format('YYYY-MM-DD HH:mm:ss')];
-  
-        // Uso de db.get para obtener un solo resultado
-        const result = await db.getAllAsync(query, values);
-
-        if (result && result[0] && result[0].kcals !== null && result[0].protein !== null && result[0].carbs !== null) {
-          
-          // Formatear cada valor de result[0] a 2 decimales
-          const formattedResult = {
-            kcals: parseFloat(result[0].kcals.toFixed(2)),
-            protein: parseFloat(result[0].protein.toFixed(2)),
-            carbs: parseFloat(result[0].carbs.toFixed(2))
-          };
-          setTodayMacros(formattedResult);
-        }
-        
-
-      }
-    } catch (error) {
-      console.error("Error al obtener las calorías totales consumidas:", error);
-      return null;
-    }
-  };
 
 
   useEffect(() => {
     if (db){
-      updateMacros();
+      macros.updateMacros();
     }
   }, [isFocused]);
 
-  useFocusEffect(
-    useCallback(() => {
-      if (db){
-        updateMacros();
-      }
-    }, [db])
-  );
-
 
   useEffect(() => {
-    const setUpBarColors = async () => {
-        StatusBar.setBackgroundColor('#F5F5F5');
-        NavigationBar.setBackgroundColorAsync("white");
-        }
-    setUpBarColors();
-  }, [isFocused]);
+    if (db){
+      macros.calcTodayMacros();
+    }
+  }, [db]);
+  
+
+
+
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        return true;
+      };
+      StatusBar.setBackgroundColor('#F5F5F5');
+      NavigationBar.setBackgroundColorAsync("white");
+      return () => StatusBar.setBackgroundColor('#F5F5F5');
+    }, [])
+  );
+  
+
+
+
+
+
 
 
 
@@ -96,18 +65,18 @@ export default function MacrosMain() {
   return (
     <SafeAreaView>
       
-      <TouchableOpacity onPress={updateMacros} className="px-5">
+      <TouchableOpacity className="px-5">
         <FontAwesome className="" name="history" size={24} color="black" />
       </TouchableOpacity>
 
       {/* Stats */}
       <View className="items-center">
 
-        <PerChart kcalToday={todayMacros.kcals} kcalTotal={goals.kcals}/>
+        <PerChart kcalToday={macros.todayMacros.kcals} kcalTotal={macros.todayGoals.kcals}/>
 
-        <BrChart header="Proteína" colorT="#FF4E4E" curToday={todayMacros.protein} total={goals.protein}/>
-        <BrChart header="Carbohidratos" colorT="#FFC34E" curToday={todayMacros.carbs} total={goals.carbs}/>
-
+        <BrChart header="Proteína" colorT="#FF4E4E" curToday={macros.todayMacros.protein} total={macros.todayGoals.protein}/>
+        <BrChart header="Carbohidratos" colorT="#FFC34E" curToday={macros.todayMacros.carbs} total={macros.todayGoals.carbs}/>
+      
       </View>
 
       {/* Btns */}
@@ -124,21 +93,16 @@ export default function MacrosMain() {
 
       {/* Search btn*/}
 
-      <TouchableOpacity onPress={() => navigation.navigate("SearchAlim")}>
-      <View  className="items-center w-full px-5 mt-3 items-center justify-center">
+      <View className="px-5">
+      <TouchableOpacity className="w-full text-center justify-center bg-[#EAEAEA] h-12 rounded-lg bg-[#EAEAEA] w-full  mt-3 rounded-lg shadow-md shadow-gray-800"
+      onPress={() => navigation.navigate("SearchAlim")}>
 
-        <View className="w-full text-center justify-center bg-[#EAEAEA] h-12 rounded-lg shadow-md shadow-gray-800 ">
-          
           <View className="flex flex-row px-4">
             <FontAwesome name="search" size={16} color="#171717" />
             <Text className="ml-3 text-[#171717]">Buscar Alimento</Text>
-
           </View>
-        </View>
-
-
-      </View>
       </TouchableOpacity>
+      </View>
 
 
 
@@ -148,3 +112,5 @@ export default function MacrosMain() {
     </SafeAreaView>
   )
 }
+
+export default MacrosMain

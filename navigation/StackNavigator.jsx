@@ -19,6 +19,7 @@ import ExHistoryList from '../screens/ExHistoryList';
 import ExAdd from '../screens/ExAdd';
 import ExHistory from '../screens/ExHistory';
 import SetWeight from '../screens/SetWeight';
+import SetupUser from '../screens/SetupUser';
 
 
 
@@ -51,6 +52,8 @@ const StackNavigator = () => {
         <Stack.Screen name="ExAdd" component={ExAdd} options={{headerShown:false}} />
         <Stack.Screen name="ExHistory" component={ExHistory} options={{headerShown:false}} />
         <Stack.Screen name="SetWeight" component={SetWeight} options={{headerShown:false}} />
+        <Stack.Screen name="SetupUser" component={SetupUser} options={{headerShown:false}} />
+
 
 
 

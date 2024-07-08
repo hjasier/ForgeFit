@@ -46,6 +46,13 @@ export default function Scanner() {
   const getAlimData = async (barcode) => {
     const response = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`);
     const data = await response.json();
+    if (data.status === 0) {
+      alert("Producto no encontrado");
+      setTimeout(() => {
+        setScanned(false);
+      }, 800);
+      return;
+    }
     navigation.navigate('MacrosInfo', {data: data});
   }
 

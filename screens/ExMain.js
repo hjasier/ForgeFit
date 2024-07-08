@@ -11,8 +11,7 @@ import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
 import moment from 'moment';
-import useTimer from '../hooks/TimerHook';
-
+import { useTimer } from '../hooks/TimerHook';
 
 const ExMain = () => {
 

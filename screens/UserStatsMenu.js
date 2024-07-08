@@ -31,7 +31,7 @@ const UserStatsMenu = () => {
     const getWeight = async () => {
         const query = `SELECT * FROM weight ORDER BY date DESC LIMIT 1;`;
         const result = await db.getAllAsync(query);
-        result && setWeight(result[0].weight);
+        result[0] && setWeight(result[0].weight);
     }
     getWeight();
     }, [isFocused]);

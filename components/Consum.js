@@ -1,11 +1,32 @@
-import { View, Text, TouchableNativeFeedback , Image , TouchableOpacity } from 'react-native'
+import { View, Text, TouchableNativeFeedback , Image , TouchableOpacity, Animated  } from 'react-native'
 import React from 'react'
+import { Swipeable } from 'react-native-gesture-handler';
+import { Icon } from '@rneui/themed';
+import { useDatabase } from '../hooks/DatabaseContext';
+import { useMacros } from '../hooks/MacrosHook';
 
 const Consum = ({consum}) => {
 
-  return (
+    const db = useDatabase();
+    const macros = useMacros();
+    
+    const handleDeleteItem = () => {
+        db.runAsync('DELETE FROM consums WHERE id = ?', [consum.id]);
+        macros.updateMacros();
+    }
 
-    <TouchableOpacity>
+    const rightSwipe = () => (
+            <View className="items-center justify-center">
+                <TouchableOpacity onPress={() => handleDeleteItem()} className="w-[50] h-14 bg-red-600 justify-center items-center rounded-l-lg">
+                    <Icon type='font-awesome-5' name="trash" size={15} color="white" />
+                </TouchableOpacity>
+            </View>
+    );
+
+
+    return (
+
+    <Swipeable renderRightActions={rightSwipe}>
 
         <View className="bg-[#EAEAEA] h-14 w-full my-1 px-2 py-2 rounded-lg flex flex-row justify-between items-center">
             
@@ -50,7 +71,7 @@ const Consum = ({consum}) => {
         </View>
 
 
-    </TouchableOpacity>
+    </Swipeable>
 
 
   )

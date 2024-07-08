@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+// TimerContext.js
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
+const TimerContext = createContext(null);
 
-const useTimer = () => {
+export const TimerProvider = ({ children }) => {
   const [initialTime, setInitialTime] = useState(90);
   const [seconds, setSeconds] = useState(initialTime);
   const [isActive, setIsActive] = useState(false);
@@ -32,19 +34,26 @@ const useTimer = () => {
     const minutes = `${Math.floor(seconds / 60)}`;
     const getMinutes = `${minutes % 60}`.slice(-2);
     return `${getMinutes}:${getSeconds}`;
-  }
-  
+  };
 
-
-  return {
+  const value = {
     seconds,
     isActive,
     initialTime,
     setInitialTime,
     toggle,
     reset,
-    format : format()
+    format : format(),
   };
+
+  return (
+    <TimerContext.Provider value={value}>
+      {children}
+    </TimerContext.Provider>
+  );
 };
 
-export default useTimer;
+
+export const useTimer = () => {
+  return useContext(TimerContext);
+};
