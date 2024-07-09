@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDatabase } from '../hooks/DatabaseContext'
 import { initialData } from '../database/initialData'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const ExHistory = ({route}) => {
   
@@ -94,7 +95,7 @@ const ExHistory = ({route}) => {
   
 
   return (
-    <View>
+    <SafeAreaView>
 
         {/* NavBar */}
         <MenuNavBar>
@@ -179,7 +180,7 @@ const ExHistory = ({route}) => {
 
 
 
-    </View>
+    </SafeAreaView>
     
   )
 }

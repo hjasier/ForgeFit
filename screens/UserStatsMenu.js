@@ -1,4 +1,4 @@
-import { View, Text , TouchableOpacity, SafeAreaView } from 'react-native'
+import { View, Text , TouchableOpacity } from 'react-native'
 import React from 'react'
 import MenuNavBar from '../components/MenuNavBar';
 import { Icon } from '@rneui/themed';
@@ -11,6 +11,8 @@ import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
 import { useState } from 'react';
 import { useDatabase } from '../hooks/DatabaseContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 const UserStatsMenu = () => {
 
@@ -19,13 +21,7 @@ const UserStatsMenu = () => {
   const db = useDatabase();
   const [weight, setWeight] = useState(0);
 
-  useEffect(() => {
-    const setUpBarColors = async () => {
-        StatusBar.setBackgroundColor('#36BFF9');
-        NavigationBar.setBackgroundColorAsync("white");
-        }
-    setUpBarColors();
-  }, [isFocused]);
+  
 
   useEffect(() => {
     const getWeight = async () => {

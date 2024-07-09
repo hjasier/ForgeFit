@@ -42,24 +42,6 @@ const MacrosMain = () => {
 
 
 
-  useFocusEffect(
-    useCallback(() => {
-      const onBackPress = () => {
-        return true;
-      };
-      StatusBar.setBackgroundColor('#F5F5F5');
-      NavigationBar.setBackgroundColorAsync("white");
-      return () => StatusBar.setBackgroundColor('#F5F5F5');
-    }, [])
-  );
-  
-
-
-
-
-
-
-
 
 
   return (

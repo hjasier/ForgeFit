@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { useDatabase } from '../hooks/DatabaseContext';
 import { initialData } from '../database/initialData';
 import moment from 'moment';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const SaveEjDone = ({route}) => {
@@ -100,7 +101,7 @@ const SaveEjDone = ({route}) => {
     }
 
   return (
-    <View>
+    <SafeAreaView>
 
 
         {/* NavBar */}
@@ -195,7 +196,7 @@ const SaveEjDone = ({route}) => {
 
 
 
-    </View>
+    </SafeAreaView>
   )
 }
 

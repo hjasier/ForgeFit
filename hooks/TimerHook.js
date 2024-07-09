@@ -12,13 +12,22 @@ export const TimerProvider = ({ children }) => {
     let interval = null;
     if (isActive) {
       interval = setInterval(() => {
-        seconds > 0 && setSeconds(seconds => seconds - 1);
+        setSeconds(prevSeconds => {
+          if (prevSeconds > 0) {
+            return prevSeconds - 1;
+          } else {
+            clearInterval(interval);
+            setIsActive(false);
+            setSeconds(initialTime);
+            return 0;
+          }
+        });
       }, 1000);
-    } else {
+    } else if (!isActive && seconds !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive]);
+  }, [isActive, seconds]);
 
   const toggle = () => {
     setIsActive(!isActive);

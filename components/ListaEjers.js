@@ -8,7 +8,7 @@ import { useEffect , useState } from 'react';
 import { initialData } from '../database/initialData';
 import moment from 'moment';
 
-const ListaEjers = ({rutina}) => {
+const ListaEjers = ({search,rutina}) => {
 
   const navigation = useNavigation();
   const isFocused = useIsFocused();
@@ -24,7 +24,7 @@ const ListaEjers = ({rutina}) => {
             SELECT * 
             FROM routine_exercises
             JOIN exercises ON routine_exercises.exercise_id = exercises.id
-            WHERE routine_exercises.routine_id = ?
+            WHERE routine_exercises.routine_id = ? ${search ? `AND exercises.name LIKE '%${search}%'` : ''}
             ORDER BY routine_exercises.exOrder;
         `;
         const values = [rutina.id];

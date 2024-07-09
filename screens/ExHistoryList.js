@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDatabase } from '../hooks/DatabaseContext'
 import moment from 'moment';
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const ExHistoryList = ({route}) => {
   
@@ -76,7 +77,7 @@ const ExHistoryList = ({route}) => {
 
 
   return (
-    <View>
+    <SafeAreaView>
 
         {/* NavBar */}
 
@@ -170,7 +171,7 @@ const ExHistoryList = ({route}) => {
 
 
 
-    </View>
+    </SafeAreaView>
     
   )
 }

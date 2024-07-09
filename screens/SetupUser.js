@@ -19,6 +19,7 @@ const SetupUser = () => {
     const [selectedGoal, setSelectedGoal] = useState('');
     const [age, setAge] = useState('');
     const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
     const [isFirstTime, setIsFirstTime] = useState(true);
 
     useEffect(() => {
@@ -52,6 +53,9 @@ const SetupUser = () => {
             `;
             const values = [age, selectedGender, selectedActivity, selectedGoal, height];
             await db.runAsync(query, values);
+
+            const query2 = `INSERT INTO weight (weight) VALUES (?);`;
+            await db.runAsync(query2, [weight]);
         }
         macros.calcTodayMacros();
         navigation.navigate("Macros");
@@ -104,6 +108,22 @@ const SetupUser = () => {
             className="w-20 justify-center text-center  rounded-md h-11 bg-[#EAEAEA] shadow-md shadow-gray-700 py-0.5 px-3"
             />
         </View>
+
+
+        { isFirstTime &&
+        (
+            <View className="flex-row space-x-4 items-center justify-between mt-5">
+            <Text>Peso kg</Text>   
+            <TextInput 
+            value={weight.toString()}
+            onChangeText={setWeight}
+            placeholder="Peso" 
+            keyboardType='numeric'
+            className="w-20 justify-center text-center  rounded-md h-11 bg-[#EAEAEA] shadow-md shadow-gray-700 py-0.5 px-3"
+            />
+            </View>
+        )
+        }
 
         <View className="flex-row space-x-4 items-center justify-center mt-5">
             <Picker
