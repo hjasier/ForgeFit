@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Icon } from '@rneui/themed'
 import MenuNavBar from '../components/MenuNavBar';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation , useIsFocused} from '@react-navigation/native';
+import { useNavigation , useIsFocused, useFocusEffect} from '@react-navigation/native';
 import SelectorRutina from '../components/SelectorRutina';
 import ListaEjers from '../components/ListaEjers';
 import { useState } from 'react';
@@ -14,6 +14,7 @@ import moment from 'moment';
 import { useTimer } from '../hooks/TimerHook';
 import { useDatabase } from '../hooks/DatabaseContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomStatusBar from '../components/CustomStatusBar';
 
 const ExMain = () => {
 
@@ -38,13 +39,21 @@ const ExMain = () => {
         }
     }
     getRutina();
-  }, []);
+  }, [isFocused]);
+
+
+  useFocusEffect(
+    useCallback(() => {
+      StatusBar.setBarStyle('dark-content', true);
+      StatusBar.setBackgroundColor('#36BFF9', true);
+    }, [])
+  );
 
 
 
   return (
     <SafeAreaView>
-
+        
         {/* NavBar */}
         <MenuNavBar>
             <View className="justify-between flex-row w-full px-6 items-center">

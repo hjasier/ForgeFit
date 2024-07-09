@@ -144,6 +144,7 @@ export const setupDatabase = async () => {
           activity INTEGER,
           goal INTEGER,
           gender TEXT,
+          creationDate DATETIME DEFAULT CURRENT_TIMESTAMP,
           height INTEGER
         );
     `);
@@ -177,6 +178,26 @@ export const setupDatabase = async () => {
     `);
 
 
+    await dbInstance.execAsync(`
+      CREATE TABLE IF NOT EXISTS exercise_groups (
+        id INTEGER PRIMARY KEY NOT NULL,
+        name TEXT NOT NULL,
+        imgSRC INTEGER
+      );
+    `);
+
+
+    await dbInstance.execAsync(`
+      CREATE TABLE IF NOT EXISTS group_exercise (
+        group_id INTEGER NOT NULL,
+        exercise_id INTEGER NOT NULL,
+        FOREIGN KEY (group_id) REFERENCES groups (id),
+        FOREIGN KEY (exercise_id) REFERENCES exercises (id),
+        PRIMARY KEY (group_id, exercise_id)
+      );
+    `);
+
+
 
 
 
@@ -202,6 +223,8 @@ export const setupDatabase = async () => {
       await dbInstance.execAsync(`DROP TABLE IF EXISTS exercise_images;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS weight;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS week;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS exercise_groups;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS group_exercise;`);
 
       } catch (error) {
         console.error('Error deleting tables:', error);

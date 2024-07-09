@@ -14,6 +14,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 import moment from 'moment'
 import { useMacros } from '../hooks/MacrosHook';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import CustomStatusBar from '../components/CustomStatusBar'
 
 const MacrosMain = () => {
 
@@ -37,6 +38,14 @@ const MacrosMain = () => {
       macros.calcTodayMacros();
     }
   }, [db]);
+
+
+  useFocusEffect(
+    useCallback(() => {
+      StatusBar.setBarStyle('dark-content', true);
+      StatusBar.setBackgroundColor('#F3F3F2', true);
+    }, [])
+);
   
 
 
@@ -46,7 +55,7 @@ const MacrosMain = () => {
 
   return (
     <SafeAreaView>
-      
+
       <TouchableOpacity className="px-5">
         <FontAwesome className="" name="history" size={24} color="black" />
       </TouchableOpacity>

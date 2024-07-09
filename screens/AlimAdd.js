@@ -225,7 +225,7 @@ const AlimAdd = () => {
                     <View className="flex-row space-x-1">
                   
                       <TouchableOpacity onPress={() => setUnit("g")}>
-                        <Text style={{ backgroundColor: unitBG,color:unitBGR }} className="rounded-md w-7 h-7 items-center justify-center text-center">g</Text>
+                        <Text style={{ backgroundColor: unitBG,color:unitBGR }} className="rounded-md p-0.5 w-7 h-7 items-center justify-center text-center">g</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity onPress={() => setUnit("ml")}>

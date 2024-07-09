@@ -23,6 +23,9 @@ const BotoneraStats = () => {
 
       <BtnStats text="Configurar User" icon={"user"} iconType={"font-awesome"} path={"SetupUser"} />
 
+      <BtnStats text="Configurar Conexiones" icon={"transit-connection-variant"} iconType={"material-community"} path={"Connections"} />
+
+
 
 
 

@@ -11,6 +11,7 @@ import { useDatabase } from '../hooks/DatabaseContext';
 import { initialData } from '../database/initialData';
 import moment from 'moment';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTimer } from '../hooks/TimerHook';
 
 
 const SaveEjDone = ({route}) => {
@@ -18,6 +19,7 @@ const SaveEjDone = ({route}) => {
   const navigation = useNavigation();
   const exercise = route.params.exercise;
   const db = useDatabase();
+  const timer = useTimer();
 
   const [numSets, setNumSets] = useState(1);
   const scrollViewRef = useRef(null);
@@ -89,8 +91,7 @@ const SaveEjDone = ({route}) => {
 
             }
 
-
-
+            timer.reset();
 
           } catch (error) {
             console.error("Error al insertar el set:", error);
@@ -102,7 +103,7 @@ const SaveEjDone = ({route}) => {
 
   return (
     <SafeAreaView>
-
+      
 
         {/* NavBar */}
         <MenuNavBar>
@@ -112,7 +113,7 @@ const SaveEjDone = ({route}) => {
                 </TouchableOpacity>
                 <Text></Text>
                 <TouchableOpacity>
-                  <Text className="w-15 font-extrabold text-xl text-white">1:33</Text>
+                  <Text className="w-15 font-extrabold text-xl text-white">{timer.format}</Text>
                 </TouchableOpacity>
             </View>
         </MenuNavBar> 

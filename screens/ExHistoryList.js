@@ -8,7 +8,6 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDatabase } from '../hooks/DatabaseContext'
 import moment from 'moment';
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 const ExHistoryList = ({route}) => {
   
@@ -32,6 +31,8 @@ const ExHistoryList = ({route}) => {
           ORDER BY s.date DESC;
         `;
         const result = await db.getAllAsync(query, [histDate]);
+
+        console.log(result);
         
         const setsByEx = {};  // Inicializar como un objeto vacío
 
@@ -75,7 +76,7 @@ const ExHistoryList = ({route}) => {
 
 
   return (
-    <SafeAreaView>
+    <View>
 
         {/* NavBar */}
 
@@ -116,16 +117,16 @@ const ExHistoryList = ({route}) => {
         
         <View className="px-8">
 
-        <ScrollView className="space-y-4 ">
+        <ScrollView className="space-y-4 h-[800]">
         
-        <View className="space-y-3">
+        <View className="space-y-8 pb-80">
         {Object.keys(setsByExercise).map(exercise => (
             
         <View key={exercise}>
 
         <View className="flex-row justify-between">
-            <Text className="bg-[#EAEAEA] self-start p-2 rounded-t-lg">{exercise}</Text>
-            <Text className="bg-[#EAEAEA] self-start p-2 rounded-t-lg">0 sets</Text>
+            <Text className="bg-[#EAEAEA] self-start p-2 rounded-t-lg font-semibold">{exercise}</Text>
+          {/* <Text className="bg-[#EAEAEA] self-start p-2 rounded-t-lg text-gray-600">0 sets</Text> */}
         </View>
 
         <View className="w-full rounded-lg bg-[#EAEAEA] rounded-tl-none">
@@ -169,7 +170,7 @@ const ExHistoryList = ({route}) => {
 
 
 
-    </SafeAreaView>
+    </View>
     
   )
 }

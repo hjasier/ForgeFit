@@ -124,9 +124,9 @@ const ExHistory = ({route}) => {
         
         <View className="px-8">
 
-        <ScrollView className="space-y-4 h-[500]">
+        <ScrollView className="h-[700]">
         
-    
+        <View className="space-y-8 pb-80">
         {Object.keys(exercises).map((date) => ( 
         <View key={date}>
             <View className="flex-row justify-between">
@@ -166,6 +166,7 @@ const ExHistory = ({route}) => {
         </View>
 
         ))}
+        </View>
    
 
 

@@ -21,6 +21,9 @@ import ExHistory from '../screens/ExHistory';
 import SetWeight from '../screens/SetWeight';
 import SetupUser from '../screens/SetupUser';
 import ConfigWeek from '../screens/ConfigWeek';
+import Connections from '../screens/Connections';
+import NewGroup from '../screens/NewGroup';
+import SelectGroupEjs from '../screens/SelectGroupEjs';
 
 
 
@@ -55,7 +58,13 @@ const StackNavigator = () => {
         <Stack.Screen name="SetWeight" component={SetWeight} options={{headerShown:false}} />
         <Stack.Screen name="SetupUser" component={SetupUser} options={{headerShown:false}} />
         <Stack.Screen name="ConfigWeek" component={ConfigWeek} options={{headerShown:false}} />
+        <Stack.Screen name="Connections" component={Connections} options={{headerShown:false}} />
+        <Stack.Screen name="NewGroup" component={NewGroup} options={{headerShown:false}} />
+        <Stack.Screen name="SelectGroupEjs" component={SelectGroupEjs} options={{headerShown:false}} />
 
+
+
+        
 
 
 

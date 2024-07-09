@@ -6,6 +6,7 @@ import ConsumSearch from '../components/ConsumSearch';
 import { useDatabase } from '../hooks/DatabaseContext';
 import axios from 'axios';
 import { nutrixApiId, nutrixApiKey } from '../keys';
+import CustomStatusBar from '../components/CustomStatusBar';
 
 const SearchAlim = () => {
   const db = useDatabase();
@@ -189,14 +190,7 @@ const SearchAlim = () => {
       }));
 
       setAlimListNutrionix(alims);
-      
-      //alims.forEach((alim, index) => {
-      //  setTimeout(() => {
-      //    fetchNutrionixDetails(alim);
-      //  }, index * 200); // Retrasar cada solicitud 200ms más que la anterior
-      // });
-      
-      
+            
     } catch (err) {
       console.error('Error al buscar productos en Nutrionix. Por favor, intenta de nuevo.');
     }
@@ -206,6 +200,7 @@ const SearchAlim = () => {
 
   return (
     <SafeAreaView className="my-2">
+
       <View className="px-8 mt-4">
         <TextInput
           onChangeText={setSearch}

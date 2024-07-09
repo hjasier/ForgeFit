@@ -1,17 +1,19 @@
 import { View, Text , TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useCallback } from 'react'
 import MenuNavBar from '../components/MenuNavBar';
 import { Icon } from '@rneui/themed';
 import BotonCuadrado from '../components/BotonCuadrado';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import BotoneraStats from '../views/BotoneraStats';
-import { useNavigation , useIsFocused } from '@react-navigation/native';
+import { useNavigation , useIsFocused, useFocusEffect } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
 import { useState } from 'react';
 import { useDatabase } from '../hooks/DatabaseContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomStatusBar from '../components/CustomStatusBar';
+
 
 
 const UserStatsMenu = () => {
@@ -20,6 +22,7 @@ const UserStatsMenu = () => {
   const isFocused = useIsFocused();
   const db = useDatabase();
   const [weight, setWeight] = useState(0);
+  const [totalDays, setTotalDays] = useState(0);
 
   
 
@@ -32,8 +35,33 @@ const UserStatsMenu = () => {
     getWeight();
     }, [isFocused]);
 
+
+    useEffect(() => {
+        const getTotalDays = async () => {
+            const query = `SELECT * FROM user WHERE id = 0 LIMIT 1;`;
+            const result = await db.getAllAsync(query);
+            console.log(result[0].creationDate);
+            const daysSinceCreation = Math.floor((new Date() - new Date(result[0].creationDate)) / (1000 * 60 * 60 * 24));
+            result[0] && setTotalDays(daysSinceCreation);
+
+        }
+        getTotalDays();
+    }
+    , [isFocused]);
+
+
+    useFocusEffect(
+        useCallback(() => {
+          StatusBar.setBarStyle('dark-content', true);
+          StatusBar.setBackgroundColor('#36BFF9', true);
+        }, [])
+    );
+
+    
+
   return (
     <SafeAreaView>
+
      
      {/* NavBar */}
 
@@ -41,7 +69,7 @@ const UserStatsMenu = () => {
         <View className="flex-row justify-between w-full px-4">
             <View className="w-5"/>
             <View className="text-center justify-center">
-                <Text className="text-white text-2xl text-center font-bold ">Día 461</Text>
+                <Text className="text-white text-2xl text-center font-bold ">Día {totalDays}</Text>
             </View>
 
             <TouchableOpacity onPress={() => navigation.navigate("ConfigMenu")} className="h-full justify-center ">

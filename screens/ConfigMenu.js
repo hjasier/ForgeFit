@@ -9,12 +9,26 @@ import { initialData } from '../database/initialData';
 import { useDatabase } from '../hooks/DatabaseContext';
 import axios from 'axios';
 import { useState } from 'react';
+import { TextInput } from 'react-native-gesture-handler';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 const ConfigMenu = () => {
 
   const db = useDatabase();
   const [availableBackups, setAvailableBackups] = useState([]);
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const handleChangeDate = async (event, selectedDate) => { 
+    setDate(selectedDate);
+    const formattedDate = selectedDate.toISOString();
+    await db.runAsync(`UPDATE user SET creationDate = ? WHERE id = 0;`, [formattedDate]);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
   
   const handleExportData = async () => {
     backupDatabase();
@@ -86,9 +100,13 @@ const ConfigMenu = () => {
 
   
   const getAvailableBackups = async () => {
-    const response = await axios.get('http://192.168.28.151:5000/list');
-    if(response.status === 200){
-     setAvailableBackups(response.data);
+    try {
+      const response = await axios.get('http://192.168.28.151:5000/list');
+      if(response.status === 200){
+      setAvailableBackups(response.data);
+      }
+    } catch (error) {
+      console.error('Error al obtener backups:', error);
     }
   }
 
@@ -132,6 +150,20 @@ const ConfigMenu = () => {
         </TouchableOpacity>
       ))}
 
+
+      <TouchableOpacity onPress={showDatepicker} className="h-10 w-30 bg-gray-500 text-white rounded-lg">
+        <Text className="text-white">Cambiar fecha inicio</Text>
+      </TouchableOpacity>
+
+        {show && (
+        <DateTimePicker
+          value={date}
+          mode="date"
+          is24Hour={true}
+          display="default"
+          onChange={handleChangeDate}
+        />
+      )}
 
     </View>
   )

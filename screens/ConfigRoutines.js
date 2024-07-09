@@ -33,7 +33,8 @@ const ConfigRoutines = () => {
       {rutina && (
       <>
       <View className="items-center py-5">
-        <TouchableOpacity onPress={()=> navigation.navigate("SelectRoutineEjs",{routine:rutina})} className="items-center text-center justify-center bg-[#EAEAEA] w-32 h-9 rounded-lg shadow-md shadow-gray-800">
+        <TouchableOpacity onPress={()=> navigation.navigate("SelectRoutineEjs",{routine:rutina})} 
+        className="items-center text-center justify-center bg-[#EAEAEA] w-32 h-9 rounded-lg shadow-md shadow-gray-800">
           <Text>Editar Ejercicios</Text>
         </TouchableOpacity>
       </View>

@@ -6,15 +6,18 @@ import axios from 'axios';
 import { useState } from 'react';
 import { nutrixApiId , nutrixApiKey } from '../keys';
 import { useEffect } from 'react';
+import { Swipeable } from 'react-native-gesture-handler';
+import { Icon } from '@rneui/themed';
+import { useDatabase } from '../hooks/DatabaseContext';
 
 const ConsumSearch = ({alim}) => {
 
   const navigation = useNavigation();
+  const db = useDatabase();
 
   const bgColor = alim.uploadSRC === "user" ? "#F9E3C0" : "#EAEAEA";
-
   const [fetchingDetails, setFetchingDetails] = useState(false);
-
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const fetchNutrionixDetails = async (alim) => {
     setFetchingDetails(true);
@@ -67,13 +70,33 @@ const ConsumSearch = ({alim}) => {
     }
   }
 
+
+  const handleDeleteItem = () => {
+    db.runAsync('DELETE FROM alims WHERE id = ?', [alim.id]);
+    setIsDeleted(true);
+  }
+
+  const rightSwipe = () => (
+    
+    <View className="items-center justify-center">
+      { !alim.isAPIResult && ( 
+        <TouchableOpacity onPress={() => handleDeleteItem()} className="w-[50] h-14 bg-red-600 justify-center items-center rounded-l-lg">
+            <Icon type='font-awesome-5' name="trash" size={15} color="white" />
+        </TouchableOpacity>
+      )}
+    </View>
+   
+  );
+
+  if (isDeleted) {
+    return null;
+  }
+
   return (
-
+    <Swipeable renderRightActions={rightSwipe}>
+    
     <TouchableOpacity onPress={handlePress}>
-
         <View style={{backgroundColor:bgColor}} className="h-14 w-full my-1 px-2 py-2 rounded-lg flex flex-row justify-between items-center">
-            
-            
             <View className="flex flex-row">
 
                 {
@@ -84,8 +107,7 @@ const ConsumSearch = ({alim}) => {
                         <Image source={require('../assets/testImg.png')} className="h-10 w-10 rounded-md"/>
                     )
                 }
-                
-            
+              
                 <View className="flex flex-col pl-3">
                     
                     <Text>{alim.name}</Text>
@@ -109,12 +131,9 @@ const ConsumSearch = ({alim}) => {
                         <Text className="px-1 text-xs text-gray-500">{alim.weight} {alim.unit}</Text>
                     </View>
 
-                    
-
                 </View>
 
             </View>
-
 
             <TouchableOpacity>
                 <View className="mx-1">
@@ -122,18 +141,9 @@ const ConsumSearch = ({alim}) => {
                 </View>
             </TouchableOpacity>
 
-
-
-
-            
-            
-
-
         </View>
-
-
     </TouchableOpacity>
-
+    </Swipeable>
 
   )
 }

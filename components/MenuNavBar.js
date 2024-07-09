@@ -4,26 +4,29 @@ import { Icon } from '@rneui/themed';
 import { useNavigation , useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
+import CustomStatusBar from './CustomStatusBar';
 
 
 const menuNavBar = ({name,children}) => {
 
+
+  
+
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   
+  
 
 
-  useEffect(() => {
-    if (isFocused) {
-      StatusBar.setBackgroundColor('#36BFF9'); // Cambia el color de fondo
-    }
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     StatusBar.setBackgroundColor('#36BFF9');
+  //   }
 
-    return () => {
-      // Restablece la configuración de la barra de estado cuando el componente se desenfoca
-      StatusBar.setBackgroundColor('transparent');
-    };
-  }, [isFocused]);
-
+  //   return () => {
+  //     StatusBar.setBackgroundColor('#F3F3F2');
+  //   };
+  // }, [isFocused]);
 
 
 
@@ -31,6 +34,7 @@ const menuNavBar = ({name,children}) => {
     
   return (
     <View className="w-full h-16 flex-row bg-[#36BFF9] rounded-b-3xl">
+      
         {children}
     </View>
   )
