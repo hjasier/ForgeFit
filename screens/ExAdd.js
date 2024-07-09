@@ -28,7 +28,6 @@ const ExAdd = () => {
 
 
     const handleSaveEx = async () => {
-        console.log("Guardando ejercicio");
         await saveExData();
         navigation.goBack();
     }

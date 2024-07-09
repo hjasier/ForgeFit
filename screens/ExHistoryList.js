@@ -32,8 +32,6 @@ const ExHistoryList = ({route}) => {
           ORDER BY s.date DESC;
         `;
         const result = await db.getAllAsync(query, [histDate]);
-
-        console.log(result);
         
         const setsByEx = {};  // Inicializar como un objeto vacío
 

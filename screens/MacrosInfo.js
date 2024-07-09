@@ -85,7 +85,6 @@ const MacrosInfo = ({ route }) => {
         await db.runAsync(query, values);
 
         const updatedAlims = await db.getAllAsync('SELECT * FROM alims');
-        console.log(updatedAlims);
       }
     } catch (error) {
       console.error("Error al insertar el alimento:", error);
@@ -96,7 +95,6 @@ const MacrosInfo = ({ route }) => {
   };
 
   const handleSaveAlim = () => {
-    console.log("Guardando alimento");
     insertAlim();
     navigation.navigate("Macros");
   };
@@ -126,7 +124,6 @@ const MacrosInfo = ({ route }) => {
 
   useEffect(() => {
     if (route.params?.imgSRC) {
-      console.log("Imagen recibida: ", route.params.imgSRC);
       setImage(route.params.imgSRC);
 
     }

@@ -99,7 +99,6 @@ const AlimAdd = () => {
         await FileSystem.downloadAsync(firstImage, newFilePath);
 
         setImgSRC(newFilePath);
-        console.log('Imagen guardada en: ', newFilePath);
         setLoadingIMG(false);
       } else {
         setImgSRC(null);

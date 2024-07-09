@@ -49,7 +49,6 @@ const ConfigWeek = () => {
         const query = 'UPDATE week SET routine_id = ? WHERE id = ?';
         const values = [rutina ? rutina.id : null, selectedDay];
         try {
-            console.log('UPDATEANDO -->', rutina, selectedDay);
             await db.runAsync(query, values);
             getDays();
         } catch (error) {

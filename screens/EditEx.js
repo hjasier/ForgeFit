@@ -21,7 +21,6 @@ const EditEx = ({route}) => {
   const [newImage, setNewImage] = useState(exercise.imgSRC);
   
   const handleEditEx = () => {
-    console.log("Editando ejercicio");
     updateExData();
     navigation.goBack();
   }

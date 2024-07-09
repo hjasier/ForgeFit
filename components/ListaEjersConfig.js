@@ -128,10 +128,8 @@ const ListaEjersConfig = ({rutina}) => {
               contentContainerStyle={{ paddingBottom: 500 }}
               data={exercises}
               onDragEnd={({ data }) => {
-                // Actualiza el estado con el nuevo orden
                 setData(data);
                 setExercises(data);
-                console.log(data); // Muestra el nuevo orden en la consola
                 handleUpdateOrder(data);
               }}
               keyExtractor={(item) => item.id.toString()}

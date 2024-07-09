@@ -41,7 +41,6 @@ export default function TakeImg({ route }) {
       try {
         // Toma la foto y obtén la URI temporal
         const photo = await cameraRef.current.takePictureAsync();
-        console.log('Foto temporalmente guardada en: ', photo.uri);
 
         // Recorta la imagen para que sea cuadrada
         const size = 1900; //300x300
@@ -56,9 +55,6 @@ export default function TakeImg({ route }) {
           [{ crop: { originX: originX, originY: originY, width: size, height: size } }],
           { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
         );
-
-        console.log('Foto recortada guardada en: ', croppedPhoto.uri);
-        
 
         // Definir la ruta donde se guardará la imagen dentro de la aplicación
         const appImagePath = `${FileSystem.documentDirectory}photos/`;
@@ -76,12 +72,10 @@ export default function TakeImg({ route }) {
           from: croppedPhoto.uri,
           to: newFilePath,
         });
-
-        console.log('Foto guardada en la aplicación en: ', newFilePath);
         backdata = route.params.backData;
         navigation.navigate(returnPath, { imgSRC: newFilePath , backData: backdata});
       } catch (error) {
-        console.log('Error al tomar la foto: ', error);
+        console.error('Error al tomar la foto: ', error);
       }
     }
   };

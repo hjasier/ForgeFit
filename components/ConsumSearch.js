@@ -11,8 +11,6 @@ const ConsumSearch = ({alim}) => {
 
   const navigation = useNavigation();
 
-  //console.log(alim.uploadSRC);
-
   const bgColor = alim.uploadSRC === "user" ? "#F9E3C0" : "#EAEAEA";
 
   const [fetchingDetails, setFetchingDetails] = useState(false);

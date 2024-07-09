@@ -45,7 +45,6 @@ const ListaEjers = ({search,rutina}) => {
           WHERE DATE(date) = DATE(?)
         `;
         const result = await db.getAllAsync(query, [moment().format('YYYY-MM-DD')]);
-        console.log(result);
       }
       getCompletedExercises();
     }

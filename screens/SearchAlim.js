@@ -145,8 +145,7 @@ const SearchAlim = () => {
 
       setAlimListOpenFoodFacts(alims);
     } catch (err) {
-      console.log(err);
-      console.log('Error al buscar productos en OpenFoodFacts. Por favor, intenta de nuevo.');
+      console.error(err);
     }
   };
 
@@ -199,7 +198,7 @@ const SearchAlim = () => {
       
       
     } catch (err) {
-      console.log('Error al buscar productos en Nutrionix. Por favor, intenta de nuevo.');
+      console.error('Error al buscar productos en Nutrionix. Por favor, intenta de nuevo.');
     }
   };
 

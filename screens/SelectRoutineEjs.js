@@ -38,7 +38,6 @@ const SelectRoutineEjs = ({route}) => {
           const query = `SELECT * FROM routine_exercises WHERE routine_id = ?;`;
           const values = [routine.id];
           const result = await db.getAllAsync(query, values);
-          console.log(result);
           setSelectedExercises(result);
         }
         getSelectedExercises();

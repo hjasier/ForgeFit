@@ -29,7 +29,6 @@ const SelectExImage = ({selectedImage, setNewImage}) => {
 
 
   useEffect(() => {
-    console.log(selectedImage);
     if (selectedImage) {
       
       scrollToElement(selectedImage);

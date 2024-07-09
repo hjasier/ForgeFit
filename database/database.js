@@ -249,7 +249,6 @@ export const setupDatabase = async () => {
           assetUri, // La URI del recurso en la carpeta de activos
           newFilePath // La ruta de destino en el sistema de archivos del usuario
         );
-        console.log(newFilePath);
         return newFilePath;
       }
       catch (error) {
@@ -346,7 +345,6 @@ export const getDatabase = () => dbInstance;
 
 
 export const backupDatabase = async () => {
-  console.log('Backing up database');
   try {
     const dbPath = FileSystem.documentDirectory + 'SQLite/';
     const filesToCompress = [
@@ -447,7 +445,6 @@ export const importBackUpFromServer = async (backup) => {
     try {
       const response = await axios.get(`http://192.168.28.151:5000/download/${file}`, { responseType: 'arraybuffer' });
       const filePath = dbPath + file.split('_')[1];
-      console.log("Guardando archivo en:", filePath);
       const base64Data = Buffer.from(response.data, 'binary').toString('base64');
       await FileSystem.writeAsStringAsync(filePath, base64Data, { encoding: FileSystem.EncodingType.Base64 });
     } catch (error) {

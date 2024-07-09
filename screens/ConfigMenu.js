@@ -64,13 +64,10 @@ const ConfigMenu = () => {
 
         await restoreDatabase(newPath);
   
-        console.log(`Archivo copiado exitosamente a ${newPath}`);
         Alert.alert('Base de datos importada');
         
         // Aquí puedes continuar con cualquier acción adicional que necesites con el archivo copiado
-      } else {
-        console.log('Selección de documento cancelada por el usuario.');
-      }
+      } 
     } catch (error) {
       console.error('Error al importar archivo:', error);
       // Manejar el error de acuerdo a tu aplicación

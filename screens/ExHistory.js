@@ -43,8 +43,6 @@ const ExHistory = ({route}) => {
 
         setExercises(groupByDate(sets));
 
-        console.log(sets);
-
       }
 
       getExercises();

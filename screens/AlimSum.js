@@ -119,7 +119,8 @@ const AlimSum = ({ route }) => {
           await db.runAsync(query, values);
         }
         else {
-          console.log("El alimento ya existe en la base de datos UPDATE LLL");
+          //TODO: Update alim
+          console.error("El alimento ya existe en la base de datos UPDATE LLL");
         }
       }
     } catch (error) {
@@ -131,9 +132,6 @@ const AlimSum = ({ route }) => {
 
 
   const handleStoreConsum = () => { 
-
-    console.log("API RESULT: "+alim.isAPIResult);
-
     if(alim.isAPIResult){
       checkAlimExists();
     }

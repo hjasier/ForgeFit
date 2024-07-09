@@ -15,7 +15,6 @@ export const MacrosProvider = ({ children }) => {
 
 
   const updateMacros = async () => {
-    console.log("Actualizando macros del día HOOK");
     try {
       if (db) {
         const query = `
@@ -55,7 +54,6 @@ export const MacrosProvider = ({ children }) => {
   };
 
   const calcTodayMacros = async () => {
-    console.log("Calculando macros del día...");
     try {
         if (db) {
 
@@ -77,7 +75,6 @@ export const MacrosProvider = ({ children }) => {
         const weight = weightData[0].weight
 
         const newMacros = calculateMacros(height, weight, age, gender, activity, goal);
-        console.log(newMacros);
         setTodayGoals(newMacros);
         }
     }
