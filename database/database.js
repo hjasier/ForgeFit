@@ -164,7 +164,19 @@ export const setupDatabase = async () => {
         date DATETIME DEFAULT CURRENT_TIMESTAMP,
         weight INTEGER NOT NULL
       );
-  `);
+    `);
+
+    await dbInstance.execAsync(`
+      CREATE TABLE IF NOT EXISTS week (
+        id INTEGER PRIMARY KEY NOT NULL,
+        name TEXT NOT NULL,
+        letter TEXT NOT NULL,
+        routine_id INTEGER,
+        FOREIGN KEY (routine_id) REFERENCES routines (id)
+      );
+    `);
+
+
 
 
 
@@ -176,8 +188,8 @@ export const setupDatabase = async () => {
     if (DEBUG_DELETE_ALL_TABLES) {
       console.log('Droping all tables');
       try {
-      await dbInstance.execAsync(`DROP TABLE IF EXISTS alims;`);
-      await dbInstance.execAsync(`DROP TABLE IF EXISTS consums;`);
+      //await dbInstance.execAsync(`DROP TABLE IF EXISTS alims;`);
+      //await dbInstance.execAsync(`DROP TABLE IF EXISTS consums;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS exercises;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS musculatures;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS muscleGroup;`);
@@ -189,6 +201,7 @@ export const setupDatabase = async () => {
       await dbInstance.execAsync(`DROP TABLE IF EXISTS musculature_exercise;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS exercise_images;`);
       await dbInstance.execAsync(`DROP TABLE IF EXISTS weight;`);
+      await dbInstance.execAsync(`DROP TABLE IF EXISTS week;`);
 
       } catch (error) {
         console.error('Error deleting tables:', error);
@@ -292,6 +305,23 @@ export const setupDatabase = async () => {
         }
     }else{
       console.log("Skipping exercises insertions")
+    }
+    
+
+    const weekresult = await dbInstance.getAllAsync('SELECT COUNT(*) FROM week');
+    if (weekresult[0]["COUNT(*)"]==0) {
+        let query = `INSERT INTO week (id, name, letter) VALUES`;
+        initialData.week.forEach((day) => {
+            query += `(${day.id},'${day.name}','${day.letter}'),`;
+        });
+        query = query.slice(0, -1); // Elimina la última coma
+        query += ';';
+        try {
+            console.log("Insertando datos iniciales week");
+            await dbInstance.execAsync(query);
+        } catch (error) {
+            console.error("Error al insertar datos iniciales week", error);
+        }
     }
     
     

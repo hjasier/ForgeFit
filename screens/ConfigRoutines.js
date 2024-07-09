@@ -27,7 +27,7 @@ const ConfigRoutines = () => {
       </View>
 
       <View className="items-center mt-5 w-full px-8">
-          <SelectorRutina rutina={rutina} setRutina={setRutina} />
+          <SelectorRutina set={0} rutina={rutina} setRutina={setRutina} />
       </View>
 
       {rutina && (

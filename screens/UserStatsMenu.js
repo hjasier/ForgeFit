@@ -1,4 +1,4 @@
-import { View, Text , TouchableOpacity } from 'react-native'
+import { View, Text , TouchableOpacity, SafeAreaView } from 'react-native'
 import React from 'react'
 import MenuNavBar from '../components/MenuNavBar';
 import { Icon } from '@rneui/themed';
@@ -37,7 +37,7 @@ const UserStatsMenu = () => {
     }, [isFocused]);
 
   return (
-    <View>
+    <SafeAreaView>
      
      {/* NavBar */}
 
@@ -63,15 +63,15 @@ const UserStatsMenu = () => {
 
         <View className="flex-row space-x-2 mt-3">
             <TouchableOpacity onPress={() => navigation.navigate("SetWeight")}>
-                <BotonCuadrado name={`Peso ${weight} kg`}/>
+                <BotonCuadrado icon="weight" iconType={"material-community"} name={`Peso ${weight} kg`}/>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate("ExAdd")}>
-                <BotonCuadrado name="Crear Ejercicio"/>
+                <BotonCuadrado icon="plus-square" iconType={"font-awesome-5"} name="Crear Ejercicio"/>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate({name:"ConfigRoutines"})}>
-                <BotonCuadrado name="Configurar Rutinas"/>
+                <BotonCuadrado icon="calendar-plus-o" iconType={"font-awesome"} name="Configurar Rutinas"/>
             </TouchableOpacity>
             
         </View>
@@ -94,7 +94,7 @@ const UserStatsMenu = () => {
 
 
 
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 import { Icon } from '@rneui/themed'
 import MenuNavBar from '../components/MenuNavBar';
@@ -12,14 +12,16 @@ import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
 import moment from 'moment';
 import { useTimer } from '../hooks/TimerHook';
+import { useDatabase } from '../hooks/DatabaseContext';
 
 const ExMain = () => {
 
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const timer = useTimer();
+  const db = useDatabase();
 
-  const [rutina, setRutina] = useState(0);
+  const [rutina, setRutina] = useState(null);
 
   useEffect(() => {
     const setUpBarColors = async () => {
@@ -29,8 +31,23 @@ const ExMain = () => {
     setUpBarColors();
   }, [isFocused]);
 
+  useEffect(() => {
+    const getRutina = async () => {
+        const query = `SELECT * FROM week WHERE id = ${moment().isoWeekday()-1}`;
+        const result = await db.getAllAsync(query);
+        const routineId = result[0].routine_id;
+        if (routineId){
+          const routine = await db.getAllAsync(`SELECT * FROM routines WHERE id = ${routineId}`);
+          setRutina(routine[0]);
+        }
+    }
+    getRutina();
+  }, []);
+
+
+
   return (
-    <View>
+    <SafeAreaView>
 
         {/* NavBar */}
 
@@ -55,17 +72,10 @@ const ExMain = () => {
         </View>
 
         <View className="items-center mt-5">
-            <ListaEjers rutina={rutina}/>
+            <ListaEjers  rutina={rutina}/>
         </View>
 
-
-        
-
-    
-
-
-
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -8,7 +8,7 @@ import { useIsFocused } from '@react-navigation/native'
 import { initialData } from '../database/initialData'
 
 
-const SelectorRutina = ({rutina , setRutina}) => {
+const SelectorRutina = ({unselect, set ,rutina , setRutina}) => {
 
   const db = useDatabase();
   const isFocused = useIsFocused();
@@ -21,12 +21,22 @@ const SelectorRutina = ({rutina , setRutina}) => {
         const query = `SELECT * FROM routines;`;
         const result = await db.getAllAsync(query);
         setRutinas(result);
-        setRutina(result[0]);
+        if (set!=null && result.length>0){
+          setRutina(result[set]);
+        }
       }
       getRutinas();
 
     }
   }, [isFocused]);
+
+  const handleSelectRutina = (rut) => {
+    if (unselect && rutina && rutina.id === rut.id){
+      setRutina(null);
+      return;
+    }
+    setRutina(rut)
+  }
   
 
   
@@ -38,12 +48,12 @@ const SelectorRutina = ({rutina , setRutina}) => {
       
       {rutinas.length === 0 ? (
         <View className="flex-row justify-center items-center h-14 w-full rounded-lg">
-          <Text className="text-base">No hay rutinas</Text>
+          <Text className="text-base">No hay rutinas guardadas</Text>
         </View>
       ) : (
       rutinas.map((rut) => (
         <TouchableOpacity
-          onPress={() => setRutina(rut)}
+          onPress={() => handleSelectRutina(rut)}
           key={rut.id}
           style={
             rutina && (rut.id === rutina.id) ? { backgroundColor: "#FFD700" } : { backgroundColor: "#d9d9d93e" }

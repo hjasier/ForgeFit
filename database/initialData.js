@@ -245,5 +245,17 @@ export const initialData = {
         { name: "Gemelos en prensa", muscles: [24, 25], muscleGroups: [2], image: "man-doing-standing-calf-raise-with-assisted-machin-vector-44360414.png" } // Gemelos, Sóleo
     ]
 
+    ,
+
+    week:[
+        {id:0,name:'Lunes',letter:'L'},
+        {id:1,name:'Martes',letter:'M'},
+        {id:2,name:'Miércoles',letter:'X'},
+        {id:3,name:'Jueves',letter:'J'},
+        {id:4,name:'Viernes',letter:'V'},
+        {id:5,name:'Sábado',letter:'S'},
+        {id:6,name:'Domingo',letter:'D'}
+    ]
+
     
 };

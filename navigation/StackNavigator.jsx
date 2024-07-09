@@ -20,6 +20,7 @@ import ExAdd from '../screens/ExAdd';
 import ExHistory from '../screens/ExHistory';
 import SetWeight from '../screens/SetWeight';
 import SetupUser from '../screens/SetupUser';
+import ConfigWeek from '../screens/ConfigWeek';
 
 
 
@@ -53,6 +54,8 @@ const StackNavigator = () => {
         <Stack.Screen name="ExHistory" component={ExHistory} options={{headerShown:false}} />
         <Stack.Screen name="SetWeight" component={SetWeight} options={{headerShown:false}} />
         <Stack.Screen name="SetupUser" component={SetupUser} options={{headerShown:false}} />
+        <Stack.Screen name="ConfigWeek" component={ConfigWeek} options={{headerShown:false}} />
+
 
 
 

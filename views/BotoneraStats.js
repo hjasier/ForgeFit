@@ -17,11 +17,11 @@ const BotoneraStats = () => {
     <View className="w-full pb-24 px-6 space-y-3">
     
       
-      <BtnStats text="Lista de ejercicios" icon={"star"} iconType={"font-awesome-5"} path={"ExList"} />
+      <BtnStats text="Lista de ejercicios" icon={"list-alt"} iconType={"font-awesome"} path={"ExList"} />
 
-      <BtnStats text="Configurar Semana" icon={"star"} iconType={"font-awesome-5"} path={"ExList"} />
+      <BtnStats text="Configurar Semana" icon={"calendar-alt"} iconType={"font-awesome-5"} path={"ConfigWeek"} />
 
-      <BtnStats text="Configurar User" icon={"star"} iconType={"font-awesome-5"} path={"SetupUser"} />
+      <BtnStats text="Configurar User" icon={"user"} iconType={"font-awesome"} path={"SetupUser"} />
 
 
 
