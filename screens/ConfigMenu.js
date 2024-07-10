@@ -11,7 +11,9 @@ import axios from 'axios';
 import { useState } from 'react';
 import { TextInput } from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import entrenamientos from '../database/entrenamientos';
+import relaciones from '../database/relaciones';
+import moment from 'moment';
 
 const ConfigMenu = () => {
 
@@ -22,6 +24,7 @@ const ConfigMenu = () => {
 
   const handleChangeDate = async (event, selectedDate) => { 
     setDate(selectedDate);
+    setShow(false);
     const formattedDate = selectedDate.toISOString();
     await db.runAsync(`UPDATE user SET creationDate = ? WHERE id = 0;`, [formattedDate]);
   };
@@ -110,9 +113,7 @@ const ConfigMenu = () => {
     }
   }
 
-  useEffect(() => {
-    getAvailableBackups();
-  }, []);
+
 
   const handleImportDataFromServer = async (backup) => {
     const response = importBackUpFromServer(backup);
@@ -123,36 +124,72 @@ const ConfigMenu = () => {
     }
   }
 
+  const formatDate = (date,time) => {
+    const dateTime = `${date} ${time}`;
+    return moment(dateTime, 'DD-MM-YYYY HH:mm').format('YYYY-MM-DD HH:mm');
+  }
+
+  const importDataFromOldDB = async () => {
+    try {
+      if (db) {
+        for (let i = 0; i < entrenamientos.length; i++) {
+          if(!relaciones[entrenamientos[i].ej_id]){
+            continue;
+          }
+          const query = `
+            INSERT INTO sets
+            (exercise_id, weight, reps, date, isMainSet)
+            VALUES (?, ?, ?, ?, 1);
+          `;
+          const values = [relaciones[entrenamientos[i].ej_id], entrenamientos[i]["medidas"].peso, entrenamientos[i]["medidas"].reps, formatDate(entrenamientos[i].fecha,entrenamientos[i].hora)];
+          await db.runAsync(query, values);
+        }
+      }
+    } catch (error) {
+      console.error("Error al insertar rutina", error);
+      return;
+    } finally {
+      // Código de limpieza o navegación aquí si es necesario
+    }
+  }
 
 
 
     
   return (
-    <View className="items-center justify-center h-full">
+    <View className="items-center justify-center h-full space-y-10">
       
       
-      <TouchableOpacity className="h-10 w-30 bg-gray-500 text-white rounded-lg" onPress={handleExportData}>
-        <Text className="text-white">Exportar datos</Text>
+      <TouchableOpacity p-4 onPress={handleExportData}>
+        <Text >Exportar datos</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleImportData} className="h-10 w-30 bg-gray-500 text-white rounded-lg">
-        <Text className="text-white">Importar datos</Text>
+      <TouchableOpacity onPress={handleImportData} p-4>
+        <Text >Importar datos</Text>
       </TouchableOpacity>
 
 
-      <TouchableOpacity onPress={handleBackUpToServer} className="h-10 w-30 bg-gray-500 text-white rounded-lg">
-        <Text className="text-white">Backup a Server</Text>
+      <TouchableOpacity onPress={handleBackUpToServer} p-4>
+        <Text >Backup a Server</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={getAvailableBackups} p-4>
+        <Text >Ver Backups en Server</Text>
       </TouchableOpacity>
 
       {availableBackups.map((backup, index) => (
-        <TouchableOpacity key={index} onPress={() => handleImportDataFromServer(backup)} className="h-10 w-30 bg-gray-500 text-white rounded-lg">
-          <Text className="text-white">Restaurar Copia de seguridad {backup.name}</Text>
+        <TouchableOpacity key={index} onPress={() => handleImportDataFromServer(backup)} p-4>
+          <Text >Restaurar Copia de seguridad {backup.name}</Text>
         </TouchableOpacity>
       ))}
 
 
-      <TouchableOpacity onPress={showDatepicker} className="h-10 w-30 bg-gray-500 text-white rounded-lg">
-        <Text className="text-white">Cambiar fecha inicio</Text>
+      <TouchableOpacity onPress={showDatepicker} p-4>
+        <Text >Cambiar fecha inicio</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => importDataFromOldDB()} p-4>
+        <Text >ImportDataFromOldDB</Text>
       </TouchableOpacity>
 
         {show && (

@@ -40,7 +40,6 @@ const UserStatsMenu = () => {
         const getTotalDays = async () => {
             const query = `SELECT * FROM user WHERE id = 0 LIMIT 1;`;
             const result = await db.getAllAsync(query);
-            console.log(result[0].creationDate);
             const daysSinceCreation = Math.floor((new Date() - new Date(result[0].creationDate)) / (1000 * 60 * 60 * 24));
             result[0] && setTotalDays(daysSinceCreation);
 

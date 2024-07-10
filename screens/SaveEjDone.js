@@ -51,7 +51,22 @@ const SaveEjDone = ({route}) => {
     }
   };
 
-    const handleSaveSet = async () => {
+  //Weight input can include operations like 90-15
+  const formatWeight = (weight) => {
+    // Expresión regular para verificar si la entrada es una operación matemática
+    const isMathOperation = /^[0-9+\-*/().\s]+$/.test(weight.trim());
+    if (isMathOperation) {
+      try {
+        // Usar eval para evaluar la operación matemática
+        return eval(weight);
+      } catch (error) {
+        console.error("Error evaluando la operación matemática: ", error);
+        return weight;
+      }
+    }
+  };  
+
+  const handleSaveSet = async () => {
         if (setsData[0].peso === '' || setsData[0].reps === '') {
           return;
         }
@@ -65,7 +80,7 @@ const SaveEjDone = ({route}) => {
                 (id, exercise_id, weight, reps, date, isMainSet)
                 VALUES (?, ?, ?, ?, ?, 1);
               `;
-            const values = [main_set_id, exercise.id ,setsData[0].peso, setsData[0].reps, moment().format('YYYY-MM-DD HH:mm:ss')];
+            const values = [main_set_id, exercise.id ,formatWeight(setsData[0].peso), setsData[0].reps, moment().format('YYYY-MM-DD HH:mm:ss')];
 
             await db.runAsync(query, values); 
 
@@ -77,7 +92,7 @@ const SaveEjDone = ({route}) => {
                 (id, exercise_id, weight, reps, isMainSet)
                 VALUES (?, ?, ?, ? , 0);
               `;
-              const dropSetValues = [drop_set_id, exercise.id, setsData[i].peso, setsData[i].reps];
+              const dropSetValues = [drop_set_id, exercise.id, formatWeight(setsData[i].peso), setsData[i].reps];
               await db.runAsync(setsinsertQuery, dropSetValues);
 
               const query = `

@@ -3,12 +3,13 @@ import React from 'react'
 import MenuNavBar from '../components/MenuNavBar'
 import { Icon } from '@rneui/themed'
 import { useIsFocused, useNavigation } from '@react-navigation/native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDatabase } from '../hooks/DatabaseContext'
 import { initialData } from '../database/initialData'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useTimer } from '../hooks/TimerHook'
 
 const ExHistory = ({route}) => {
   
@@ -16,6 +17,7 @@ const ExHistory = ({route}) => {
   const navigation = useNavigation();
   const db = useDatabase();
   const isFocused = useIsFocused();
+  const timer = useTimer();
 
     
   const [exercises, setExercises] = useState([]);
@@ -90,7 +92,57 @@ const ExHistory = ({route}) => {
     }
 
 
+    const renderSet = ({ item: set }) => (
+      <View key={set.id} className="flex-row justify-between py-1 px-3">
+        <Text className="w-20 font-semibold text-blue-500">
+          {new Date(new Date(set.date).getTime() + 2 * 60 * 60 * 1000).toLocaleTimeString('es-ES', {
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'Europe/Madrid'
+          })}
+        </Text>
+        <View className="w-20 flex-row items-center">
+          <TextInput className="font-bold text-right" onChangeText={handleEditSet(set, 'weight')}>
+            {set.weight}
+          </TextInput>
+          <Text className="font-bold"> kg</Text>
+        </View>
+        <View className="w-20 flex-row items-center">
+          <TextInput onChangeText={handleEditSet(set, 'reps')} className="text-gray-700 text-right">
+            {set.reps}
+          </TextInput>
+          <Text className="text-gray-700"> reps</Text>
+        </View>
+        {0 === 0 ? (
+          <Text className="w-20 text-slate-400">{1 + set.num_dropsets} sets</Text>
+        ) : (
+          <Text className="w-20 text-slate-400"></Text>
+        )}
+      </View>
+    );
   
+    const renderItem = ({ item: section }) => (
+      <View key={section.date} className="mb-5">
+        <View className="flex-row justify-between">
+          <Text className="bg-[#EAEAEA] self-start p-2 rounded-t-lg">{formatDate(section.date)}</Text>
+          <Text className="bg-[#EAEAEA] self-start p-2 rounded-t-lg">
+            {section.sets.length + section.sets.reduce((total, exercise) => total + exercise.num_dropsets, 0)} sets
+          </Text>
+        </View>
+        <View className="w-full rounded-lg bg-[#EAEAEA] rounded-t-none">
+          <FlatList
+            data={section.sets}
+            renderItem={renderSet}
+            keyExtractor={set => set.id.toString()}
+          />
+        </View>
+      </View>
+    );
+
+  const sections = Object.keys(exercises).map(date => ({
+    date,
+    sets: exercises[date]
+  }));
 
   return (
     <SafeAreaView>
@@ -109,7 +161,7 @@ const ExHistory = ({route}) => {
               </View>
 
               <TouchableOpacity>
-                  <Text className="w-15 font-extrabold text-xl text-white">1:33</Text>
+                  <Text className="w-15 font-extrabold text-xl text-white">{timer.format}</Text>
               </TouchableOpacity>
             </View>
         </MenuNavBar> 
@@ -118,60 +170,16 @@ const ExHistory = ({route}) => {
 
         {/* Historial de un ejercicio concreto cada dia*/}
         
-        <View className="flex-row justify-center py-5 items-center space-x-3">
-            <Text>Historial</Text>
-        </View>
+        
         
         <View className="px-8">
 
-        <ScrollView className="h-[700]">
-        
-        <View className="space-y-8 pb-80">
-        {Object.keys(exercises).map((date) => ( 
-        <View key={date}>
-            <View className="flex-row justify-between">
-                <Text className="bg-[#EAEAEA] self-start p-2 rounded-t-lg">{formatDate(date)}</Text>
-                <Text className="bg-[#EAEAEA] self-start p-2 rounded-t-lg">{exercises[date].length + exercises[date].reduce((total, exercise) => total + exercise.num_dropsets, 0)} sets</Text>
-
-            </View>
-            
-            <View className="w-full rounded-lg bg-[#EAEAEA] rounded-t-none ">
-
-                { exercises[date].map((set) => (
-                <View key={set.id} className="flex-row justify-between py-1 px-3">
-                        <Text className="w-20 font-semibold text-blue-500">{new Date(new Date(set.date).getTime() + 2 * 60 * 60 * 1000).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })}</Text>
-
-                        <View className="w-20 flex-row items-center" >
-                            <TextInput className="font-bold text-right" onChangeText={handleEditSet(set,"weight")}>{set.weight}</TextInput>
-                            <Text className="font-bold"> kg</Text>
-                        </View>
-                        
-                        <View className="w-20 flex-row items-center" >
-                            <TextInput onChangeText={handleEditSet(set,"reps")} className="text-gray-700 text-right">{set.reps}</TextInput>
-                            <Text className="text-gray-700 "> reps</Text>
-                        </View>
-                        
-                        {0 === 0 ? (
-                        <Text className="w-20 text-slate-400">{1 + set.num_dropsets} sets</Text>
-                        ):(
-                        <Text className="w-20 text-slate-400"></Text>
-                        )}     
-                        
-                </View>
-
-                ))}
-
-            </View>
-
-        </View>
-
-        ))}
-        </View>
-   
-
-
-        
-        </ScrollView>
+        <FlatList
+      data={sections}
+      renderItem={renderItem}
+      keyExtractor={section => section.date}
+      contentContainerStyle={{ paddingBottom: 280 , paddingTop:50 }}
+    />
 
 
         </View>

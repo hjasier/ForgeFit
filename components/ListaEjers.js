@@ -107,9 +107,8 @@ const ListaEjers = ({search,rutina}) => {
 
   const updateCompletedGroups = (completedExercises) => {
     const completedGroups = [];
-    console.log(completedExercises);
     Object.keys(completedExercises).forEach(set => {
-      if (exercisesByIDs[set] && (completedExercises[set].length >= exercisesByIDs[set].sets)) {
+      if ((exercisesByIDs[set] && connectedExercises[set]) && (completedExercises[set].length >= exercisesByIDs[set].sets)) {
         completedGroups.push(...connectedExercises[set]);
       }
     });

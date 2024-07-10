@@ -172,6 +172,14 @@ export const initialData = {
         { id:87, name: 'woman-doing-seated-face-pull-rear-delt-vector-49568420.png', imgSRC: require('../assets/exDefaultImages/woman-doing-seated-face-pull-rear-delt-vector-49568420.png'), muscleGroup: 3 },
         { id:88, name: 'man-doing-stiff-legged-barbell-deadlift-vector-38515390.png', imgSRC: require('../assets/exDefaultImages/man-doing-stiff-legged-barbell-deadlift-vector-38515390.png'), muscleGroup: 1 },
         { id:89, name: 'man-doing-tricep-dip-exercise-vector-49364088.png', imgSRC: require('../assets/exDefaultImages/man-doing-tricep-dip-exercise-vector-49364088.png'), muscleGroup: 4 },
+        { id:90, name: 'low-upward-cable-pulley-crossover-chest-flyes-vector-34502867.png', imgSRC: require('../assets/exDefaultImages/low-upward-cable-pulley-crossover-chest-flyes-vector-34502867.png'), muscleGroup: 0 },
+        { id:91, name: 'man-doing-barbell-hip-thrusts-exercise-vector-38309176.png', imgSRC: require('../assets/exDefaultImages/man-doing-barbell-hip-thrusts-exercise-vector-38309176.png'), muscleGroup: 2 },
+        { id:92, name: 'man-doing-reverse-cable-flyes-exercise-vector-40872251.png', imgSRC: require('../assets/exDefaultImages/man-doing-reverse-cable-flyes-exercise-vector-40872251.png'), muscleGroup: 0 }
+
+
+
+
+
 
       ],
     
@@ -242,7 +250,11 @@ export const initialData = {
         { name: "Aductor", muscles: [22], muscleGroups: [2], image: "man-doing-adductor-adduction-inner-thigh-machine-vector-38567794.png" }, // Aductores
         { name: "Gemelos en máquina", muscles: [24, 25], muscleGroups: [2], image: "seated-calf-machine-raises-vector-44360420.png" }, // Gemelos, Sóleo
         { name: "Gemelos en Smith", muscles: [24, 25], muscleGroups: [2], image: "man-doing-calf-raises-posture-exercise-vector-34493783.png" }, // Gemelos, Sóleo
-        { name: "Gemelos en prensa", muscles: [24, 25], muscleGroups: [2], image: "man-doing-standing-calf-raise-with-assisted-machin-vector-44360414.png" } // Gemelos, Sóleo
+        { name: "Gemelos en prensa", muscles: [24, 25], muscleGroups: [2], image: "man-doing-standing-calf-raise-with-assisted-machin-vector-44360414.png" }, // Gemelos, Sóleo
+        { name: "Bandeja Polea Abajo", muscles: [4], muscleGroups: [0], image: "low-upward-cable-pulley-crossover-chest-flyes-vector-34502867.png" }, //Bandeja Polea
+        { name: "Hip Thrust", muscles: [38], muscleGroups: [2], image: "man-doing-barbell-hip-thrusts-exercise-vector-38309176.png" }, //Bandeja Polea
+        
+
     ]
 
     ,
