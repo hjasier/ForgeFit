@@ -232,9 +232,9 @@ const ConfigMenu = () => {
       </TextInput>
 
 
-      <Text>
+      <TouchableOpacity onPress={() => Updates.fetchUpdateAsync()}>
         Expo Updates Enabled: {Updates.isEnabled ? 'Yes' : 'No'}
-      </Text>
+      </TouchableOpacity>
 
         {show && (
         <DateTimePicker

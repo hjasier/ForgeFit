@@ -11,11 +11,17 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "platforms": ["ios", "android"],  // Asegúrate de incluir 'android' aquí
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera."
+      },
+      "runtimeVersion": {
+        "policy": "appVersion"
       }
     },
     "android": {
@@ -24,24 +30,28 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.hjasier.ForgeFit",
-      "permissions": ["CAMERA", "WRITE_EXTERNAL_STORAGE"]  // Cambiado a strings simples para Android
+      "permissions": [
+        "CAMERA",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [],
-    "hooks": {
-      // Aquí se pueden agregar scripts o hooks personalizados si es necesario
-    },
+    "hooks": {},
     "extra": {
       "eas": {
         "build": {
-          "releaseChannel": "default",  // Canal de release (puede ajustarse según tu configuración)
-          // Otras configuraciones de EAS según sea necesario
+          "releaseChannel": "default"
         },
         "projectId": "06f32d72-676c-4abd-8e97-d871d53f31c4"
       }
     },
-    "owner": "hjasier"
+    "owner": "hjasier",
+    "updates": {
+      "url": "https://u.expo.dev/06f32d72-676c-4abd-8e97-d871d53f31c4"
+    }
   }
 }
