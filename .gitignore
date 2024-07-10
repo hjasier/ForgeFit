@@ -36,8 +36,6 @@ yarn-error.*
 
 #Exercise images
 assets/exDefaultImages/*
-
-
 keys.js
 
 database/entrenamientos.json
