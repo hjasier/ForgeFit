@@ -12,8 +12,10 @@ import { useState } from 'react';
 import { TextInput } from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import entrenamientos from '../database/entrenamientos';
+import weights from '../database/weights';
 import relaciones from '../database/relaciones';
 import moment from 'moment';
+import * as Updates from 'expo-updates';
 
 const ConfigMenu = () => {
 
@@ -21,6 +23,7 @@ const ConfigMenu = () => {
   const [availableBackups, setAvailableBackups] = useState([]);
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [serverDir , setServerDir] = useState('http://192.168.28.151:5000');
 
   const handleChangeDate = async (event, selectedDate) => { 
     setDate(selectedDate);
@@ -92,7 +95,7 @@ const ConfigMenu = () => {
   };
 
   const handleBackUpToServer = async () => {
-    const response = backupDatabaseToServer();
+    const response = backupDatabaseToServer(serverDir);
     if (response){
       Alert.alert('Backup realizado con éxito');
       getAvailableBackups();
@@ -104,7 +107,7 @@ const ConfigMenu = () => {
   
   const getAvailableBackups = async () => {
     try {
-      const response = await axios.get('http://192.168.28.151:5000/list');
+      const response = await axios.get(`${serverDir}/list`);
       if(response.status === 200){
       setAvailableBackups(response.data);
       }
@@ -132,26 +135,53 @@ const ConfigMenu = () => {
   const importDataFromOldDB = async () => {
     try {
       if (db) {
+        n = 0;
         for (let i = 0; i < entrenamientos.length; i++) {
           if(!relaciones[entrenamientos[i].ej_id]){
             continue;
           }
+          n++;
           const query = `
             INSERT INTO sets
             (exercise_id, weight, reps, date, isMainSet)
             VALUES (?, ?, ?, ?, 1);
           `;
-          const values = [relaciones[entrenamientos[i].ej_id], entrenamientos[i]["medidas"].peso, entrenamientos[i]["medidas"].reps, formatDate(entrenamientos[i].fecha,entrenamientos[i].hora)];
+          const values = [parseInt(relaciones[entrenamientos[i].ej_id])+1, entrenamientos[i]["medidas"].peso, entrenamientos[i]["medidas"].reps, formatDate(entrenamientos[i].fecha,entrenamientos[i].hora)];
           await db.runAsync(query, values);
         }
+        Alert.alert(`Se han importado ${n} entrenamientos`);
       }
     } catch (error) {
       console.error("Error al insertar rutina", error);
       return;
-    } finally {
-      // Código de limpieza o navegación aquí si es necesario
-    }
+    } 
   }
+
+
+  const importWeightDataFromOldDB = async () => {
+    try {
+      if (db) {
+        n = 0;
+        const preq = `DELETE FROM weight`;
+        await db.runAsync(preq);
+        for (let i = 0; i < weights.length; i++) {
+          n++;
+
+          const query = `
+            INSERT INTO weight
+            (weight,date)
+            VALUES (?, ?);
+          `;
+          await db.runAsync(query,[parseFloat(weights[i].peso), moment(weights[i].fecha, 'DD-MM-YYYY').format('YYYY-MM-DD')]);
+        }
+        Alert.alert(`Se han importado ${n} entrenamientos`);
+      }
+    } catch (error) {
+      console.error("Error al insertar rutina", error);
+      return;
+    } 
+  }
+    
 
 
 
@@ -191,6 +221,20 @@ const ConfigMenu = () => {
       <TouchableOpacity onPress={() => importDataFromOldDB()} p-4>
         <Text >ImportDataFromOldDB</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => importWeightDataFromOldDB()} p-4>
+        <Text >ImportWeightDataFromOldDB</Text>
+      </TouchableOpacity>
+
+
+      <TextInput onChangeText={setServerDir} placeholder="Server Dir" p-4>
+        {serverDir}
+      </TextInput>
+
+
+      <Text>
+        Expo Updates Enabled: {Updates.isEnabled ? 'Yes' : 'No'}
+      </Text>
 
         {show && (
         <DateTimePicker

@@ -18,6 +18,8 @@ const PerChart = ({kcalToday,kcalTotal}) => {
             radius={60}
             innerRadius={50} 
             data={pieData}
+            backgroundColor="#F3F3F2"
+            
             centerLabelComponent={() => 
               {
             return <View className="flex items-center">

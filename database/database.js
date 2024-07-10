@@ -299,7 +299,7 @@ export const setupDatabase = async () => {
       else{
         console.log("Skipping exercise_images insertions")
       }
-    
+
 
 
     const eresult = await dbInstance.getAllAsync('SELECT COUNT(*) FROM exercises');
@@ -424,7 +424,7 @@ export const restoreDatabase = async (tarUri) => {
 };
 
 
-export const backupDatabaseToServer = async () => {
+export const backupDatabaseToServer = async (serverDir) => {
   const dbPath = FileSystem.documentDirectory + 'SQLite/';
   const filesToSend = [
       { name: 'database.db', path: dbPath + 'database.db' },
@@ -440,7 +440,7 @@ export const backupDatabaseToServer = async () => {
       });
   });
   try {
-      const response = await axios.post('http://192.168.28.151:5000/upload', formData, {
+      const response = await axios.post(`${serverDir}/upload`, formData, {
           headers: {
               'Content-Type': 'multipart/form-data'
           }

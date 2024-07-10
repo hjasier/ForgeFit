@@ -1,0 +1,1494 @@
+[
+    {
+        "_id": "OOmugxUZkt",
+        "user_id": 43619620,
+        "peso": "55",
+        "fecha": "9-4-2023"
+    },
+    {
+        "_id": "UhzfwxCOMr",
+        "user_id": 43619620,
+        "peso": "55.7",
+        "fecha": "11-4-2023"
+    },
+    {
+        "_id": "vdtHSigNPQ",
+        "user_id": 43619620,
+        "peso": "55.4",
+        "fecha": "12-4-2023"
+    },
+    {
+        "_id": "HMdVpEfzkL",
+        "user_id": 43619620,
+        "peso": "56.4",
+        "fecha": "13-4-2023"
+    },
+    {
+        "_id": "KhLUxSuaOO",
+        "user_id": 43619620,
+        "peso": "56.8",
+        "fecha": "14-4-2023"
+    },
+    {
+        "_id": "PenfSIOqIu",
+        "user_id": 43619620,
+        "peso": "57.4",
+        "fecha": "15-4-2023"
+    },
+    {
+        "_id": "PbVEcbRidz",
+        "user_id": 43619620,
+        "peso": 57.7,
+        "fecha": "16-4-2023",
+        "hora": "01:21"
+    },
+    {
+        "_id": "HTmMcAlZQh",
+        "user_id": 43619620,
+        "peso": 56.4,
+        "fecha": "17-4-2023",
+        "hora": "23:57"
+    },
+    {
+        "_id": "inElfGgrLg",
+        "user_id": 43619620,
+        "peso": 57.1,
+        "fecha": "20-4-2023",
+        "hora": "20:36"
+    },
+    {
+        "_id": "fNfFFjYdGK",
+        "user_id": 43619620,
+        "peso": 57.4,
+        "fecha": "22-4-2023",
+        "hora": "16:50"
+    },
+    {
+        "_id": "QSShnazRJd",
+        "user_id": 43619620,
+        "peso": 58.0,
+        "fecha": "30-4-2023",
+        "hora": "09:27"
+    },
+    {
+        "_id": "MkyoLuGHZF",
+        "user_id": 43619620,
+        "peso": 57.4,
+        "fecha": "6-5-2023",
+        "hora": "12:22"
+    },
+    {
+        "_id": "EhcKNMxZuX",
+        "user_id": 43619620,
+        "peso": 59.5,
+        "fecha": "17-5-2023",
+        "hora": "13:40"
+    },
+    {
+        "_id": "zjfPyOmRky",
+        "user_id": 43619620,
+        "peso": 58.4,
+        "fecha": "23-5-2023",
+        "hora": "15:39"
+    },
+    {
+        "_id": "tjAREHCgWE",
+        "user_id": 43619620,
+        "peso": 57.5,
+        "fecha": "24-5-2023",
+        "hora": "09:24"
+    },
+    {
+        "_id": "MTfjxSsvFe",
+        "user_id": 43619620,
+        "peso": 58.6,
+        "fecha": "27-5-2023",
+        "hora": "09:29"
+    },
+    {
+        "_id": "BocYtDiXsZ",
+        "user_id": 43619620,
+        "peso": 58.3,
+        "fecha": "2-6-2023",
+        "hora": "15:08"
+    },
+    {
+        "_id": "wZmnhivwKH",
+        "user_id": 43619620,
+        "peso": 58.5,
+        "fecha": "6-6-2023",
+        "hora": "11:19"
+    },
+    {
+        "_id": "sOPpuNPwPl",
+        "user_id": 43619620,
+        "peso": 58.0,
+        "fecha": "19-6-2023",
+        "hora": "12:48"
+    },
+    {
+        "_id": "DiZUPYfiua",
+        "user_id": 43619620,
+        "peso": 58.8,
+        "fecha": "20-6-2023",
+        "hora": "15:54"
+    },
+    {
+        "_id": "XoRDcmmMdO",
+        "user_id": 43619620,
+        "peso": 55.0,
+        "fecha": "11-9-2023",
+        "hora": "21:52"
+    },
+    {
+        "_id": "hMxlufsPXh",
+        "user_id": 43619620,
+        "peso": 56.3,
+        "fecha": "12-9-2023",
+        "hora": "22:31"
+    },
+    {
+        "_id": "ZSZQvGRrDg",
+        "user_id": 43619620,
+        "peso": 55.6,
+        "fecha": "13-9-2023",
+        "hora": "07:42"
+    },
+    {
+        "_id": "knxGxHZFje",
+        "user_id": 43619620,
+        "peso": 55.7,
+        "fecha": "15-9-2023",
+        "hora": "22:35"
+    },
+    {
+        "_id": "wSvKYLBHXG",
+        "user_id": 43619620,
+        "peso": 56.2,
+        "fecha": "16-9-2023",
+        "hora": "12:43"
+    },
+    {
+        "_id": "bcCnuDqgLU",
+        "user_id": 43619620,
+        "peso": 56.4,
+        "fecha": "17-9-2023",
+        "hora": "09:03"
+    },
+    {
+        "_id": "aJwYzSyfVK",
+        "user_id": 43619620,
+        "peso": 56.8,
+        "fecha": "18-9-2023",
+        "hora": "19:18"
+    },
+    {
+        "_id": "NiYAjoPTAN",
+        "user_id": 43619620,
+        "peso": 57.1,
+        "fecha": "19-9-2023",
+        "hora": "08:05"
+    },
+    {
+        "_id": "FqAnLpoMDv",
+        "user_id": 43619620,
+        "peso": 56.3,
+        "fecha": "20-9-2023",
+        "hora": "09:09"
+    },
+    {
+        "_id": "qXsPLyrEPs",
+        "user_id": 43619620,
+        "peso": 57.9,
+        "fecha": "21-9-2023",
+        "hora": "21:37"
+    },
+    {
+        "_id": "BwXvzLBSJH",
+        "user_id": 43619620,
+        "peso": 57.5,
+        "fecha": "22-9-2023",
+        "hora": "23:56"
+    },
+    {
+        "_id": "LsfDHCkNOa",
+        "user_id": 43619620,
+        "peso": 56.6,
+        "fecha": "23-9-2023",
+        "hora": "09:51"
+    },
+    {
+        "_id": "hgjjgXUcdg",
+        "user_id": 43619620,
+        "peso": 57.6,
+        "fecha": "24-9-2023",
+        "hora": "11:06"
+    },
+    {
+        "_id": "JoGsrKhjuf",
+        "user_id": 43619620,
+        "peso": 58.5,
+        "fecha": "25-9-2023",
+        "hora": "16:39"
+    },
+    {
+        "_id": "bVrZMAnizM",
+        "user_id": 43619620,
+        "peso": 57.7,
+        "fecha": "28-9-2023",
+        "hora": "13:55"
+    },
+    {
+        "_id": "dmYfnJmkhM",
+        "user_id": 43619620,
+        "peso": 58.2,
+        "fecha": "29-9-2023",
+        "hora": "07:08"
+    },
+    {
+        "_id": "awDHYaKkie",
+        "user_id": 43619620,
+        "peso": 57.7,
+        "fecha": "30-9-2023",
+        "hora": "09:02"
+    },
+    {
+        "_id": "uADbSfwsKf",
+        "user_id": 43619620,
+        "peso": 58.1,
+        "fecha": "1-10-2023",
+        "hora": "09:21"
+    },
+    {
+        "_id": "AbwhxtsDtH",
+        "user_id": 43619620,
+        "peso": 58.8,
+        "fecha": "7-10-2023",
+        "hora": "08:29"
+    },
+    {
+        "_id": "uqnUfgNmzF",
+        "user_id": 43619620,
+        "peso": 58.5,
+        "fecha": "8-10-2023",
+        "hora": "09:51"
+    },
+    {
+        "_id": "wbQjucyeOC",
+        "user_id": 43619620,
+        "peso": 58.2,
+        "fecha": "11-10-2023",
+        "hora": "14:53"
+    },
+    {
+        "_id": "ZLmHbCesvv",
+        "user_id": 43619620,
+        "peso": 58.0,
+        "fecha": "12-10-2023",
+        "hora": "09:26"
+    },
+    {
+        "_id": "XeTtBxWkGe",
+        "user_id": 43619620,
+        "peso": 58.3,
+        "fecha": "13-10-2023",
+        "hora": "12:05"
+    },
+    {
+        "_id": "NwzvFThKYr",
+        "user_id": 43619620,
+        "peso": 58.1,
+        "fecha": "15-10-2023",
+        "hora": "13:01"
+    },
+    {
+        "_id": "xSiVIjbccF",
+        "user_id": 43619620,
+        "peso": 59.0,
+        "fecha": "16-10-2023",
+        "hora": "10:53"
+    },
+    {
+        "_id": "xpfcDMHROh",
+        "user_id": 43619620,
+        "peso": 59.5,
+        "fecha": "18-10-2023",
+        "hora": "07:54"
+    },
+    {
+        "_id": "AbPmDkKYns",
+        "user_id": 43619620,
+        "peso": 58.2,
+        "fecha": "22-10-2023",
+        "hora": "09:48"
+    },
+    {
+        "_id": "bCVRpFWcdF",
+        "user_id": 43619620,
+        "peso": 59.2,
+        "fecha": "23-10-2023",
+        "hora": "15:17"
+    },
+    {
+        "_id": "dWpSxoQyYj",
+        "user_id": 43619620,
+        "peso": 59.3,
+        "fecha": "25-10-2023",
+        "hora": "11:14"
+    },
+    {
+        "_id": "VLsLayzQrf",
+        "user_id": 43619620,
+        "peso": 59.8,
+        "fecha": "26-10-2023",
+        "hora": "07:16"
+    },
+    {
+        "_id": "jwahOIRLzC",
+        "user_id": 43619620,
+        "peso": 59.9,
+        "fecha": "27-10-2023",
+        "hora": "11:19"
+    },
+    {
+        "_id": "mnbmatgTRz",
+        "user_id": 43619620,
+        "peso": 59.6,
+        "fecha": "28-10-2023",
+        "hora": "08:21"
+    },
+    {
+        "_id": "HIUqAejJfq",
+        "user_id": 43619620,
+        "peso": 59.2,
+        "fecha": "29-10-2023",
+        "hora": "08:28"
+    },
+    {
+        "_id": "BlbTfesJwg",
+        "user_id": 43619620,
+        "peso": 59.8,
+        "fecha": "1-11-2023",
+        "hora": "11:57"
+    },
+    {
+        "_id": "IlQFNBdfyt",
+        "user_id": 43619620,
+        "peso": 61.0,
+        "fecha": "2-11-2023",
+        "hora": "07:18"
+    },
+    {
+        "_id": "QMiGeZhMyG",
+        "user_id": 43619620,
+        "peso": 60.8,
+        "fecha": "3-11-2023",
+        "hora": "12:50"
+    },
+    {
+        "_id": "rnONSUkvgj",
+        "user_id": 43619620,
+        "peso": 60.1,
+        "fecha": "5-11-2023",
+        "hora": "10:02"
+    },
+    {
+        "_id": "kIXKfXDqFS",
+        "user_id": 43619620,
+        "peso": 60.7,
+        "fecha": "7-11-2023",
+        "hora": "10:12"
+    },
+    {
+        "_id": "FcGxGBxaiQ",
+        "user_id": 43619620,
+        "peso": 61.1,
+        "fecha": "9-11-2023",
+        "hora": "08:24"
+    },
+    {
+        "_id": "eYFeLgtlvx",
+        "user_id": 43619620,
+        "peso": 61.8,
+        "fecha": "12-11-2023",
+        "hora": "11:42"
+    },
+    {
+        "_id": "MiTedKuGfj",
+        "user_id": 43619620,
+        "peso": 62.5,
+        "fecha": "14-11-2023",
+        "hora": "07:49"
+    },
+    {
+        "_id": "cpYZrpFokX",
+        "user_id": 43619620,
+        "peso": 62.4,
+        "fecha": "16-11-2023",
+        "hora": "09:31"
+    },
+    {
+        "_id": "uLtwKasZZF",
+        "user_id": 43619620,
+        "peso": 62.7,
+        "fecha": "17-11-2023",
+        "hora": "07:19"
+    },
+    {
+        "_id": "FYbvnIlsfa",
+        "user_id": 43619620,
+        "peso": 62.3,
+        "fecha": "18-11-2023",
+        "hora": "08:48"
+    },
+    {
+        "_id": "sNMsNbukxu",
+        "user_id": 43619620,
+        "peso": 61.5,
+        "fecha": "19-11-2023",
+        "hora": "09:56"
+    },
+    {
+        "_id": "YHFOAQZfIM",
+        "user_id": 43619620,
+        "peso": 62.9,
+        "fecha": "24-11-2023",
+        "hora": "13:45"
+    },
+    {
+        "_id": "eAJYyiTKKw",
+        "user_id": 43619620,
+        "peso": 62.9,
+        "fecha": "25-11-2023",
+        "hora": "10:17"
+    },
+    {
+        "_id": "tEzyWTLLpu",
+        "user_id": 43619620,
+        "peso": 62.4,
+        "fecha": "28-11-2023",
+        "hora": "14:05"
+    },
+    {
+        "_id": "JJGqdIaLYx",
+        "user_id": 43619620,
+        "peso": 62.5,
+        "fecha": "1-12-2023",
+        "hora": "12:43"
+    },
+    {
+        "_id": "kVaXKXugur",
+        "user_id": 43619620,
+        "peso": 62.1,
+        "fecha": "2-12-2023",
+        "hora": "09:48"
+    },
+    {
+        "_id": "bBSPqifTjy",
+        "user_id": 43619620,
+        "peso": 62.0,
+        "fecha": "5-12-2023",
+        "hora": "17:05"
+    },
+    {
+        "_id": "tCEwMJhxWX",
+        "user_id": 43619620,
+        "peso": 62.8,
+        "fecha": "6-12-2023",
+        "hora": "13:01"
+    },
+    {
+        "_id": "PmBRfVgmNm",
+        "user_id": 43619620,
+        "peso": 62.7,
+        "fecha": "7-12-2023",
+        "hora": "10:00"
+    },
+    {
+        "_id": "WbirURTNOY",
+        "user_id": 43619620,
+        "peso": 63.3,
+        "fecha": "9-12-2023",
+        "hora": "13:14"
+    },
+    {
+        "_id": "nZFUATjjLs",
+        "user_id": 43619620,
+        "peso": 63.2,
+        "fecha": "10-12-2023",
+        "hora": "10:18"
+    },
+    {
+        "_id": "aeybERbGXO",
+        "user_id": 43619620,
+        "peso": 63.2,
+        "fecha": "13-12-2023",
+        "hora": "10:40"
+    },
+    {
+        "_id": "hofWGABXYo",
+        "user_id": 43619620,
+        "peso": 63.3,
+        "fecha": "14-12-2023",
+        "hora": "11:10"
+    },
+    {
+        "_id": "kzRpAPjgMh",
+        "user_id": 43619620,
+        "peso": 63.9,
+        "fecha": "15-12-2023",
+        "hora": "09:27"
+    },
+    {
+        "_id": "FXPouUpTDC",
+        "user_id": 43619620,
+        "peso": 63.4,
+        "fecha": "16-12-2023",
+        "hora": "12:16"
+    },
+    {
+        "_id": "oSSIaSyZAu",
+        "user_id": 43619620,
+        "peso": 63.8,
+        "fecha": "17-12-2023",
+        "hora": "10:56"
+    },
+    {
+        "_id": "zVGTSIXFKz",
+        "user_id": 43619620,
+        "peso": 63.6,
+        "fecha": "18-12-2023",
+        "hora": "11:01"
+    },
+    {
+        "_id": "BwnArIjVwA",
+        "user_id": 43619620,
+        "peso": 64.6,
+        "fecha": "22-12-2023",
+        "hora": "10:57"
+    },
+    {
+        "_id": "iExUExxYhc",
+        "user_id": 43619620,
+        "peso": 64.5,
+        "fecha": "23-12-2023",
+        "hora": "10:49"
+    },
+    {
+        "_id": "WswzPeFGHz",
+        "user_id": 43619620,
+        "peso": 63.7,
+        "fecha": "25-12-2023",
+        "hora": "11:26"
+    },
+    {
+        "_id": "pPcssfsuLX",
+        "user_id": 43619620,
+        "peso": 63.4,
+        "fecha": "26-12-2023",
+        "hora": "17:58"
+    },
+    {
+        "_id": "VkSLGKyNDk",
+        "user_id": 43619620,
+        "peso": 64.0,
+        "fecha": "28-12-2023",
+        "hora": "12:46"
+    },
+    {
+        "_id": "lWDYMjOJnp",
+        "user_id": 43619620,
+        "peso": 64.2,
+        "fecha": "3-1-2024",
+        "hora": "13:48"
+    },
+    {
+        "_id": "yoCIIsUxeR",
+        "user_id": 43619620,
+        "peso": 64.5,
+        "fecha": "5-1-2024",
+        "hora": "18:17"
+    },
+    {
+        "_id": "OrWzkjZScd",
+        "user_id": 43619620,
+        "peso": 63.7,
+        "fecha": "6-1-2024",
+        "hora": "23:47"
+    },
+    {
+        "_id": "LInCFQtjIg",
+        "user_id": 43619620,
+        "peso": 63.5,
+        "fecha": "7-1-2024",
+        "hora": "12:39"
+    },
+    {
+        "_id": "BXZVQNxqci",
+        "user_id": 43619620,
+        "peso": 63.3,
+        "fecha": "9-1-2024",
+        "hora": "17:00"
+    },
+    {
+        "_id": "dXtMXJnHva",
+        "user_id": 43619620,
+        "peso": 64.5,
+        "fecha": "11-1-2024",
+        "hora": "09:27"
+    },
+    {
+        "_id": "loNwMoppPI",
+        "user_id": 43619620,
+        "peso": 63.4,
+        "fecha": "13-1-2024",
+        "hora": "10:33"
+    },
+    {
+        "_id": "RLxlnrYloX",
+        "user_id": 43619620,
+        "peso": 64.1,
+        "fecha": "14-1-2024",
+        "hora": "09:19"
+    },
+    {
+        "_id": "HjRgRRhfmj",
+        "user_id": 43619620,
+        "peso": 63.7,
+        "fecha": "15-1-2024",
+        "hora": "09:46"
+    },
+    {
+        "_id": "QBBbIZhGrD",
+        "user_id": 43619620,
+        "peso": 64.4,
+        "fecha": "16-1-2024",
+        "hora": "11:56"
+    },
+    {
+        "_id": "lBilfBToAD",
+        "user_id": 43619620,
+        "peso": 64.2,
+        "fecha": "17-1-2024",
+        "hora": "16:03"
+    },
+    {
+        "_id": "SmZrYTHSqz",
+        "user_id": 43619620,
+        "peso": 64.7,
+        "fecha": "18-1-2024",
+        "hora": "08:36"
+    },
+    {
+        "_id": "mnFAkkMoqh",
+        "user_id": 43619620,
+        "peso": 65.2,
+        "fecha": "19-1-2024",
+        "hora": "09:34"
+    },
+    {
+        "_id": "OmSSUUkCTM",
+        "user_id": 43619620,
+        "peso": 63.9,
+        "fecha": "20-1-2024",
+        "hora": "10:35"
+    },
+    {
+        "_id": "ooHbdOEpEK",
+        "user_id": 43619620,
+        "peso": 64.2,
+        "fecha": "22-1-2024",
+        "hora": "07:17"
+    },
+    {
+        "_id": "ZKEUZraLuv",
+        "user_id": 43619620,
+        "peso": 64.5,
+        "fecha": "23-1-2024",
+        "hora": "11:01"
+    },
+    {
+        "_id": "WKTchDwKbl",
+        "user_id": 43619620,
+        "peso": 64.5,
+        "fecha": "25-1-2024",
+        "hora": "10:53"
+    },
+    {
+        "_id": "QOXnGlVFPd",
+        "user_id": 43619620,
+        "peso": 64.3,
+        "fecha": "26-1-2024",
+        "hora": "10:56"
+    },
+    {
+        "_id": "QVJsemzhrA",
+        "user_id": 43619620,
+        "peso": 64.4,
+        "fecha": "27-1-2024",
+        "hora": "11:52"
+    },
+    {
+        "_id": "SwteYvHUYw",
+        "user_id": 43619620,
+        "peso": 64.4,
+        "fecha": "29-1-2024",
+        "hora": "12:33"
+    },
+    {
+        "_id": "OXdZWZbFyC",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "30-1-2024",
+        "hora": "11:24"
+    },
+    {
+        "_id": "wxPnjSIfJZ",
+        "user_id": 43619620,
+        "peso": 65.5,
+        "fecha": "31-1-2024",
+        "hora": "10:38"
+    },
+    {
+        "_id": "MXbsGNogcY",
+        "user_id": 43619620,
+        "peso": 65.4,
+        "fecha": "1-2-2024",
+        "hora": "10:39"
+    },
+    {
+        "_id": "KpVNJeqaek",
+        "user_id": 43619620,
+        "peso": 65.5,
+        "fecha": "2-2-2024",
+        "hora": "11:23"
+    },
+    {
+        "_id": "FfSPnixabV",
+        "user_id": 43619620,
+        "peso": 65.5,
+        "fecha": "3-2-2024",
+        "hora": "11:37"
+    },
+    {
+        "_id": "AYTkSziFjZ",
+        "user_id": 43619620,
+        "peso": 65.3,
+        "fecha": "5-2-2024",
+        "hora": "10:40"
+    },
+    {
+        "_id": "pHamLemJqS",
+        "user_id": 43619620,
+        "peso": 65.5,
+        "fecha": "6-2-2024",
+        "hora": "11:16"
+    },
+    {
+        "_id": "WqzsTXfLxm",
+        "user_id": 43619620,
+        "peso": 65.9,
+        "fecha": "8-2-2024",
+        "hora": "07:59"
+    },
+    {
+        "_id": "PLhYZqGjic",
+        "user_id": 43619620,
+        "peso": 65.6,
+        "fecha": "9-2-2024",
+        "hora": "15:19"
+    },
+    {
+        "_id": "LwBokdLayX",
+        "user_id": 43619620,
+        "peso": 65.6,
+        "fecha": "10-2-2024",
+        "hora": "17:20"
+    },
+    {
+        "_id": "SdnPoLJisV",
+        "user_id": 43619620,
+        "peso": 65.2,
+        "fecha": "12-2-2024",
+        "hora": "08:19"
+    },
+    {
+        "_id": "hTEuuKyUGm",
+        "user_id": 43619620,
+        "peso": 66.0,
+        "fecha": "13-2-2024",
+        "hora": "09:17"
+    },
+    {
+        "_id": "GyeoPnsupE",
+        "user_id": 43619620,
+        "peso": 66.5,
+        "fecha": "14-2-2024",
+        "hora": "08:54"
+    },
+    {
+        "_id": "MnHqgrZFpu",
+        "user_id": 43619620,
+        "peso": 65.7,
+        "fecha": "15-2-2024",
+        "hora": "07:31"
+    },
+    {
+        "_id": "CaQgPwrDCa",
+        "user_id": 43619620,
+        "peso": 65.9,
+        "fecha": "16-2-2024",
+        "hora": "15:39"
+    },
+    {
+        "_id": "quHMLtpTEG",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "17-2-2024",
+        "hora": "09:26"
+    },
+    {
+        "_id": "GdeijWpSiV",
+        "user_id": 43619620,
+        "peso": 64.8,
+        "fecha": "18-2-2024",
+        "hora": "10:42"
+    },
+    {
+        "_id": "utKfqfuzeR",
+        "user_id": 43619620,
+        "peso": 65.7,
+        "fecha": "19-2-2024",
+        "hora": "14:13"
+    },
+    {
+        "_id": "tFXETuzlHq",
+        "user_id": 43619620,
+        "peso": 65.1,
+        "fecha": "20-2-2024",
+        "hora": "09:13"
+    },
+    {
+        "_id": "fpSwYpKmgW",
+        "user_id": 43619620,
+        "peso": 65.9,
+        "fecha": "21-2-2024",
+        "hora": "14:59"
+    },
+    {
+        "_id": "zwhNpoTcsY",
+        "user_id": 43619620,
+        "peso": 65.8,
+        "fecha": "24-2-2024",
+        "hora": "17:30"
+    },
+    {
+        "_id": "lGYdMVPJeS",
+        "user_id": 43619620,
+        "peso": 65.7,
+        "fecha": "26-2-2024",
+        "hora": "14:02"
+    },
+    {
+        "_id": "oHMhZaqODg",
+        "user_id": 43619620,
+        "peso": 65.65,
+        "fecha": "27-2-2024",
+        "hora": "13:43"
+    },
+    {
+        "_id": "UBqphzyfso",
+        "user_id": 43619620,
+        "peso": 65.9,
+        "fecha": "28-2-2024",
+        "hora": "14:52"
+    },
+    {
+        "_id": "oIrSSotbzE",
+        "user_id": 43619620,
+        "peso": 65.4,
+        "fecha": "29-2-2024",
+        "hora": "10:00"
+    },
+    {
+        "_id": "VwgrSMRoDF",
+        "user_id": 43619620,
+        "peso": 65.8,
+        "fecha": "1-3-2024",
+        "hora": "14:42"
+    },
+    {
+        "_id": "YmZwWlhFvR",
+        "user_id": 43619620,
+        "peso": 65.2,
+        "fecha": "2-3-2024",
+        "hora": "10:39"
+    },
+    {
+        "_id": "wcRCPHlNHh",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "3-3-2024",
+        "hora": "21:38"
+    },
+    {
+        "_id": "kdYeZtdoAu",
+        "user_id": 43619620,
+        "peso": 66.0,
+        "fecha": "4-3-2024",
+        "hora": "14:56"
+    },
+    {
+        "_id": "uwpHfUbuRk",
+        "user_id": 43619620,
+        "peso": 65.3,
+        "fecha": "5-3-2024",
+        "hora": "13:55"
+    },
+    {
+        "_id": "snUWqfiIBi",
+        "user_id": 43619620,
+        "peso": 66.0,
+        "fecha": "7-3-2024",
+        "hora": "09:14"
+    },
+    {
+        "_id": "SmAxBxBbVk",
+        "user_id": 43619620,
+        "peso": 65.4,
+        "fecha": "8-3-2024",
+        "hora": "14:39"
+    },
+    {
+        "_id": "wWqXjMTtBI",
+        "user_id": 43619620,
+        "peso": 65.7,
+        "fecha": "9-3-2024",
+        "hora": "16:27"
+    },
+    {
+        "_id": "YroHWZDLEI",
+        "user_id": 43619620,
+        "peso": 66.2,
+        "fecha": "11-3-2024",
+        "hora": "07:53"
+    },
+    {
+        "_id": "VLCAVbmmJA",
+        "user_id": 43619620,
+        "peso": 65.8,
+        "fecha": "12-3-2024",
+        "hora": "10:09"
+    },
+    {
+        "_id": "oBacIxhWHk",
+        "user_id": 43619620,
+        "peso": 66.4,
+        "fecha": "13-3-2024",
+        "hora": "07:54"
+    },
+    {
+        "_id": "OVJFAxoHnZ",
+        "user_id": 43619620,
+        "peso": 66.5,
+        "fecha": "14-3-2024",
+        "hora": "08:58"
+    },
+    {
+        "_id": "NXQLIuYtIc",
+        "user_id": 43619620,
+        "peso": 66.1,
+        "fecha": "15-3-2024",
+        "hora": "14:54"
+    },
+    {
+        "_id": "kqcWnCGuSw",
+        "user_id": 43619620,
+        "peso": 66.2,
+        "fecha": "16-3-2024",
+        "hora": "10:20"
+    },
+    {
+        "_id": "BIAQfFvBwZ",
+        "user_id": 43619620,
+        "peso": 66.0,
+        "fecha": "17-3-2024",
+        "hora": "21:46"
+    },
+    {
+        "_id": "LRMxqxMqTp",
+        "user_id": 43619620,
+        "peso": 66.5,
+        "fecha": "18-3-2024",
+        "hora": "14:01"
+    },
+    {
+        "_id": "nxoSavTWHt",
+        "user_id": 43619620,
+        "peso": 66.3,
+        "fecha": "19-3-2024",
+        "hora": "09:55"
+    },
+    {
+        "_id": "JrnaTYobVj",
+        "user_id": 43619620,
+        "peso": 66.6,
+        "fecha": "20-3-2024",
+        "hora": "15:03"
+    },
+    {
+        "_id": "LLmHxeuCfw",
+        "user_id": 43619620,
+        "peso": 66.1,
+        "fecha": "21-3-2024",
+        "hora": "10:09"
+    },
+    {
+        "_id": "oHXTUdDBim",
+        "user_id": 43619620,
+        "peso": 66.1,
+        "fecha": "22-3-2024",
+        "hora": "14:37"
+    },
+    {
+        "_id": "HWuLbhLeDw",
+        "user_id": 43619620,
+        "peso": 65.8,
+        "fecha": "23-3-2024",
+        "hora": "09:16"
+    },
+    {
+        "_id": "MHVYHtfQbW",
+        "user_id": 43619620,
+        "peso": 65.5,
+        "fecha": "26-3-2024",
+        "hora": "12:39"
+    },
+    {
+        "_id": "FLuOaxXTxq",
+        "user_id": 43619620,
+        "peso": 65.5,
+        "fecha": "1-4-2024",
+        "hora": "12:18"
+    },
+    {
+        "_id": "GJxNOJGPCg",
+        "user_id": 43619620,
+        "peso": 65.9,
+        "fecha": "6-4-2024",
+        "hora": "11:51"
+    },
+    {
+        "_id": "kpnwpCHSHg",
+        "user_id": 43619620,
+        "peso": 65.5,
+        "fecha": "8-4-2024",
+        "hora": "10:37"
+    },
+    {
+        "_id": "fRoLMYJKdg",
+        "user_id": 43619620,
+        "peso": 66.2,
+        "fecha": "10-4-2024",
+        "hora": "14:16"
+    },
+    {
+        "_id": "wAdXkuuSSH",
+        "user_id": 43619620,
+        "peso": 65.3,
+        "fecha": "12-4-2024",
+        "hora": "14:33"
+    },
+    {
+        "_id": "RrfVfiXndM",
+        "user_id": 43619620,
+        "peso": 65.8,
+        "fecha": "16-4-2024",
+        "hora": "11:44"
+    },
+    {
+        "_id": "WIQRfFXwSM",
+        "user_id": 43619620,
+        "peso": 65.9,
+        "fecha": "17-4-2024",
+        "hora": "12:47"
+    },
+    {
+        "_id": "sYAfZnZLsz",
+        "user_id": 43619620,
+        "peso": 65.7,
+        "fecha": "18-4-2024",
+        "hora": "14:27"
+    },
+    {
+        "_id": "NCzBuxRiIS",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "19-4-2024",
+        "hora": "14:28"
+    },
+    {
+        "_id": "VzzQUTjCCn",
+        "user_id": 43619620,
+        "peso": 64.7,
+        "fecha": "20-4-2024",
+        "hora": "16:39"
+    },
+    {
+        "_id": "AbxteXEgNG",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "21-4-2024",
+        "hora": "11:28"
+    },
+    {
+        "_id": "qgSDjUpoPc",
+        "user_id": 43619620,
+        "peso": 65.1,
+        "fecha": "22-4-2024",
+        "hora": "08:19"
+    },
+    {
+        "_id": "VLpQzNiiiP",
+        "user_id": 43619620,
+        "peso": 64.6,
+        "fecha": "24-4-2024",
+        "hora": "12:06"
+    },
+    {
+        "_id": "RsidoNbfXA",
+        "user_id": 43619620,
+        "peso": 65.2,
+        "fecha": "25-4-2024",
+        "hora": "09:54"
+    },
+    {
+        "_id": "RtDiIDFAtk",
+        "user_id": 43619620,
+        "peso": 65.4,
+        "fecha": "26-4-2024",
+        "hora": "11:20"
+    },
+    {
+        "_id": "PtUtGBSaXp",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "27-4-2024",
+        "hora": "10:39"
+    },
+    {
+        "_id": "FrmGydYGrr",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "30-4-2024",
+        "hora": "15:10"
+    },
+    {
+        "_id": "vvUzKhPBGh",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "1-5-2024",
+        "hora": "12:55"
+    },
+    {
+        "_id": "BCcTQYBxVQ",
+        "user_id": 43619620,
+        "peso": 65.2,
+        "fecha": "2-5-2024",
+        "hora": "14:11"
+    },
+    {
+        "_id": "ERbwsMGkiw",
+        "user_id": 43619620,
+        "peso": 64.8,
+        "fecha": "6-5-2024",
+        "hora": "11:45"
+    },
+    {
+        "_id": "YXwIOHZlrh",
+        "user_id": 43619620,
+        "peso": 65.8,
+        "fecha": "10-5-2024",
+        "hora": "12:35"
+    },
+    {
+        "_id": "QpPcyvBCew",
+        "user_id": 43619620,
+        "peso": 65.1,
+        "fecha": "11-5-2024",
+        "hora": "10:35"
+    },
+    {
+        "_id": "FIPoozfucc",
+        "user_id": 43619620,
+        "peso": 65.3,
+        "fecha": "14-5-2024",
+        "hora": "12:27"
+    },
+    {
+        "_id": "pcBCeQSNuC",
+        "user_id": 43619620,
+        "peso": 65.3,
+        "fecha": "15-5-2024",
+        "hora": "15:17"
+    },
+    {
+        "_id": "ucIHWzCKLv",
+        "user_id": 43619620,
+        "peso": 65.7,
+        "fecha": "17-5-2024",
+        "hora": "09:45"
+    },
+    {
+        "_id": "DDZnMnzbBf",
+        "user_id": 43619620,
+        "peso": 64.8,
+        "fecha": "18-5-2024",
+        "hora": "10:49"
+    },
+    {
+        "_id": "uNIjurPHkU",
+        "user_id": 43619620,
+        "peso": 65.3,
+        "fecha": "20-5-2024",
+        "hora": "00:23"
+    },
+    {
+        "_id": "QAuAYILnwM",
+        "user_id": 43619620,
+        "peso": 64.6,
+        "fecha": "21-5-2024",
+        "hora": "08:51"
+    },
+    {
+        "_id": "UsWgnhefml",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "22-5-2024",
+        "hora": "23:17"
+    },
+    {
+        "_id": "tukzFhoGFu",
+        "user_id": 43619620,
+        "peso": 65.1,
+        "fecha": "23-5-2024",
+        "hora": "23:18"
+    },
+    {
+        "_id": "hpLWiEdQQF",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "26-5-2024",
+        "hora": "23:03"
+    },
+    {
+        "_id": "YIINucsXui",
+        "user_id": 43619620,
+        "peso": 65.3,
+        "fecha": "27-5-2024",
+        "hora": "11:05"
+    },
+    {
+        "_id": "lDtYPKaGyY",
+        "user_id": 43619620,
+        "peso": 65.1,
+        "fecha": "29-5-2024",
+        "hora": "12:31"
+    },
+    {
+        "_id": "nEPrWShABt",
+        "user_id": 43619620,
+        "peso": 65.7,
+        "fecha": "30-5-2024",
+        "hora": "09:16"
+    },
+    {
+        "_id": "LtfyikwHsv",
+        "user_id": 43619620,
+        "peso": 65.3,
+        "fecha": "2-6-2024",
+        "hora": "14:05"
+    },
+    {
+        "_id": "jlPUYtylHI",
+        "user_id": 43619620,
+        "peso": 65.2,
+        "fecha": "4-6-2024",
+        "hora": "13:07"
+    },
+    {
+        "_id": "LhHCxJoiuu",
+        "user_id": 43619620,
+        "peso": 64.7,
+        "fecha": "5-6-2024",
+        "hora": "10:40"
+    },
+    {
+        "_id": "dvTfYLExGV",
+        "user_id": 43619620,
+        "peso": 62.5,
+        "fecha": "14-6-2024",
+        "hora": "10:01"
+    },
+    {
+        "_id": "jyxLMXPXHz",
+        "user_id": 43619620,
+        "peso": 64.6,
+        "fecha": "15-6-2024",
+        "hora": "11:33"
+    },
+    {
+        "_id": "rbqMBlKtch",
+        "user_id": 43619620,
+        "peso": 64.9,
+        "fecha": "16-6-2024",
+        "hora": "14:08"
+    },
+    {
+        "_id": "JGwYhYzUrL",
+        "user_id": 43619620,
+        "peso": 65.3,
+        "fecha": "17-6-2024",
+        "hora": "14:16"
+    },
+    {
+        "_id": "sOgxstdaNW",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "18-6-2024",
+        "hora": "10:45"
+    },
+    {
+        "_id": "fyxROZDVkA",
+        "user_id": 43619620,
+        "peso": 65.0,
+        "fecha": "19-6-2024",
+        "hora": "14:17"
+    },
+    {
+        "_id": "cuWnIABbol",
+        "user_id": 43619620,
+        "peso": 65.6,
+        "fecha": "21-6-2024",
+        "hora": "11:22"
+    },
+    {
+        "_id": "hgMqPbBWAW",
+        "user_id": 43619620,
+        "peso": 65.6,
+        "fecha": "24-6-2024",
+        "hora": "10:39"
+    },
+    {
+        "_id": "BTNEJYvILu",
+        "user_id": 43619620,
+        "peso": 65.8,
+        "fecha": "25-6-2024",
+        "hora": "12:29"
+    },
+    {
+        "_id": "ZUqJWVqkbs",
+        "user_id": 43619620,
+        "peso": 66.0,
+        "fecha": "26-6-2024",
+        "hora": "12:02"
+    },
+    {
+        "_id": "LIQUmhxyLj",
+        "user_id": 43619620,
+        "peso": 66.0,
+        "fecha": "27-6-2024",
+        "hora": "10:16"
+    },
+    {
+        "_id": "zTkjqbzGBs",
+        "user_id": 43619620,
+        "peso": 66.4,
+        "fecha": "28-6-2024",
+        "hora": "10:56"
+    },
+    {
+        "_id": "nTnWorZRxH",
+        "user_id": 43619620,
+        "peso": 66.3,
+        "fecha": "29-6-2024",
+        "hora": "14:22"
+    },
+    {
+        "_id": "MSvrLzeyeG",
+        "user_id": 43619620,
+        "peso": 65.9,
+        "fecha": "30-6-2024",
+        "hora": "13:41"
+    },
+    {
+        "_id": "ZhSTcFPJqe",
+        "user_id": 43619620,
+        "peso": 65.7,
+        "fecha": "1-7-2024",
+        "hora": "12:00"
+    },
+    {
+        "_id": "rjfesboLgi",
+        "user_id": 43619620,
+        "peso": 65.4,
+        "fecha": "3-7-2024",
+        "hora": "10:30"
+    },
+    {
+        "_id": "wtlvuKYZCy",
+        "user_id": 43619620,
+        "peso": 65.6,
+        "fecha": "4-7-2024",
+        "hora": "11:14"
+    },
+    {
+        "_id": "NflvDekimz",
+        "user_id": 43619620,
+        "peso": 66.1,
+        "fecha": "5-7-2024",
+        "hora": "14:36"
+    },
+    {
+        "_id": "jyiuddxmUP",
+        "user_id": 43619620,
+        "peso": 66.1,
+        "fecha": "6-7-2024",
+        "hora": "11:38"
+    },
+    {
+        "_id": "jOvPyDNpVR",
+        "user_id": 43619620,
+        "peso": 65.7,
+        "fecha": "7-7-2024",
+        "hora": "13:32"
+    },
+    {
+        "_id": "ILrSWJffOn",
+        "user_id": 43619620,
+        "peso": 65.8,
+        "fecha": "8-7-2024",
+        "hora": "12:02"
+    },
+    {
+        "_id": "CackriZnht",
+        "user_id": 43619620,
+        "peso": 66.2,
+        "fecha": "9-7-2024",
+        "hora": "12:01"
+    },
+    {
+        "_id": "KsSgvGRJsm",
+        "user_id": 43619620,
+        "peso": 66.2,
+        "fecha": "9-7-2024",
+        "hora": "12:01"
+    },
+    {
+        "_id": "wOrrGSZzdc",
+        "user_id": 43619620,
+        "peso": 66.4,
+        "fecha": "10-7-2024",
+        "hora": "16:00"
+    }
+]

@@ -5,6 +5,8 @@ import { TextInput } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import { useDatabase } from '../hooks/DatabaseContext'
 import { useState } from 'react'
+import { LineChart } from "react-native-gifted-charts";
+
 
 
 const SetWeight = () => {
@@ -18,8 +20,9 @@ const SetWeight = () => {
    useEffect(() => {
      const getWeightData = async () => {
          if (db) {
-            const query = `SELECT * FROM weight ORDER BY date DESC;`;
+            const query = `SELECT * FROM weight ORDER BY date ASC;`;
             const result = await db.getAllAsync(query);
+            setData(result);
          }
       }
 
@@ -32,6 +35,12 @@ const SetWeight = () => {
         await db.runAsync(query, values);
         navigation.goBack();
     }
+
+    const lineData = [{value: 0},{value: 10},{value: 8},{value: 58},{value: 56},{value: 78},{value: 74},{value: 98}];
+
+    const weightData = data.map((item) => {
+        return {value: item.weight}
+    });
 
 
   return (
@@ -48,9 +57,36 @@ const SetWeight = () => {
       </TouchableOpacity>
     </View>
 
-    <View>
-        {}
+
+    {weightData.length > 0 &&
+    <View className="mt-10 px-8">
+    <LineChart
+        
+            areaChart
+            curved
+            data={weightData}
+            height={400}
+            spacing={1}
+            initialSpacing={2}
+            color1="skyblue"
+            color2="orange"
+            textColor1="green"
+            hideDataPoints
+            dataPointsColor1="blue"
+            startFillColor1="skyblue"
+            startOpacity={0.8}
+            endOpacity={0.3}
+            isAnimated 
+            domain={{ min: 0, max: Math.max(...weightData.map(item => item.value)) }}
+            formatYLabel={(label) => label + ' kg'}
+            yAxisOffset={55}
+            trimYAxisAtTop={true}
+            yAxisExtraHeight={75 - 70}
+            maxValue={12}
+            
+            />
     </View>
+    }
 
     
     </SafeAreaView>
