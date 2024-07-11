@@ -453,7 +453,7 @@ export const backupDatabaseToServer = async (serverDir) => {
 };
 
 
-export const importBackUpFromServer = async (backup) => {
+export const importBackUpFromServer = async (backup,serverDir) => {
   const filesToDownload = [backup.f0, backup.f1, backup.f2];
 
   const dbPath = FileSystem.documentDirectory + 'SQLite/';
@@ -466,7 +466,7 @@ export const importBackUpFromServer = async (backup) => {
 
   await Promise.all(filesToDownload.map(async (file) => {
     try {
-      const response = await axios.get(`http://192.168.28.151:5000/download/${file}`, { responseType: 'arraybuffer' });
+      const response = await axios.get(`${serverDir}/download/${file}`, { responseType: 'arraybuffer' });
       const filePath = dbPath + file.split('_')[1];
       const base64Data = Buffer.from(response.data, 'binary').toString('base64');
       await FileSystem.writeAsStringAsync(filePath, base64Data, { encoding: FileSystem.EncodingType.Base64 });

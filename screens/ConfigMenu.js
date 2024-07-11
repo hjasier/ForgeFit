@@ -119,7 +119,7 @@ const ConfigMenu = () => {
 
 
   const handleImportDataFromServer = async (backup) => {
-    const response = importBackUpFromServer(backup);
+    const response = importBackUpFromServer(backup,serverDir);
     if (response){
       Alert.alert('Backup restaurado con éxito');
     } else {
@@ -233,7 +233,7 @@ const ConfigMenu = () => {
 
 
       <TouchableOpacity onPress={() => Updates.fetchUpdateAsync()}>
-        Expo Updates Enabled: {Updates.isEnabled ? 'Yes' : 'No'}
+       <Text>Expo Updates Enabled: {Updates.isEnabled ? 'Yes '+Updates.runtimeVersion : 'No'}</Text> 
       </TouchableOpacity>
 
         {show && (
