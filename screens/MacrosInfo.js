@@ -23,6 +23,15 @@ const MacrosInfo = ({ route }) => {
   const [servingUnit, setServingUnit] = useState("g");
   const [recalculatedNutrients, setRecalculatedNutrients] = useState({});
   const [image, setImage] = useState(product.image_front_url);
+
+  //Macros
+
+  const [kcal, setKcal] = useState(product.nutriments["energy-kcal_100g"]);
+  const [protein, setProtein] = useState(product.nutriments.proteins_100g);
+  const [carbs, setCarbs] = useState(product.nutriments.carbohydrates_100g);
+  const [fat, setFat] = useState(product.nutriments.fat_100g);
+  const [fiber, setFiber] = useState(product.nutriments.fiber_100g);
+  const [sodium, setSodium] = useState(product.nutriments.sodium_100g);
   
   const db = useDatabase();
 
@@ -191,32 +200,32 @@ const MacrosInfo = ({ route }) => {
         <NutrientLevel name="Azúcares" icon="spoon-sugar" iconType="material-community" level={product.nutrient_levels.sugars} value={recalculatedNutrients.sugars_100g + " g"} />
 
         {/* Salt */}
-        <NutrientLevel name="Sal" icon="star" level={product.nutrient_levels.salt} value={recalculatedNutrients.salt_100g + " g"} />
+        <NutrientLevel name="Sal" iconType={"material-community"} icon="shaker" level={product.nutrient_levels.salt} value={recalculatedNutrients.salt_100g + " g"} />
 
         {/* Saturated Fat */}
-        <NutrientLevel name="Grasas Saturadas" icon="star" level={product.nutrient_levels["saturated-fat"]} value={recalculatedNutrients["saturated-fat_100g"] + " g"} />
+        <NutrientLevel name="Grasas Saturadas" iconType={"font-awesome-5"} icon="hamburger" level={product.nutrient_levels["saturated-fat"]} value={recalculatedNutrients["saturated-fat_100g"] + " g"} />
 
         <Text className="mt-8 mb-3">Información Nutricional</Text>
 
-        <ScrollView className="h-32">
+        <ScrollView className="h-40">
           <View className="space-y-2">
             {/* Kcal */}
-            <MacroInfo key={"nutri-kcal"} name="Kcal" icon="star" unit="kcal" value={recalculatedNutrients["energy-kcal_100g"]} />
+            <MacroInfo key={"nutri-kcal"} name="Kcal" icon="fire" iconType={"font-awesome-5"} unit="kcal" setValue={setKcal} value={kcal} />
 
             {/* Protein */}
-            <MacroInfo key={"nutri-protein"} name="Proteina" icon="star" unit="g" value={recalculatedNutrients.proteins_100g} />
+            <MacroInfo key={"nutri-protein"} name="Proteina" icon="drumstick-bite" iconType={"font-awesome-5"} unit="g" setValue={setProtein} value={protein} />
 
             {/* Carbs */}
-            <MacroInfo key={"nutri-carbs"} name="Carbohidratos" icon="star" unit="g" value={recalculatedNutrients.carbohydrates_100g} />
+            <MacroInfo key={"nutri-carbs"} name="Carbohidratos" icon="rice" iconType={"material-community"} unit="g" setValue={setCarbs} value={carbs} />
 
             {/* Fats */}
-            <MacroInfo key={"nutri-fats"} name="Grasas" icon="star" unit="g" value={recalculatedNutrients.fat_100g} />
+            <MacroInfo key={"nutri-fats"} name="Grasas" icon="bacon" iconType={"font-awesome-5"} unit="g" setValue={setFat} value={fat} />
 
             {/* Fiber */}
-            <MacroInfo key={"nutri-fiber"} name="Fibra" icon="star" unit="g" value={recalculatedNutrients.fiber_100g} />
+            <MacroInfo key={"nutri-fiber"} name="Fibra" icon="leaf" iconType={"font-awesome-5"} unit="g" setValue={setFiber} value={fiber} />
 
             {/* Sodium */}
-            <MacroInfo key={"nutri-sodium"} name="Sodio" icon="star" unit="mg" value={recalculatedNutrients.sodium_100g} />
+            <MacroInfo key={"nutri-sodium"} name="Sodio" icon="prescription-bottle" iconType={"font-awesome-5"} unit="mg" setValue={setSodium} value={sodium} />
           </View>
         </ScrollView>
       </View>

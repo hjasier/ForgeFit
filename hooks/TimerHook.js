@@ -1,5 +1,7 @@
 // TimerContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { Vibration } from 'react-native';
+
 
 const TimerContext = createContext(null);
 
@@ -7,43 +9,66 @@ export const TimerProvider = ({ children }) => {
   const [initialTime, setInitialTime] = useState(90);
   const [seconds, setSeconds] = useState(initialTime);
   const [isActive, setIsActive] = useState(false);
+  const [resetTime, setResetTime] = useState(null);
 
   useEffect(() => {
     let interval = null;
+
     if (isActive) {
       interval = setInterval(() => {
-        setSeconds(prevSeconds => {
-          if (prevSeconds > 0) {
-            return prevSeconds - 1;
-          } else {
-            clearInterval(interval);
-            setIsActive(false);
-            setSeconds(initialTime);
-            return 0;
-          }
-        });
+        const now = new Date().getTime();
+        const elapsedTime = Math.floor((now - resetTime) / 1000);
+        const newSeconds = initialTime - elapsedTime;
+
+        if (newSeconds > 0) {
+          setSeconds(newSeconds);
+        } else {
+          clearInterval(interval);
+          setIsActive(false);
+          setSeconds(0);
+          vibrateDevice();
+        }
       }, 1000);
-    } else if (!isActive && seconds !== 0) {
-      clearInterval(interval);
     }
+
     return () => clearInterval(interval);
-  }, [isActive, seconds]);
+  }, [isActive, resetTime, initialTime]);
 
   const toggle = () => {
     setIsActive(!isActive);
   };
 
   const reset = () => {
+    const now = new Date().getTime();
+    setResetTime(now);
     setSeconds(initialTime);
     setIsActive(true);
   };
 
+
   const format = () => {
-    const getSeconds = `${seconds % 60}`.slice(-2);
+    const getSeconds = `${seconds % 60}`.padStart(2, '0');
     const minutes = `${Math.floor(seconds / 60)}`;
     const getMinutes = `${minutes % 60}`.slice(-2);
     return `${getMinutes}:${getSeconds}`;
   };
+
+
+  const vibrateMultiple = (times, pattern) => {
+    Vibration.vibrate(pattern);
+  
+    if (times > 1) {
+      setTimeout(() => {
+        vibrateMultiple(times - 1, pattern);
+      }, pattern.reduce((acc, val) => acc + val, 0)); // Suma de todo el patrón para determinar el tiempo total de espera
+    }
+  };
+
+  const vibrateDevice = () => {
+    const pattern = [500, 500, 500]; // Vibra por 500ms, descansa 500ms, y repite dos veces
+    vibrateMultiple(3, pattern);
+  };
+  
 
   const value = {
     seconds,
@@ -52,7 +77,7 @@ export const TimerProvider = ({ children }) => {
     setInitialTime,
     toggle,
     reset,
-    format : format(),
+    format: format(),
   };
 
   return (
@@ -61,7 +86,6 @@ export const TimerProvider = ({ children }) => {
     </TimerContext.Provider>
   );
 };
-
 
 export const useTimer = () => {
   return useContext(TimerContext);

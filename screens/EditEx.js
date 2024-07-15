@@ -47,7 +47,7 @@ const EditEx = ({route}) => {
     <View className="items-center">
 
     <TextInput 
-      value={exercise.name}
+      value={newName}
       onChangeText={setNewName}
       placeholder="Nombre del ejercicio" 
       className="w-52 justify-center text-center  rounded-md h-11 bg-[#EAEAEA] shadow-md shadow-gray-700 py-0.5 px-3"/>

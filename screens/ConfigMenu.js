@@ -183,7 +183,22 @@ const ConfigMenu = () => {
   }
     
 
+  async function onFetchUpdateAsync() {
+    alert(`update:${Updates?.releaseChannel}`)
+    alert(`updatemainifest:${Updates?.manifest?.releaseChannel}`)
+    try {
+      const update = await Updates.checkForUpdateAsync();
 
+      if (update.isAvailable) {
+        alert('update.isAvailable:true')
+        await Updates.fetchUpdateAsync();
+        await Updates.reloadAsync();
+      }
+    } catch (error) {
+      // You can also add an alert() to see the error message in case of an error when fetching updates.
+      alert(`Error fetching latest Expo update: ${error}`);
+    }
+  }
 
     
   return (
@@ -232,7 +247,7 @@ const ConfigMenu = () => {
       </TextInput>
 
 
-      <TouchableOpacity onPress={() => Updates.fetchUpdateAsync()}>
+      <TouchableOpacity onPress={() => onFetchUpdateAsync()}>
        <Text>Expo Updates Enabled: {Updates.isEnabled ? 'Yes '+Updates.runtimeVersion : 'No'}</Text> 
       </TouchableOpacity>
 

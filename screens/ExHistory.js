@@ -151,7 +151,7 @@ const ExHistory = ({route}) => {
         <MenuNavBar>
             <View className="justify-between flex-row w-full px-6 items-center">
 
-              <TouchableOpacity onPress={() => navigation.goBack()}>
+              <TouchableOpacity onPress={() => navigation.navigate("SaveEjDone",{exercise:exercise})}>
                 <Icon size={18} name="arrow-left" type="font-awesome-5" color="white" />
               </TouchableOpacity>
             
