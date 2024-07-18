@@ -21,16 +21,18 @@ const MacrosMain = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const macros = useMacros();
+  const [firstLoad, setFirstLoad] = useState(false);
 
   const db = useDatabase();
 
 
 
   useEffect(() => {
-    if (db){
+    if (db && !firstLoad){
       macros.updateMacros();
+      setFirstLoad(true);
     }
-  }, [isFocused]);
+  }, [isFocused,db]);
 
 
   useEffect(() => {
@@ -38,6 +40,9 @@ const MacrosMain = () => {
       macros.calcTodayMacros();
     }
   }, [db]);
+
+
+
 
 
   useFocusEffect(

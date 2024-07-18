@@ -210,22 +210,22 @@ const MacrosInfo = ({ route }) => {
         <ScrollView className="h-40">
           <View className="space-y-2">
             {/* Kcal */}
-            <MacroInfo key={"nutri-kcal"} name="Kcal" icon="fire" iconType={"font-awesome-5"} unit="kcal" setValue={setKcal} value={kcal} />
+            <MacroInfo macroKey={"energy-kcal_100g"} key={"energy-kcal_100g"} name="Kcal" icon="fire" iconType={"font-awesome-5"} unit="kcal" value={recalculatedNutrients} setRecalculatedNutrients={setRecalculatedNutrients} />
 
             {/* Protein */}
-            <MacroInfo key={"nutri-protein"} name="Proteina" icon="drumstick-bite" iconType={"font-awesome-5"} unit="g" setValue={setProtein} value={protein} />
+            <MacroInfo macroKey={"proteins_100g"} key={"proteins_100g"} name="Proteina" icon="drumstick-bite" iconType={"font-awesome-5"} unit="g" value={recalculatedNutrients} setRecalculatedNutrients={setRecalculatedNutrients} />
 
             {/* Carbs */}
-            <MacroInfo key={"nutri-carbs"} name="Carbohidratos" icon="rice" iconType={"material-community"} unit="g" setValue={setCarbs} value={carbs} />
+            <MacroInfo macroKey={"carbohydrates_100g"} key={"carbohydrates_100g"} name="Carbohidratos" icon="rice" iconType={"material-community"} unit="g" value={recalculatedNutrients} setRecalculatedNutrients={setRecalculatedNutrients}/>
 
             {/* Fats */}
-            <MacroInfo key={"nutri-fats"} name="Grasas" icon="bacon" iconType={"font-awesome-5"} unit="g" setValue={setFat} value={fat} />
+            <MacroInfo macroKey={"fat_100g"} key={"fat_100g"} name="Grasas" icon="bacon" iconType={"font-awesome-5"} unit="g" value={recalculatedNutrients} setRecalculatedNutrients={setRecalculatedNutrients}/>
 
             {/* Fiber */}
-            <MacroInfo key={"nutri-fiber"} name="Fibra" icon="leaf" iconType={"font-awesome-5"} unit="g" setValue={setFiber} value={fiber} />
+            <MacroInfo macroKey={"fiber_100g"} key={"fiber_100g"} name="Fibra" icon="leaf" iconType={"font-awesome-5"} unit="g" value={recalculatedNutrients} setRecalculatedNutrients={setRecalculatedNutrients}/>
 
             {/* Sodium */}
-            <MacroInfo key={"nutri-sodium"} name="Sodio" icon="prescription-bottle" iconType={"font-awesome-5"} unit="mg" setValue={setSodium} value={sodium} />
+            <MacroInfo macroKey={"sodium_100g"} key={"sodium_100g"} name="Sodio" icon="prescription-bottle" iconType={"font-awesome-5"} unit="mg"  value={recalculatedNutrients}  setRecalculatedNutrients={setRecalculatedNutrients}/>
           </View>
         </ScrollView>
       </View>

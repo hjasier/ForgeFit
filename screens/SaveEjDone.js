@@ -70,9 +70,11 @@ const SaveEjDone = ({route}) => {
         if (setsData[0].peso === '' || setsData[0].reps === '') {
           return;
         }
+
+        navigation.navigate("ExMain");
         
         const main_set_id = Math.floor(Math.random() * 100000000);
-
+        
         try {
             if (db) {
               const query = `
@@ -111,9 +113,7 @@ const SaveEjDone = ({route}) => {
           } catch (error) {
             console.error("Error al insertar el set:", error);
             return;
-          } finally {
-            navigation.goBack();
-          }
+          } 
     }
 
   return (
@@ -136,7 +136,7 @@ const SaveEjDone = ({route}) => {
 
         <ScrollView ref={scrollViewRef} className="h-screen">
 
-        <View className="px-12 py-10 pb-32">
+        <View className="px-12 py-10 pb-[330]">
 
             <View className="flex-row items-center space-x-4 justify-center mb-16">
                 <Image resizeMode='contain' className="w-12 h-12" source={initialData.images[exercise.imgSRC].imgSRC} />

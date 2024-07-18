@@ -51,7 +51,10 @@
     },
     "owner": "hjasier",
     "updates": {
-      "url": "https://u.expo.dev/06f32d72-676c-4abd-8e97-d871d53f31c4"
+      "url": "https://u.expo.dev/06f32d72-676c-4abd-8e97-d871d53f31c4",
+      "checkAutomatically": "ON_LOAD",
+      "enabled": true,
+      "fallbackToCacheTimeout": 0
     }
   }
 }

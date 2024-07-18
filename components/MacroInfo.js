@@ -3,7 +3,14 @@ import React from 'react'
 import { Icon } from '@rneui/themed';
 import { TextInput } from 'react-native-gesture-handler';
 
-const MacroInfo = ({name,icon,unit,value,setValue,iconType}) => {
+const MacroInfo = ({name,icon,unit,value,setRecalculatedNutrients,iconType,macroKey}) => {
+
+  const handleEditValue = (text) => {
+    let newValue = {...value}
+    newValue[macroKey] = text
+    setRecalculatedNutrients(newValue)
+  }
+
   return (
     <View className="flex-row justify-between mt-2">
         <View className="flex-row space-x-5">
@@ -13,7 +20,7 @@ const MacroInfo = ({name,icon,unit,value,setValue,iconType}) => {
             <Text>{name}</Text>
         </View>
         <View className="flex-row space-x-1 items-center">
-            <TextInput keyboardType='numeric' onChangeText={setValue} className="p-0">{value}</TextInput>
+            <TextInput keyboardType='numeric' onChangeText={handleEditValue}  className="p-0">{value[macroKey]}</TextInput>
             <Text> {unit}</Text>
         </View>
     </View>

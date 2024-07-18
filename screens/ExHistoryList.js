@@ -34,6 +34,7 @@ const ExHistoryList = ({route}) => {
           JOIN exercises ex ON s.exercise_id = ex.id 
           WHERE DATE(s.date) = DATE(?)
           ${search ? `AND ex.name LIKE '%${search}%'` : ''}
+          AND s.isMainSet = 1
           ORDER BY s.date DESC;
         `;
         const result = await db.getAllAsync(query, [histDate]);

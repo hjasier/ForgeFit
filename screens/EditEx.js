@@ -36,6 +36,7 @@ const EditEx = ({route}) => {
     const values = [newName, newImage, group, exercise.id];
     await db.runAsync(query, values);
   }
+  
 
   return (
     <SafeAreaView className="py-10">
