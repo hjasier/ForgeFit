@@ -143,6 +143,7 @@ const ExHistory = ({route}) => {
     date,
     sets: exercises[date]
   }));
+  
 
   return (
     <SafeAreaView>
@@ -151,8 +152,8 @@ const ExHistory = ({route}) => {
         <MenuNavBar>
             <View className="justify-between flex-row w-full px-6 items-center">
 
-              <TouchableOpacity onPress={() => navigation.navigate("SaveEjDone",{exercise:exercise})}>
-                <Icon size={18} name="arrow-left" type="font-awesome-5" color="white" />
+              <TouchableOpacity className="py-4" onPress={() => navigation.navigate("SaveEjDone",{exercise:exercise})}>
+                <Icon size={20} name="plus-square" type="font-awesome" color="white" />
               </TouchableOpacity>
             
               <View className="flex-row text-center items-center justify-center space-x-2 max-w-xs">

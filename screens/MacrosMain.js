@@ -32,6 +32,9 @@ const MacrosMain = () => {
       macros.updateMacros();
       setFirstLoad(true);
     }
+    else if(db){
+      macros.updateMacros();
+    }
   }, [isFocused,db]);
 
 
