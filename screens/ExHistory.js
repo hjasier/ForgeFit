@@ -9,7 +9,7 @@ import { useEffect } from 'react'
 import { useDatabase } from '../hooks/DatabaseContext'
 import { initialData } from '../database/initialData'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useTimer } from '../hooks/TimerHook'
+import Timer from '../components/Timer'
 
 const ExHistory = ({route}) => {
   
@@ -17,7 +17,6 @@ const ExHistory = ({route}) => {
   const navigation = useNavigation();
   const db = useDatabase();
   const isFocused = useIsFocused();
-  const timer = useTimer();
 
     
   const [exercises, setExercises] = useState([]);
@@ -161,9 +160,8 @@ const ExHistory = ({route}) => {
                 <Text style={{maxWidth:192}} className="text-center text-white font-bold text-base">{exercise.name}</Text>
               </View>
 
-              <TouchableOpacity>
-                  <Text className="w-15 font-extrabold text-xl text-white">{timer.format}</Text>
-              </TouchableOpacity>
+              {/* CountDown Timer */}
+              <Timer/> 
             </View>
         </MenuNavBar> 
 

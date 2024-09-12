@@ -24,6 +24,7 @@ import ConfigWeek from '../screens/ConfigWeek';
 import Connections from '../screens/Connections';
 import NewGroup from '../screens/NewGroup';
 import SelectGroupEjs from '../screens/SelectGroupEjs';
+import ConfigTimer from '../screens/ConfigTimer';
 
 
 
@@ -61,6 +62,8 @@ const StackNavigator = () => {
         <Stack.Screen name="Connections" component={Connections} options={{headerShown:false}} />
         <Stack.Screen name="NewGroup" component={NewGroup} options={{headerShown:false}} />
         <Stack.Screen name="SelectGroupEjs" component={SelectGroupEjs} options={{headerShown:false}} />
+        <Stack.Screen name="ConfigTimer" component={ConfigTimer} options={{headerShown:false}} />
+        
 
 
 

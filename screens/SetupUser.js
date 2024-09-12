@@ -6,6 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 import { useDatabase } from '../hooks/DatabaseContext';
 import { useNavigation } from '@react-navigation/native';
 import { useMacros } from '../hooks/MacrosHook';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const SetupUser = () => {
@@ -59,6 +60,7 @@ const SetupUser = () => {
         }
         macros.calcTodayMacros();
         navigation.navigate("Macros");
+        await AsyncStorage.setItem('timerDuration', 90);
     }
 
     const handleUpdateUserData = async () => {

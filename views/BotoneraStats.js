@@ -25,6 +25,7 @@ const BotoneraStats = () => {
 
       <BtnStats text="Configurar Conexiones" icon={"transit-connection-variant"} iconType={"material-community"} path={"Connections"} />
 
+      <BtnStats text="Configurar Temporizador" icon={"timer-sand"} iconType={"material-community"} path={"ConfigTimer"} />
 
 
 

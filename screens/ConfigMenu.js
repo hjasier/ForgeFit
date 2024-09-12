@@ -11,9 +11,6 @@ import axios from 'axios';
 import { useState } from 'react';
 import { TextInput } from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import entrenamientos from '../database/entrenamientos';
-import weights from '../database/weights';
-import relaciones from '../database/relaciones';
 import moment from 'moment';
 import * as Updates from 'expo-updates';
 
@@ -132,55 +129,6 @@ const ConfigMenu = () => {
     return moment(dateTime, 'DD-MM-YYYY HH:mm').format('YYYY-MM-DD HH:mm');
   }
 
-  const importDataFromOldDB = async () => {
-    try {
-      if (db) {
-        n = 0;
-        for (let i = 0; i < entrenamientos.length; i++) {
-          if(!relaciones[entrenamientos[i].ej_id]){
-            continue;
-          }
-          n++;
-          const query = `
-            INSERT INTO sets
-            (exercise_id, weight, reps, date, isMainSet)
-            VALUES (?, ?, ?, ?, 1);
-          `;
-          const values = [parseInt(relaciones[entrenamientos[i].ej_id])+1, entrenamientos[i]["medidas"].peso, entrenamientos[i]["medidas"].reps, formatDate(entrenamientos[i].fecha,entrenamientos[i].hora)];
-          await db.runAsync(query, values);
-        }
-        Alert.alert(`Se han importado ${n} entrenamientos`);
-      }
-    } catch (error) {
-      console.error("Error al insertar rutina", error);
-      return;
-    } 
-  }
-
-
-  const importWeightDataFromOldDB = async () => {
-    try {
-      if (db) {
-        n = 0;
-        const preq = `DELETE FROM weight`;
-        await db.runAsync(preq);
-        for (let i = 0; i < weights.length; i++) {
-          n++;
-
-          const query = `
-            INSERT INTO weight
-            (weight,date)
-            VALUES (?, ?);
-          `;
-          await db.runAsync(query,[parseFloat(weights[i].peso), moment(weights[i].fecha, 'DD-MM-YYYY').format('YYYY-MM-DD')]);
-        }
-        Alert.alert(`Se han importado ${n} entrenamientos`);
-      }
-    } catch (error) {
-      console.error("Error al insertar rutina", error);
-      return;
-    } 
-  }
     
 
   async function onFetchUpdateAsync() {
@@ -230,13 +178,6 @@ const ConfigMenu = () => {
         <Text >Cambiar fecha inicio</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => importDataFromOldDB()} p-4>
-        <Text >ImportDataFromOldDB</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => importWeightDataFromOldDB()} p-4>
-        <Text >ImportWeightDataFromOldDB</Text>
-      </TouchableOpacity>
 
 
       <TextInput onChangeText={setServerDir} placeholder="Server Dir" p-4>

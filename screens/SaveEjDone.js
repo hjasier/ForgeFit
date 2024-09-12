@@ -12,6 +12,7 @@ import { initialData } from '../database/initialData';
 import moment from 'moment';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTimer } from '../hooks/TimerHook';
+import Timer from '../components/Timer';
 
 
 const SaveEjDone = ({route}) => {
@@ -127,9 +128,8 @@ const SaveEjDone = ({route}) => {
                     <Icon className="w-15" name="history" type="font-awesome-5" color="white" />
                 </TouchableOpacity>
                 <Text></Text>
-                <TouchableOpacity>
-                  <Text className="w-15 font-extrabold text-xl text-white">{timer.format}</Text>
-                </TouchableOpacity>
+                {/* CountDown Timer */}
+                <Timer/> 
             </View>
         </MenuNavBar> 
 

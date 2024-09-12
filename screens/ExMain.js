@@ -11,16 +11,16 @@ import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
 import moment from 'moment';
-import { useTimer } from '../hooks/TimerHook';
 import { useDatabase } from '../hooks/DatabaseContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomStatusBar from '../components/CustomStatusBar';
+import Timer from '../components/Timer';
 
 const ExMain = () => {
 
   const navigation = useNavigation();
   const isFocused = useIsFocused();
-  const timer = useTimer();
+
   const db = useDatabase();
 
   const [rutina, setRutina] = useState(null);
@@ -62,9 +62,9 @@ const ExMain = () => {
               </TouchableOpacity>
                 <TextInput onChangeText={setSearch} className="bg-[#d9d9d92c] text-center text-white text-base h-12 w-44 rounded-lg" placeholder='Buscar Ejercicio' />
                 
-                <TouchableOpacity onPress={timer.reset}>
-                  <Text className="w-15 font-extrabold text-xl text-white">{timer.format}</Text>
-                </TouchableOpacity>
+                {/* CountDown Timer */}
+                <Timer/> 
+
             </View>
         </MenuNavBar> 
 

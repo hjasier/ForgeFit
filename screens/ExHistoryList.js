@@ -8,9 +8,9 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDatabase } from '../hooks/DatabaseContext'
 import moment from 'moment';
-import { useTimer } from '../hooks/TimerHook'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Swipeable } from 'react-native-gesture-handler';
+import Timer from '../components/Timer'
 
 const ExHistoryList = ({route}) => {
   
@@ -18,8 +18,6 @@ const ExHistoryList = ({route}) => {
   const navigation = useNavigation();
   const db = useDatabase();
   const isFocused = useIsFocused();
-  const timer = useTimer();
-  
   const [setsByExercise, setSetsByExercise] = useState([]);
   const [histDate, setHistDate] = useState(date);
   const [search, setSearch] = useState('');
@@ -186,9 +184,8 @@ const ExHistoryList = ({route}) => {
               </TouchableOpacity>
                 <TextInput onChangeText={setSearch} className="bg-[#d9d9d92c] text-center text-white text-base h-12 w-44 rounded-lg" placeholder='Buscar Ejercicio' />
                 
-                <TouchableOpacity>
-                  <Text className="w-15 font-extrabold text-xl text-white">{timer.format}</Text>
-                </TouchableOpacity>
+                {/* CountDown Timer */}
+                <Timer/> 
             </View>
         </MenuNavBar> 
 

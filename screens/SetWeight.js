@@ -11,11 +11,13 @@ import { LineChart } from "react-native-gifted-charts";
 
 const SetWeight = () => {
 
+
    const navigation = useNavigation();
    const db = useDatabase();
 
    const [data, setData] = useState([]);
    const [weight, setWeight] = useState(0);
+   const [spacing, setSpacing]= useState(1);
 
    useEffect(() => {
      const getWeightData = async () => {
@@ -36,10 +38,24 @@ const SetWeight = () => {
         navigation.goBack();
     }
 
-    const lineData = [{value: 0},{value: 10},{value: 8},{value: 58},{value: 56},{value: 78},{value: 74},{value: 98}];
+
+    let lastMonth = '';
 
     const weightData = data.map((item) => {
-        return {value: item.weight}
+        const currentMonth = item.date.slice(0, 7);
+        let dataPoint = {
+            value: item.weight,
+            date: new Date(item.date).toLocaleString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' }),
+            weight: item.weight,
+            labelTextStyle: { color: 'lightgray', width: 60 }
+        };
+        
+        if (currentMonth !== lastMonth) {
+            const monthLabel = new Date(item.date).toLocaleString('es-ES', { month: 'short', day: 'numeric' });
+            dataPoint.label = monthLabel;
+            lastMonth = currentMonth; 
+        }
+        return dataPoint;
     });
 
 
@@ -59,32 +75,81 @@ const SetWeight = () => {
 
 
     {weightData.length > 0 &&
-    <View className="mt-10 px-8">
-    <LineChart
-        
-            areaChart
-            curved
-            data={weightData}
-            height={400}
-            spacing={1}
-            initialSpacing={2}
-            color1="skyblue"
-            color2="orange"
-            textColor1="green"
-            hideDataPoints
-            dataPointsColor1="blue"
-            startFillColor1="skyblue"
-            startOpacity={0.8}
-            endOpacity={0.3}
-            isAnimated 
-            domain={{ min: 0, max: Math.max(...weightData.map(item => item.value)) }}
-            formatYLabel={(label) => label + ' kg'}
-            yAxisOffset={55}
-            trimYAxisAtTop={true}
-            yAxisExtraHeight={75 - 70}
-            maxValue={12}
-            
-            />
+    <View className="mt-10 px-8 pb-52">
+      
+      <View className="items-center flex-1 flex-row items-end space-x-1 justify-end">
+        <TouchableOpacity onPress={() => setSpacing(prevSpacing => prevSpacing + 1)} className="bg-[#171717] w-7 h-7 rounded-lg shadow-md shadow-gray-800 items-center justify-center mt-4">
+          <Text className="text-white">+</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setSpacing(prevSpacing => Math.max(prevSpacing - 1, 1))} className="bg-[#171717] w-7 h-7 rounded-lg shadow-md shadow-gray-800 items-center justify-center mt-4">
+          <Text className="text-white">-</Text>
+        </TouchableOpacity>
+      </View>
+      
+
+      <LineChart
+          isAnimated
+          animateOnDataChange
+          animationEasing={'ease-in-out'}
+          areaChart
+          curved
+          data={weightData}
+          height={400}
+          width={250}
+          spacing={spacing}
+          initialSpacing={1}
+          thickness={3}
+          color1="#0093ff"
+          hideDataPoints
+          startFillColor1="#0093ff"
+          endFillColor="#55d3ff"
+          startOpacity={0.7}
+          endOpacity={0.3}
+          domain={{ min: 0, max: Math.max(...weightData.map(item => item.value)) }}
+          formatYLabel={(label) => label + ' kg '}
+          
+          yAxisOffset={55}
+          yAxisThickness={0}
+          xAxisType={'dashed'}
+          
+          trimYAxisAtTop={true}
+          yAxisExtraHeight={5}
+          maxValue={12}
+          rotateLabel
+          pointerConfig={{
+            pointerStripHeight: 160,
+            pointerStripColor: 'lightgray',
+            pointerStripWidth: 2,
+            pointerColor: 'lightgray',
+            radius: 6,
+            pointerLabelWidth: 100,
+            pointerLabelHeight: 90,
+            activatePointersOnLongPress: true,
+            autoAdjustPointerLabelPosition: false,
+            pointerLabelComponent: items => {
+              return (
+                <View
+                  style={{
+                    height: 90,
+                    width: 100,
+                    justifyContent: 'center',
+                    marginTop: -30,
+                    marginLeft: -40,
+                  }}>
+                  <Text style={{color: '#0f0e0d', fontSize: 14, marginBottom:6,textAlign:'center'}}>
+                    {items[0].date}
+                  </Text>
+  
+                  <View style={{paddingHorizontal:14,paddingVertical:6, borderRadius:16, backgroundColor:'white'}}>
+                    <Text style={{fontWeight: 'bold',textAlign:'center'}}>
+                      {items[0].weight + ' kg'}
+                    </Text>
+                  </View>
+                </View>
+              );
+            },
+          }}
+        />
     </View>
     }
 

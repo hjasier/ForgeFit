@@ -99,15 +99,11 @@ const UserStatsMenu = () => {
             
         </View>
         
+        
         <ScrollView className="w-full h-96 mt-4">
             <BotoneraStats/>
         </ScrollView>
 
-        <View className="flex-row space-x-2 items-center justify-center mt-4">
-            <Text>Temporizador entre ejs</Text>
-            <TextInput value="90" className="w-14 justify-center text-center  rounded-md h-9 bg-[#EAEAEA] shadow-md shadow-gray-700 py-0.5 px-3"/>
-
-        </View>
 
             
 

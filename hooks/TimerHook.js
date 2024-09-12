@@ -1,6 +1,7 @@
 // TimerContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Vibration } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const TimerContext = createContext(null);
@@ -11,6 +12,26 @@ export const TimerProvider = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   const [resetTime, setResetTime] = useState(null);
 
+  const loadTimerDuration = async () => {
+    try {
+      const savedDuration = await AsyncStorage.getItem('timerDuration');
+      if (savedDuration) {
+        setInitialTime(savedDuration);
+      }
+      else{
+        await AsyncStorage.setItem('timerDuration',90);
+      }
+    } catch (error) {
+      console.error('Error loading timer duration:', error);
+    }
+  };
+
+
+  useEffect(() => {
+    loadTimerDuration();
+  }, []);
+
+  
   useEffect(() => {
     let interval = null;
 
@@ -43,6 +64,7 @@ export const TimerProvider = ({ children }) => {
     setResetTime(now);
     setSeconds(initialTime);
     setIsActive(true);
+    loadTimerDuration();
   };
 
 
