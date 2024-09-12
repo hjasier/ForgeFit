@@ -13,6 +13,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import * as Updates from 'expo-updates';
+import { useNavigation } from '@react-navigation/native';
 
 const ConfigMenu = () => {
 
@@ -21,6 +22,7 @@ const ConfigMenu = () => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [serverDir , setServerDir] = useState('http://192.168.28.151:5000');
+  const navigation = useNavigation();
 
   const handleChangeDate = async (event, selectedDate) => { 
     setDate(selectedDate);
@@ -140,6 +142,9 @@ const ConfigMenu = () => {
         await Updates.fetchUpdateAsync();
         await Updates.reloadAsync();
       }
+      else {
+        alert('update.isAvailable:false')
+      }
     } catch (error) {
       alert(`Error fetching latest Expo update: ${error}`);
     }
@@ -176,6 +181,10 @@ const ConfigMenu = () => {
 
       <TouchableOpacity onPress={showDatepicker} p-4>
         <Text >Cambiar fecha inicio</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate("InfoScreen1")} p-4>
+        <Text>Info App</Text>
       </TouchableOpacity>
 
 

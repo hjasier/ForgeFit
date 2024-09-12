@@ -25,6 +25,9 @@ import Connections from '../screens/Connections';
 import NewGroup from '../screens/NewGroup';
 import SelectGroupEjs from '../screens/SelectGroupEjs';
 import ConfigTimer from '../screens/ConfigTimer';
+import InfoScreen1 from '../screens/InfoScreen1';
+import InfoScreen2 from '../screens/InfoScreen2';
+import InfoScreen3 from '../screens/InfoScreen3';
 
 
 
@@ -63,7 +66,14 @@ const StackNavigator = () => {
         <Stack.Screen name="NewGroup" component={NewGroup} options={{headerShown:false}} />
         <Stack.Screen name="SelectGroupEjs" component={SelectGroupEjs} options={{headerShown:false}} />
         <Stack.Screen name="ConfigTimer" component={ConfigTimer} options={{headerShown:false}} />
+        <Stack.Screen name="InfoScreen1" component={InfoScreen1} options={{headerShown:false}} />
+        <Stack.Screen name="InfoScreen2" component={InfoScreen2} options={{headerShown:false}} />
+        <Stack.Screen name="InfoScreen3" component={InfoScreen3} options={{headerShown:false}} />
+
+
         
+
+
 
 
 

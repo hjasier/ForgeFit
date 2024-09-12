@@ -38,5 +38,3 @@ yarn-error.*
 assets/exDefaultImages/*
 keys.js
 
-database/entrenamientos.json
-database/relaciones.json

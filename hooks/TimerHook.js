@@ -19,7 +19,7 @@ export const TimerProvider = ({ children }) => {
         setInitialTime(savedDuration);
       }
       else{
-        await AsyncStorage.setItem('timerDuration',90);
+        await AsyncStorage.setItem('timerDuration','90');
       }
     } catch (error) {
       console.error('Error loading timer duration:', error);
