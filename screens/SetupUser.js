@@ -7,6 +7,7 @@ import { useDatabase } from '../hooks/DatabaseContext';
 import { useNavigation } from '@react-navigation/native';
 import { useMacros } from '../hooks/MacrosHook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Icon } from '@rneui/base';
 
 
 const SetupUser = () => {
@@ -45,6 +46,10 @@ const SetupUser = () => {
 
 
     const handleSaveUserData = async () => {
+        if (!age || !height || !weight || !selectedGender || !selectedActivity || !selectedGoal) {
+            alert("Por favor, llena todos los campos");
+            return;
+        }
         if (db) {
             
             const query = `
@@ -60,7 +65,7 @@ const SetupUser = () => {
         }
         macros.calcTodayMacros();
         navigation.navigate("Macros");
-        await AsyncStorage.setItem('timerDuration', 90);
+        await AsyncStorage.setItem('timerDuration', '90');
     }
 
     const handleUpdateUserData = async () => {
@@ -78,7 +83,7 @@ const SetupUser = () => {
             await db.runAsync(query, values);
             macros.calcTodayMacros();
         }
-        navigation.goBack();
+        navigation.navigate("UserStats");
     }
 
 
@@ -180,11 +185,14 @@ const SetupUser = () => {
         </View>
 
         { isFirstTime ? (
-        <TouchableOpacity onPress={handleSaveUserData} className="w-52 bg-[#171717] h-10 rounded-lg shadow-md shadow-gray-800 items-center justify-center mt-4">
-                <Text className="text-white">Continuar</Text>
+        <TouchableOpacity onPress={handleSaveUserData} className="bg-[#36BFF9] shadow-md shadow-gray-800 py-3 px-6 rounded-md flex-row space-x-3 mt-12 ">
+           <Text className="text-white font-bold">
+                Continuar
+            </Text>
+            <Icon size={18} name="arrow-right" type="font-awesome-5" color="white" />
         </TouchableOpacity>
         ) : (
-            <TouchableOpacity onPress={handleUpdateUserData} className="w-52 bg-[#171717] h-10 rounded-lg shadow-md shadow-gray-800 items-center justify-center mt-4">
+            <TouchableOpacity onPress={handleUpdateUserData} className="bg-[#171717] shadow-md shadow-gray-800 py-3 px-6 rounded-md flex-row space-x-3 mt-12">
                 <Text className="text-white">Actualizar</Text>
             </TouchableOpacity>
         )

@@ -61,10 +61,12 @@ export const MacrosProvider = ({ children }) => {
         const weightData = await db.getAllAsync(`SELECT * FROM weight ORDER BY date DESC LIMIT 1;`);
         
         if (!userData[0]){
-        return navigation.navigate('SetupUser');
+        return;
+       
         }
         if (!weightData[0]){
-        return navigation.navigate('SetWeight');
+        return;
+        
         }
 
         const height = userData[0].height;

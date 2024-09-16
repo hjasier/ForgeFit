@@ -142,8 +142,8 @@ const ListaEjers = ({search,rutina}) => {
 
 
   return (
-    <ScrollView className="w-full h-[505]">
-      <View className="w-full pb-24 px-6 space-y-3">
+    <ScrollView className="w-full">
+      <View className="w-full pb-96 px-6 space-y-3">
       {sortedExercises.map((exercise) => (
         <TouchableOpacity onPress={() => navigation.navigate("SaveEjDone",{exercise:exercise})} key={exercise.id} 
 
@@ -165,7 +165,7 @@ const ListaEjers = ({search,rutina}) => {
               
         }}
 
-        className="flex-row justify-between h-14 w-full items-center px-4 rounded-lg">
+        className="flex-row justify-between h-14 w-full items-center pl-4 rounded-lg">
           <View className="flex-row items-center">
             <Image resizeMode="contain" className="w-8 h-8" source={initialData.images[exercise.imgSRC].imgSRC} />
 
@@ -174,7 +174,8 @@ const ListaEjers = ({search,rutina}) => {
             </View>
             
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("ExHistory",{exercise:exercise})}>
+          
+          <TouchableOpacity className="pr-4 pl-1 h-14 items-center justify-center" onPress={() => navigation.navigate("ExHistory",{exercise:exercise})}>
             <Icon size={20} name="history" type="font-awesome-5"/>
           </TouchableOpacity>
 

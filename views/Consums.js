@@ -33,14 +33,14 @@ const Consums = () => {
 
 
   return (
-    <View className="w-full px-7 mt-1">
+    <View className="w-full px-7 mt-1 mb-9">
 
       <TouchableOpacity onPress={updateTodaysConsums} className="justify-start flex py-1">
         <Text className="">Hoy</Text>
       </TouchableOpacity>
 
 
-      <ScrollView className="h-48">
+      <ScrollView className="">
         {todaysConsums.map((consum, index) => (
           <Consum key={index} consum={consum} />
         ))}

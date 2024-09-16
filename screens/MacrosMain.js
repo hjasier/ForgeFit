@@ -62,7 +62,7 @@ const MacrosMain = () => {
 
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1">
 
       <TouchableOpacity className="px-5">
         <FontAwesome className="" name="history" size={24} color="black" />
@@ -86,13 +86,13 @@ const MacrosMain = () => {
 
       {/* Consums */}
 
-      <View className="items-center mt-1">
+      <View className="flex-1 items-center mt-1">
         <Consums />
       </View>
 
       {/* Search btn*/}
 
-      <View className="px-5">
+      <View className="px-5 pb-8">
       <TouchableOpacity className="w-full text-center justify-center bg-[#EAEAEA] h-12 rounded-lg bg-[#EAEAEA] w-full  mt-3 rounded-lg shadow-md shadow-gray-800"
       onPress={() => navigation.navigate("SearchAlim")}>
 

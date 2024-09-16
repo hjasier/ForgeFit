@@ -32,7 +32,9 @@ const UserStatsMenu = () => {
         const result = await db.getAllAsync(query);
         result[0] && setWeight(result[0].weight);
     }
-    getWeight();
+    if (db){
+        getWeight();
+    }
     }, [isFocused]);
 
 
@@ -44,7 +46,9 @@ const UserStatsMenu = () => {
             result[0] && setTotalDays(daysSinceCreation);
 
         }
-        getTotalDays();
+        if (db){
+            getTotalDays();
+        }
     }
     , [isFocused]);
 

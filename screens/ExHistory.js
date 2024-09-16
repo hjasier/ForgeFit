@@ -42,6 +42,9 @@ const ExHistory = ({route}) => {
         const values = [exercise.id];
         const sets = await db.getAllAsync(setsQuery, values);
 
+        if (sets.length === 0) {
+          return;
+        }
         setExercises(groupByDate(sets));
 
       }

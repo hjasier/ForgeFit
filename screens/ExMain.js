@@ -38,7 +38,9 @@ const ExMain = () => {
           setRutina(routine[0]);
         }
     }
-    getRutina();
+    if (db){
+      getRutina();
+    }
   }, [isFocused]);
 
 

@@ -80,8 +80,8 @@ const SelectRoutineEjs = ({route}) => {
           <SelectorGrupo group={group} setGroup={setGroup} />
       </View>
 
-      <ScrollView className="h-[550] mt-5" >
-      <View className="items-center pb-24 px-5 space-y-3">
+      <ScrollView className=" mt-5" >
+      <View className="items-center pb-48 px-5 space-y-3">
 
       {exercises.map((exercise) => {
         // Encontrar el ejercicio seleccionado en la lista de selectedExercises

@@ -70,11 +70,11 @@ const InfoScreen3 = () => {
 
 
 
-        <TouchableOpacity onPress={() => navigation.navigate("UserStats")} className="bg-[#36BFF9] py-3 px-6 rounded-md flex-row space-x-3">
+        <TouchableOpacity onPress={() => navigation.navigate("SetupUser")} className="bg-[#36BFF9] py-3 px-6 rounded-md flex-row space-x-3 shadow-md shadow-gray-800">
             <Text className="text-white font-bold">
-                Cerrar
+                Siguiente
             </Text>
-            
+            <Icon size={18} name="arrow-right" type="font-awesome-5" color="white" />
         </TouchableOpacity>
 
 
