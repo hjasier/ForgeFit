@@ -60,14 +60,10 @@ export const MacrosProvider = ({ children }) => {
         const userData = await db.getAllAsync('SELECT * FROM user WHERE id = 0');
         const weightData = await db.getAllAsync(`SELECT * FROM weight ORDER BY date DESC LIMIT 1;`);
         
-        if (!userData[0]){
-        return;
-       
+        if (!userData[0] || !weightData[0]) {
+          return null;
         }
-        if (!weightData[0]){
-        return;
-        
-        }
+
 
         const height = userData[0].height;
         const age = userData[0].age;

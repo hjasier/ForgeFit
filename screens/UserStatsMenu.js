@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { useDatabase } from '../hooks/DatabaseContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomStatusBar from '../components/CustomStatusBar';
+import ChartStats from '../components/ChartStats';
 
 
 
@@ -86,7 +87,9 @@ const UserStatsMenu = () => {
     <View className="items-center pt-8 px-5">
 
     
-        <View className="w-80 h-40 bg-white "></View>
+        <View className="w-80 h-40 items-center">
+            <ChartStats />
+        </View>
 
         <View className="flex-row space-x-2 mt-3">
             <TouchableOpacity onPress={() => navigation.navigate("SetWeight")}>

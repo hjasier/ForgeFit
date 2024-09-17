@@ -35,10 +35,6 @@ const Stack = createStackNavigator();
 
 const StackNavigator = () => {
 
-  //const {user} = useAuth();
-  const {user} = true;
-
-
   return (
     <Stack.Navigator>
       
