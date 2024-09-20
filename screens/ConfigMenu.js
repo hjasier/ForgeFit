@@ -14,6 +14,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import * as Updates from 'expo-updates';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const ConfigMenu = () => {
 
@@ -23,6 +25,17 @@ const ConfigMenu = () => {
   const [show, setShow] = useState(false);
   const [serverDir , setServerDir] = useState('http://192.168.28.151:5000');
   const navigation = useNavigation();
+  const [graphInterval, setGraphInterval] = useState('35');
+
+  
+  useEffect(() => {
+    const fetchGraphInterval = async () => {
+      const storedInterval = await AsyncStorage.getItem('graphInterval');
+      setGraphInterval(storedInterval ? parseInt(storedInterval, 10) : 35);
+    };
+    fetchGraphInterval();
+  }, []);
+
 
   const handleChangeDate = async (event, selectedDate) => { 
     setDate(selectedDate);
@@ -120,7 +133,7 @@ const ConfigMenu = () => {
   const handleImportDataFromServer = async (backup) => {
     const response = importBackUpFromServer(backup,serverDir);
     if (response){
-      Alert.alert('Backup restaurado con éxito');
+      Alert.alert('Importando backup');
     } else {
       Alert.alert('Error al restaurar el backup');
     }
@@ -148,6 +161,15 @@ const ConfigMenu = () => {
     } catch (error) {
       alert(`Error fetching latest Expo update: ${error}`);
     }
+  }
+
+  const changeGraphsInterval = async (interval) => {
+    const parsedInterval = parseInt(interval, 10);
+    
+    if (isNaN(interval) || interval < 15 || interval === '' || interval === null || isNaN(parsedInterval)) { 
+      return;
+    }
+    await AsyncStorage.setItem('graphInterval', interval);
   }
 
     
@@ -186,6 +208,13 @@ const ConfigMenu = () => {
       <TouchableOpacity onPress={() => navigation.navigate("InfoScreen1")} p-4>
         <Text>Info App</Text>
       </TouchableOpacity>
+
+      <View className="flex-row justify-center items-center space-x-2">
+        <Text>Intervalo Grafica stats</Text>
+      <TextInput onChangeText={changeGraphsInterval} placeholder="Server Dir" p-4>
+        {graphInterval}
+      </TextInput>
+      </View>
 
 
 

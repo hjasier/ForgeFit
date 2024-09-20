@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text , Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MacrosMain from '../screens/MacrosMain'
@@ -58,9 +58,14 @@ const TabNavigator = () => {
    // Si está cargando, mostrar un loader
    if (isLoading) {
      return (
-       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-         <Text>Cargando...</Text>
-       </View>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Image 
+          source={require('../assets/splash.png')} 
+          style={{ width: 700, height: 700 }}
+          resizeMode="contain"
+        />
+        <Text>Cargando...</Text>
+    </View>
      );
    }
 

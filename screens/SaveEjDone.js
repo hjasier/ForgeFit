@@ -24,6 +24,7 @@ const SaveEjDone = ({route}) => {
 
   const [numSets, setNumSets] = useState(1);
   const scrollViewRef = useRef(null);
+  const [saving, setSaving] = useState(false);
 
   const [setsData, setSetsData] = useState(
     Array.from({ length: 20 }, () => ({ peso: '', reps: '' })) // 20 sets max
@@ -68,9 +69,10 @@ const SaveEjDone = ({route}) => {
   };  
 
   const handleSaveSet = async () => {
-        if (setsData[0].peso === '' || setsData[0].reps === '') {
+        if (setsData[0].peso === '' || setsData[0].reps === '' || saving) {
           return;
         }
+        setSaving(true);
 
         navigation.navigate("ExMain");
         
@@ -193,7 +195,7 @@ const SaveEjDone = ({route}) => {
                     <Text>DropSet</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={handleSaveSet} className="w-20 h-8 bg-[#171717] items-center justify-center rounded-lg">
+                <TouchableOpacity disabled={saving}  onPress={handleSaveSet} className="w-20 h-8 bg-[#171717] items-center justify-center rounded-lg">
                     <Text className="text-white">Guardar</Text>
                 </TouchableOpacity>
             </View>

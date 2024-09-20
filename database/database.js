@@ -6,6 +6,7 @@ import { initialData } from './initialData';
 import { Asset } from 'expo-asset';
 import axios from 'axios';
 import { Buffer } from 'buffer';
+import { Alert } from 'react-native';
 
 
 let dbInstance = null;
@@ -470,6 +471,7 @@ export const importBackUpFromServer = async (backup,serverDir) => {
       const filePath = dbPath + file.split('_')[1];
       const base64Data = Buffer.from(response.data, 'binary').toString('base64');
       await FileSystem.writeAsStringAsync(filePath, base64Data, { encoding: FileSystem.EncodingType.Base64 });
+      Alert.alert('Base de datos importada');
     } catch (error) {
       console.error(`Error al descargar o guardar el archivo ${file}:`, error);
     }

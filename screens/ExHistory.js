@@ -10,6 +10,8 @@ import { useDatabase } from '../hooks/DatabaseContext'
 import { initialData } from '../database/initialData'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Timer from '../components/Timer'
+import { Swipeable } from 'react-native-gesture-handler';
+
 
 const ExHistory = ({route}) => {
   
@@ -20,8 +22,7 @@ const ExHistory = ({route}) => {
 
     
   const [exercises, setExercises] = useState([]);
-  
-  
+
 
   useEffect(() => {
     if (db) {
@@ -93,35 +94,89 @@ const ExHistory = ({route}) => {
         db.runAsync(query, values);
     }
 
+    const handleDeleteSet = async (set) => {
+      try {
+        if (db) {
+          const queryDropsets = `SELECT * FROM dropsets WHERE main_set_id = ?;`;
+          const dropsets = await db.getAllAsync(queryDropsets, [set.id]);
+    
+          await Promise.all(dropsets.map(drop => {
+            const q2 = `DELETE FROM dropsets WHERE id = ?;`;
+            return db.runAsync(q2, [drop.id]);
+          }));
+    
+          const query = `DELETE FROM sets WHERE id = ?;`;
+          await db.runAsync(query, [set.id]);
+    
+          setExercises(prevExercises => {
+            const updatedExercises = { ...prevExercises };
+            const dateKey = set.date.split(' ')[0];
+            
+            if (updatedExercises[dateKey]) {
+              updatedExercises[dateKey] = updatedExercises[dateKey].filter(s => s.id !== set.id);
+              if (updatedExercises[dateKey].length === 0) {
+                delete updatedExercises[dateKey]; // Eliminar la fecha si no hay sets
+              }
+            }
+            return updatedExercises;
+          });
+        }
+      } catch (error) {
+        console.error("Error al borrar el set", error);
+      }
+    };
 
-    const renderSet = ({ item: set }) => (
-      <View key={set.id} className="flex-row justify-between py-1 px-3">
-        <Text className="w-20 font-semibold text-blue-500">
-          {new Date(new Date(set.date).getTime() + 2 * 60 * 60 * 1000).toLocaleTimeString('es-ES', {
-            hour: '2-digit',
-            minute: '2-digit',
-            timeZone: 'Europe/Madrid'
-          })}
-        </Text>
-        <View className="w-20 flex-row items-center">
-          <TextInput className="font-bold text-right" onChangeText={handleEditSet(set, 'weight')}>
-            {set.weight}
-          </TextInput>
-          <Text className="font-bold"> kg</Text>
+
+    const renderSet = ({ item: set }) => {
+      // Comprobar si es el día de hoy
+      const isToday = new Date(set.date).toISOString().split('T')[0] === new Date().toISOString().split('T')[0];
+    
+      const content = (
+        <View key={set.id} className="flex-row justify-between py-1 px-3">
+          <Text className="w-20 font-semibold text-blue-500">
+            {new Date(new Date(set.date).getTime() + 2 * 60 * 60 * 1000).toLocaleTimeString('es-ES', {
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZone: 'Europe/Madrid'
+            })}
+          </Text>
+          <View className="w-20 flex-row items-center">
+            <TextInput className="font-bold text-right" onChangeText={handleEditSet(set, 'weight')}>
+              {set.weight}
+            </TextInput>
+            <Text className="font-bold"> kg</Text>
+          </View>
+          <View className="w-20 flex-row items-center">
+            <TextInput onChangeText={handleEditSet(set, 'reps')} className="text-gray-700 text-right">
+              {set.reps}
+            </TextInput>
+            <Text className="text-gray-700"> reps</Text>
+          </View>
+          {0 === 0 ? (
+            <Text className="w-20 text-slate-400">{1 + set.num_dropsets} sets</Text>
+          ) : (
+            <Text className="w-20 text-slate-400"></Text>
+          )}
         </View>
-        <View className="w-20 flex-row items-center">
-          <TextInput onChangeText={handleEditSet(set, 'reps')} className="text-gray-700 text-right">
-            {set.reps}
-          </TextInput>
-          <Text className="text-gray-700"> reps</Text>
-        </View>
-        {0 === 0 ? (
-          <Text className="w-20 text-slate-400">{1 + set.num_dropsets} sets</Text>
-        ) : (
-          <Text className="w-20 text-slate-400"></Text>
-        )}
+      );
+    
+      return isToday ? (
+        <Swipeable renderRightActions={() => rightSwipe(set)}>
+          {content}
+        </Swipeable>
+      ) : (
+        content
+      );
+    };
+
+    const rightSwipe = (set) => (
+      <View className="items-center justify-center">
+          <TouchableOpacity onPress={() => handleDeleteSet(set)} className="w-[50] h-full bg-red-600 justify-center items-center rounded-l-lg">
+              <Icon type='font-awesome-5' name="trash" size={15} color="white" />
+          </TouchableOpacity>
       </View>
     );
+    
   
     const renderItem = ({ item: section }) => (
       <View key={section.date} className="mb-5">
@@ -177,11 +232,11 @@ const ExHistory = ({route}) => {
         <View className="px-8">
 
         <FlatList
-      data={sections}
-      renderItem={renderItem}
-      keyExtractor={section => section.date}
-      contentContainerStyle={{ paddingBottom: 280 , paddingTop:50 }}
-    />
+        data={sections}
+        renderItem={renderItem}
+        keyExtractor={section => section.date}
+        contentContainerStyle={{ paddingBottom: 280 , paddingTop:50 }}
+        />
 
 
         </View>
