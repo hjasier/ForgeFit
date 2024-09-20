@@ -98,6 +98,7 @@ const TabNavigator = () => {
       tabBarActiveTintColor: '#36BFF9',
       tabBarInactiveTintColor: 'gray',
       tabBarShowLabel: false,
+      
       tabBarIcon: ({focused , color , size }) => {
 
         if (route.name === 'Macros') {

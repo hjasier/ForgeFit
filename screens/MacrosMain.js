@@ -52,6 +52,7 @@ const MacrosMain = () => {
     useCallback(() => {
       StatusBar.setBarStyle('dark-content', true);
       StatusBar.setBackgroundColor('#F3F3F2', true);
+      NavigationBar.setBackgroundColorAsync("white");
     }, [])
 );
   

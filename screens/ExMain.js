@@ -48,6 +48,7 @@ const ExMain = () => {
     useCallback(() => {
       StatusBar.setBarStyle('dark-content', true);
       StatusBar.setBackgroundColor('#36BFF9', true);
+      NavigationBar.setBackgroundColorAsync("white");
     }, [])
   );
 
