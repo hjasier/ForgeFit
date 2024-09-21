@@ -1,7 +1,10 @@
 import { View, Text , Image } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MacrosMain from '../screens/MacrosMain'
+import { useFocusEffect } from '@react-navigation/native';
+import * as NavigationBar from 'expo-navigation-bar';
+import { useIsFocused } from '@react-navigation/native';
 
 
 import { useNavigation } from '@react-navigation/native';
@@ -25,6 +28,19 @@ const TabNavigator = () => {
   const [initialRouteName, setInitialRouteName] = useState(''); 
   const [firstLoad, setFirstLoad] = useState(true);
   const [isLoading, setIsLoading] = useState(true); 
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused){
+      NavigationBar.setBackgroundColorAsync("white");
+    }
+    else{
+      NavigationBar.setBackgroundColorAsync("#F3F3F2");
+    }
+  }, [isFocused]);
+
+
+
 
   // Obtener el último tab seleccionado de AsyncStorage
   useEffect(() => {
